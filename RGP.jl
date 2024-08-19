@@ -5,7 +5,7 @@ a = [0.3 0.7 0.5;0.6 0.5 0.7;0.3 0.6 0.5;-2.8 -4.0 -3.2]
 b = [200; 200; 200;-1500];         # demanda 
 c = [1 1 1 1];  
 # parametros 
-gama =[3, 3, 3, 3]                # custo 
+gama =[1, 1, 1, 1]                # custo 
 (m,n) = size(A)
 
 include("modeloMRob.jl")
