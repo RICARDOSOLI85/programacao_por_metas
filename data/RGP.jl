@@ -9,6 +9,6 @@ c = [1 1 1 1];
 # parametros 
 Gamma = [[0,0,0,0],[0,0,0,3],[1,1,1,1],[1,1,1,3],[3,3,3,3]]
 for gama in Gamma 
-    include("modeloMRob.jl")
+    include("KRobustoGP.jl")
     resultados  = linear_robusto(A,b,c,gama)
 end 
