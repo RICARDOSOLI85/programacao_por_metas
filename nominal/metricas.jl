@@ -73,7 +73,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     # Salvando os resultados em um arquivo de texto
     open("resultados_gp1.txt", "a") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_1 : D                      \n")
+    write(file,"                     Teste do Modelo GP_1 : D                  \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
@@ -91,10 +91,10 @@ function calcular_metricas(C,x,xo,y_real,beta)
     write(file,"Indefindos    =  $Indef\n") 
     write(file,"Falso Positivo Correto = $FPc\n") 
     write(file,"-----------------------------\n")
-    write(file, "Acurácia   = $accuracy\n")
+    write(file, "accuray    = $accuracy\n")
     write(file,"precision   = $precision\n") 
     write(file,"recall      = $recall\n") 
-    write(file, "F1Score    = $f1_score\n")
+    write(file, "F1Score     = $f1_score\n")
     write(file,"*****************************************************\n")
     end 
     
