@@ -1,26 +1,48 @@
  =============================================================== 
-                     Teste do Modelo GP_2 : A                      
+                     Teste do Modelo GP_1 : A                  
  =============================================================== 
  
-Função Objetivo = 0.0
-variáveis = [-1.5, 2.5]
-hiperplano + beta  = -1.0000000000000013
-hiperplano      = -2.0000000000000013
-hiperplano - beta  = 3.0000000000000013
+Função Objetivo = 4.6
+variáveis      = [0.0, 1.0]
+hiperplano      = 1.9
 ---------------------------------------------------------------
 Matriz de Confusão                     
 --------------------------------------------------------------- 
-|| True Positive (TP) = 5  | False Negative (FN) = 0 ||
-|| False Positive (FP) = 1 | True Negative (TN) = 4  ||
+|| True Positive (TP) = 3  | False Negative (FN) = 2 ||
+|| False Positive (FP) = 3 | True Negative (TN) = 2  ||
 --------------------------------------------------------------- 
 -----------------------------
 Erro Classe A =  0
 Erro Classe B =  0
 Indefindos    =  0
-Falso Positivo Correto = 1
+Falso Positivo Correto = 3
 -----------------------------
-Acurácia   = 0.9
-precision   = 0.8333333333333334
-recall      = 1.0
-F1Score    = 0.9090909090909091
+accuray    = 0.5
+precision   = 0.5
+recall      = 0.6
+F1Score     = 0.5454545454545454
+*****************************************************
+ =============================================================== 
+                     Teste do Modelo GP_1 : B                  
+ =============================================================== 
+ 
+Função Objetivo = 4.6
+variáveis      = [0.0, 1.0]
+hiperplano      = 1.9
+---------------------------------------------------------------
+Matriz de Confusão                     
+--------------------------------------------------------------- 
+|| True Positive (TP) = 3  | False Negative (FN) = 2 ||
+|| False Positive (FP) = 3 | True Negative (TN) = 2  ||
+--------------------------------------------------------------- 
+-----------------------------
+Erro Classe A =  0
+Erro Classe B =  0
+Indefindos    =  0
+Falso Positivo Correto = 3
+-----------------------------
+accuray    = 0.5
+precision   = 0.5
+recall      = 0.6
+F1Score     = 0.5454545454545454
 *****************************************************

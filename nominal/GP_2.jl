@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_dete(C,ca,cb,alpha,beta)
+function gp_deter(C,ca,cb,alpha,beta)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
@@ -49,7 +49,7 @@ function gp_dete(C,ca,cb,alpha,beta)
     # solve modelo
     optimize!(modelo)
 
-   print(modelo) 
+   #print(modelo) 
 
    JuMP.all_variables(modelo)
    num_variables(modelo)

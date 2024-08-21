@@ -2,11 +2,13 @@
 # Data: 22/ Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
-function calcular_metricas(C,x,xo,y_real,beta)
+function calcular_metricas(modelo,C,x,xo,y_real,beta)
     
     n = length(x)
     w = x 
-    wo = xo    
+    wo = xo 
+    
+    FO = JuMP.objective_value(modelo)
 
     # Calcular o Hiperplano 
     c = Matrix(C)
@@ -73,7 +75,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     # Salvando os resultados em um arquivo de texto
     open("resultados_gp1.txt", "a") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_1 : D                  \n")
+    write(file,"                     Teste do Modelo GP_1 : D                \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
@@ -92,11 +94,11 @@ function calcular_metricas(C,x,xo,y_real,beta)
     write(file,"Falso Positivo Correto = $FPc\n") 
     write(file,"-----------------------------\n")
     write(file, "accuray    = $accuracy\n")
-    write(file,"precision   = $precision\n") 
+    write(file,"precision  = $precision\n") 
     write(file,"recall      = $recall\n") 
     write(file, "F1Score     = $f1_score\n")
     write(file,"*****************************************************\n")
-    end 
+  end 
     
 end
 
