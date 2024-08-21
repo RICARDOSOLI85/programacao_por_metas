@@ -3,16 +3,24 @@
 # Nome: Ricardo Soares Oliveira 
 
 function calcular_metricas(C,x,xo,y_real)
-    #n = length(x)
-    w = x 
+    n = length(x)
+    w = zeros(n)
     wo = JuMP.value(xo)
     
+    for j=1:n 
+        w[j] = JuMP.value(x[j])
+    end 
+
+    w = [w[j] for j in 1:n]
 
     # Calcular o Hiperplano 
     c = Matrix(C)
     y_modelo = c * w 
     y_predito = y_modelo .>= wo 
     y_pred    = y_modelo .== wo 
+    println("y_predito = ", y_predito)
+    println(" y_true    = ",  y_real)
+    println("y_pred    = ", y_pred )
 
     # Calculando TP, FN, FP,TN 
     TP = sum((y_real .==1) .& (y_predito .==1))
@@ -45,7 +53,7 @@ function calcular_metricas(C,x,xo,y_real)
     println("                      Teste do Modelo GP_1                   ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
-    println("Hiperlano       = ", xo)
+    println("Hiperlano       = ",  wo)
     println("--------------------------------------------------------------")
     println("                    Matriz de Confusão                        ")
     println("--------------------------------------------------------------")
@@ -62,7 +70,7 @@ function calcular_metricas(C,x,xo,y_real)
     println("Falso Positivo Correto = ", FPc)
     println("----------------------------")
     println("Acurácia    =  ", accuracy)
-    println("precision   = ", precision)
+    println("precision   =  " , precision)
     println("recall      =  ", recall)
     println("F1Score     =  ", f1_score)
     println("==================================================================")

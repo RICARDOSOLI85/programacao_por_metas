@@ -32,7 +32,7 @@ function gp_det(C,ca,cb,alpha,beta)
     @variable(modelo, 0 <= x[j=1:n] <= 1)      #A
     #@variable(modelo, -1 <= x[j=1:n] <= 1)    #B
     #@variable(modelo,x[j=1:n])                #C
-    #@variable(modelo,x[j=1:n]<= 1)            #D
+    #@variable(modelo,x[j=1:n]<= 9)            #D
     @variable(modelo, x0) 
     @variables(modelo,
     begin 
@@ -67,9 +67,9 @@ function gp_det(C,ca,cb,alpha,beta)
    xo = JuMP.value(x0)
    x  = JuMP.value.(x)
    println("-------------Imprimindo a Solução do Modelo---------")
-   println("F[O] = ", FO)
-   println("x[0] = ", xo)
-   for i=1:n
+   println("F[O] = ",  FO)
+   println("x[0] = ",  xo)
+   for i=1:n 
    println("x[$i] = ", JuMP.value.(x[i]))
    end
    
