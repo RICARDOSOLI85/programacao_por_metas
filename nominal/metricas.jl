@@ -7,21 +7,28 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     n = length(x)
     w = x 
     wo = xo 
-    
     FO = JuMP.objective_value(modelo)
-
+    #===============================
+       for j=1:n 
+        w[j] = JuMP.value(x[j])
+    end 
+    w = [w[j] for j in 1:n]
+    ===============================# 
     # Calcular o Hiperplano 
     c = Matrix(C)
     y_modelo = c * w 
+    println("vetor hiperplano =" , y_modelo)  
     y_predito = y_modelo .>= wo 
     y_real .== y_real 
     y_pred    = y_modelo .== wo 
     println("y_predito = ", y_predito)
     println("y_real    = ",  y_real)
     println("y_pred    = ", y_pred )
-    #println(" beta + xo = ", beta + xo)
-    #println(" beta - xo = ", beta - xo)
-
+    hiper_up = beta + xo 
+    hiper_down = beta - xo 
+    println(" beta + xo = ",hiper_up )
+    println(" beta - xo = ", hiper_down )
+   
     # Calculando TP, FN, FP,TN 
     TP = sum((y_real .==1) .& (y_predito .==1))
     FN = sum((y_real .==1) .& (y_predito .==0))
@@ -50,11 +57,13 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("                      Teste do Modelo GP_1                   ")
+    println("                      Teste do Modelo GP_2                   ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("variáveis  = ", x)
+    println("hiperplano + beta = ", wo + beta)
     println("Hiperlano       = ",  wo)
+    println("hiperplano - beta = ", wo - beta)
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
     println("--------------------------------------------------------------")
@@ -73,14 +82,16 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     println("F1Score     =  ", f1_score)
     println("==================================================================")
     # Salvando os resultados em um arquivo de texto
-    open("resultados_gp1.txt", "a") do file
+    open("resultados_gp2.txt", "a") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_1 : D                \n")
+    write(file,"                     Teste do Modelo GP_2 : D             \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
     write(file,"variáveis      = $x\n")
+    write(file,"hiperplano + beta  = $hiper_up\n")
     write(file,"hiperplano      = $xo\n")
+    write(file,"hiperplano - beta  = $hiper_down\n")
     write(file,"---------------------------------------------------------------\n")
     write(file,                        "Matriz de Confusão                     \n")
     write(file,"--------------------------------------------------------------- \n")   

@@ -17,8 +17,8 @@ beta = 0.1;
 
 # Implementar: 
 
-include("GP_1.jl")
-#include("GP_2.jl")
+#include("GP_1.jl")
+include("GP_2.jl")
 include("metricas.jl")
 
 # Funções 
