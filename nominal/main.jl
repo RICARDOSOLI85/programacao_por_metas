@@ -13,11 +13,13 @@ cb = C[6:10,:];
 
 # parâmetros 
 alpha =1.0;
-beta = 1.0; 
+beta = 0.1; 
 
 # implementar 
-include("GP_1.jl")
+#include("GP_1.jl")
+include("GP_2.jl")
 include("metricas.jl")
 
-FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)
-calcular_metricas(C,x,xo,y_real)
+#FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)
+FO, xo, x, modelo = gp_deter(C,ca,cb,alpha,beta)
+calcular_metricas(C,x,xo,y_real,beta)
