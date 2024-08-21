@@ -24,7 +24,7 @@ function gp_dete(C,ca,cb,alpha,beta)
     #@variable(modelo, -1 <= x[j=1:n] <= 1)     #B
     #@variable(modelo,x[j=1:n])                #C
     #@variable(modelo,9<=x[j=1:n]<= 9)            #D
-    @variable(modelo, x0) 
+    @variable(modelo, xo) 
     @variables(modelo,
     begin 
     n_a[1:n1] >= 0
@@ -40,8 +40,8 @@ function gp_dete(C,ca,cb,alpha,beta)
     # restrições
     @constraints(modelo,
     begin 
-    ca[i=1:n1], sum(ca[i,j]*x[j] for j in 1:n) + n_a[i] - p_a[i] == x0 + beta 
-    cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == x0 - beta 
+    ca[i=1:n1], sum(ca[i,j]*x[j] for j in 1:n) + n_a[i] - p_a[i] == xo + beta 
+    cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == xo - beta 
     end
     )
     @constraint(modelo, sum(x[j] for j in 1:n) ==1)
@@ -49,13 +49,13 @@ function gp_dete(C,ca,cb,alpha,beta)
     # solve modelo
     optimize!(modelo)
 
-    print(modelo) 
+   print(modelo) 
 
    JuMP.all_variables(modelo)
    num_variables(modelo)
    #println(modelo)
    FO = JuMP.objective_value(modelo)
-   xo = JuMP.value(x0)
+   xo = JuMP.value(xo)
    x  = JuMP.value.(x)
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
