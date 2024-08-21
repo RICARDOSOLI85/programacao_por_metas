@@ -20,7 +20,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("hiper-beta = ",hiper_down)
 
     # Metricas 
-    # y_definitvo_positivo
+    # y_definitvo_positivo (Maior ou igual a hipeplano + beta)
     y_def_pos = y_modelo .>= wo + beta
     
     println("y_definitvo_positivo = ", y_def_pos)  
