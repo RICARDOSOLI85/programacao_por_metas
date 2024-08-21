@@ -21,8 +21,8 @@ function calcular_metricas(C,x,xo,y_real,beta)
     println("y_predito = ", y_predito)
     println(" y_true    = ",  y_real)
     println("y_pred    = ", y_pred )
-    println(" beta + xo = ", beta + xo)
-    println(" beta - xo = ", beta - xo)
+    #println(" beta + xo = ", beta + xo)
+    #println(" beta - xo = ", beta - xo)
 
     # Calculando TP, FN, FP,TN 
     TP = sum((y_real .==1) .& (y_predito .==1))
@@ -52,7 +52,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("                      Teste do Modelo GP_2                   ")
+    println("                      Teste do Modelo GP_1                   ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("Hiperlano       = ",  wo)
@@ -78,9 +78,9 @@ function calcular_metricas(C,x,xo,y_real,beta)
     println("==================================================================")
 
     # Salvando os resultados em um arquivo de texto
-    open("resultados_teste1.txt", "w") do file
+    open("resultados_gp1.txt", "a") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_2                        \n")
+    write(file,"                     Teste do Modelo GP_1 : C                        \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
@@ -101,8 +101,9 @@ function calcular_metricas(C,x,xo,y_real,beta)
     write(file,"precision   = $precision\n") 
     write(file,"recall      = $recall\n") 
     write(file, "F1Score    = $f1_score\n")
-    write(file,"=======================================================\n")
+    write(file,"*****************************************************\n")
     end 
+    
 end
 
 
