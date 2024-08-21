@@ -18,10 +18,11 @@ beta = 0.1;
 # Implementar: 
 # Modelo 1 
 include("GP_1.jl")
+include("metricas_1.jl")
 # Modelo 2 
 #include("GP_2.jl")
-# Metricas 
-include("metricas.jl")
+include("metricas_2.jl")
+
 # Funções 
 FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)     # Modelo 1 
 #FO, xo, x, modelo = gp_deter(C,ca,cb,alpha,beta)  # Modelo 2
