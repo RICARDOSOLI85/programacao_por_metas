@@ -29,10 +29,10 @@ function gp_det(C,ca,cb,alpha,beta)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    #@variable(modelo, 0 <= x[j=1:n] <= 1)      #A
+    @variable(modelo, 0 <= x[j=1:n] <= 1)      #A
     #@variable(modelo, -1 <= x[j=1:n] <= 1)    #B
     #@variable(modelo,x[j=1:n])                #C
-    @variable(modelo,x[j=1:n]<= 9)            #D
+    #@variable(modelo,x[j=1:n]<= 1)            #D
     @variable(modelo, x0) 
     @variables(modelo,
     begin 
@@ -62,14 +62,21 @@ function gp_det(C,ca,cb,alpha,beta)
 
    JuMP.all_variables(modelo)
    num_variables(modelo)
-   println(modelo)
+   #println(modelo)
+   FO = JuMP.objective_value(modelo)
+   xo = JuMP.value(x0)
+   x  = JuMP.value.(x)
    println("-------------Imprimindo a Solução do Modelo---------")
-   println("F[O] = ", JuMP.objective_value(modelo))
-   println("x[0] = ", JuMP.value(x0))
+   println("F[O] = ", FO)
+   println("x[0] = ", xo)
    for i=1:n
    println("x[$i] = ", JuMP.value.(x[i]))
    end
-         
+   
+   return FO, xo, x, modelo 
+
+end 
+  #=         
 
    #------------Calculando as Métricas---------------------
    w = zeros(n)
@@ -81,14 +88,37 @@ function gp_det(C,ca,cb,alpha,beta)
    w = [w[j] for j in 1:n]
    c = Matrix(C)
 
+   #-------------- Calculando o Hiperlano ----- 
    y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
    y_modelo = c*w
+   y_predito = y_modelo.>=  w0
+   y_pred = y_modelo .==  w0  
+   println("y_predito = ", y_predito)
+   println("y_pred = ", y_pred)
+   println("w0 = ", w0 )
 
-   #-------------- Calculando o Hiperlano ----- 
-   y_true = y_real 
-   y_pred = y_modelo.>= w0  
+   # Calculando TP, FN, FP,TN 
+   TP = sum((y_real .==1) .& (y_predito .==1))
+   FN = sum((y_real .==1) .& (y_predito .==0))
+   FP = sum((y_real .==0) .& (y_predito .==1))
+   TN = sum((y_real .==0) .& (y_predito .==0))
+   println("TP = ", TP)
+   println("FN = ", FN)
+   println("FP = ", FP)
+   println("TN = ", TN)
+   ERc1 = sum((y_real .==1) .& (y_pred .==1))
+   ERc2 = sum((y_real .==0) .& (y_pred .==1))
+   # Estão sobre o hiperplano 
+   Indef = ERc1+ERc2 
+   println("Erro Classe A = ", ERc1)
+   println("Erro Classe B = ", ERc2)
+   println("Indefindos    = ", Indef)
+   # Correção do Falso Positivo pois ele conta os da classe B que estão na linha 
+   # Falso Positivo correto 
+   FPc = FP - ERc2
+   println("FPc = ", FPc)
    
-
 end
 
 
+=#
