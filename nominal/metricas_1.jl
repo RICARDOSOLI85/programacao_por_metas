@@ -21,9 +21,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     println("y_predito = ", y_predito)
     println("y_real    = ",  y_real)
     println("y_pred    = ", y_pred )
-    #println(" beta + xo = ", beta + xo)
-    #println(" beta - xo = ", beta - xo)
-
+   
     # Calculando TP, FN, FP,TN 
     TP = sum((y_real .==1) .& (y_predito .==1))
     FN = sum((y_real .==1) .& (y_predito .==0))
