@@ -4,14 +4,8 @@
 
 function calcular_metricas(C,x,xo,y_real,beta)
     n = length(x)
-    w = zeros(n)
-    wo = JuMP.value(xo)
-    
-    for j=1:n 
-        w[j] = JuMP.value(x[j])
-    end 
-
-    w = [w[j] for j in 1:n]
+    w = x 
+    wo = xo    
 
     # Calcular o Hiperplano 
     c = Matrix(C)
