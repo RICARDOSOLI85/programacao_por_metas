@@ -80,7 +80,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     # Salvando os resultados em um arquivo de texto
     open("resultados_gp1.txt", "a") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_1 : C                        \n")
+    write(file,"                     Teste do Modelo GP_1 : A                        \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
