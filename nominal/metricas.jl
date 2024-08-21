@@ -3,6 +3,7 @@
 # Nome: Ricardo Soares Oliveira 
 
 function calcular_metricas(C,x,xo,y_real,beta)
+    
     n = length(x)
     w = x 
     wo = xo    
@@ -11,6 +12,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     c = Matrix(C)
     y_modelo = c * w 
     y_predito = y_modelo .>= wo 
+    y_real .== y_real 
     y_pred    = y_modelo .== wo 
     println("y_predito = ", y_predito)
     println("y_real    = ",  y_real)
@@ -49,6 +51,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     println("                      Teste do Modelo GP_1                   ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
+    println("variáveis  = ", x)
     println("Hiperlano       = ",  wo)
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
@@ -56,9 +59,6 @@ function calcular_metricas(C,x,xo,y_real,beta)
     println("|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
     println("|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
     println("---------------------------------------------------------------")
-    #println("False Negative (FN)  =  ", FN)
-    #println("False Positive (FP)  = ", FP) 
-    #println("True Negative  (TN)  = ", TN)
     println("----------------------------")
     println("Erro Classe A = ", ERc1)
     println("Erro Classe B = ", ERc2)
@@ -77,6 +77,7 @@ function calcular_metricas(C,x,xo,y_real,beta)
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
+    write(file,"variáveis      = $x\n")
     write(file,"hiperplano      = $xo\n")
     write(file,"---------------------------------------------------------------\n")
     write(file,                        "Matriz de Confusão                     \n")
