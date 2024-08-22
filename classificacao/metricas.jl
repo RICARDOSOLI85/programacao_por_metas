@@ -21,9 +21,9 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     y_predito = y_modelo .>= wo 
     y_real .== y_real ;
     y_pred    = y_modelo .== wo ;
-    println("y_predito = ", y_predito)
-    println("y_real    = ",  y_real)
-    println("y_pred    = ", y_pred )
+    #println("y_predito = ", y_predito)
+    ##println("y_real    = ",  y_real)
+    #println("y_pred    = ", y_pred )
     hiper_up = beta + xo 
     hiper_down = beta - xo 
     println(" beta + xo = ",hiper_up )
