@@ -14,7 +14,7 @@ proporcao_treino = 0.3
 
 # include 
 include("dados.jl")
-include("dataframe.jl")
+include("dividir.jl")
 include("filtro.jl")
 
 
