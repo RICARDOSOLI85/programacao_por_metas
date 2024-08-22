@@ -11,7 +11,11 @@ Valor Acerto (Def Positivo) =  3
 Valor Erro   (Def Positivo) =  3
 Valor Acerto (Def Positivo) =  0
 Valor Erro   (Def Positivo) =  0
+Taxa Acerto (Indefindos) =  NaN
+Taxa Erro   (Indefindos) =  NaN
 .............................................
      Taxa de Acerto  |  Taxa de Erro 
 Def Positivo  : 0.5  |       0.5
+Pro Positivo  : NaN  |       NaN
+Indefindos    : NaN  |       NaN
 .............................................
