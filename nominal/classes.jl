@@ -43,61 +43,77 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     y_prob_neg =  (y_modelo .< wo) .& (y_modelo .> wo - beta )
     println("y_prob_neg = ", y_prob_neg)
 
+    # 5. Definitivamente Negativo 
+    y_def_neg = y_modelo .<= wo - beta
+    println("y_def_neg = ", y_def_neg) 
+
     
 
     println(".......................................................")
-    # Definitivamente Positivo (valores de acertos e erros)
+    # 1. Definitivamente Positivo (valores de acertos e erros)
     DPA = sum((y_real .==1) .& (y_def_pos .==1))
     DPE = sum((y_real .==0) .& (y_def_pos .==1))
     println("Valor Acerto (Def Positivo)  = ", DPA)
     println("Valor Erro   (Def. Positivo) = ", DPE)
 
-    # Provavelmente Positivo (Valores de acertos e erros)
+    # 2. Provavelmente Positivo (Valores de acertos e erros)
     PPA = sum((y_real .== 1) .& (y_prob_pos .==1))
     PPE = sum((y_real .== 0) .& (y_prob_pos .==1))
     println("Valor Acerto (Prob Positivo) = ", PPA)
     println("Valor Erro   (Prob Positivo) = ",  PPE)
 
-    # Indefinidos (sobre o hiperplano)
+    # 3. Indefinidos (sobre o hiperplano)
     IA = sum((y_real .==1) .& (y_indef .==1))
     IE = sum((y_real .==0) .& (y_indef .==1))
     println("Valores Acerto (Indefinidos) = ", IA)
-    println("Valores Erro  (Indefinidos) = ", IE)
+    println("Valores Erro  (Indefinidos)  = ", IE)
 
-    # Provavelmente Negativos (Valores de acertos e erros)
+    # 4. Provavelmente Negativos (Valores de acertos e erros)
     PNA = sum((y_real .==0).&(y_prob_neg .==1))
     PNE = sum((y_real .==0) .& (y_prob_neg .==1))
 
     println("Valor Acerto (Prob Negativo) = ", PNA)
-    println("Valor Erro  (Prob Negativo) = ",  PNE)
-    
+    println("Valor Erro  (Prob Negativo)  = ",  PNE)
+
+    # 5. Definitivamente Negativo (Valores de acertos e erros)
+    DNA = sum((y_real .==0) .& (y_def_neg .==1))
+    DNE = sum((y_real .==1) .& (y_def_neg .==1))
+
+    println("Valor Acerto (Def Negativo)  = ", DNA)
+    println("Valor Erro  (Def Negativo)   = ",  DNE)
 
 
     # Calculo das taxas 
-    # Taxa Definitivamente Positivo Acerto/Erro  
+    # 1. Taxa Definitivamente Positivo Acerto/Erro  
     TDPA = DPA/(DPA +DPE)
     TDPE = DPA/(DPA +DPE)  
 
     #println("Taxa Acerto (Def Positivo) =  ", TDPA)
     #println("Taxa Erro   (Def Positivo) =  ", TDPE)
 
-    # Taxa Provavelmente Positivo Acerto/Erro  
+    # 2. Taxa Provavelmente Positivo Acerto/Erro  
     TPPA = PPA/(PPA + PPE)
     TPPE = PPA/(PPA + PPE)  
 
     #println("Taxa Acerto (Def Positivo) =  ", TPPA)
     #println("Taxa Erro   (Def Positivo) =  ", TPPE)
 
-    # Taxa dos valores indefinidos 
+    # 3. Taxa dos valores indefinidos 
     TIA = IA /(IA +IE )
     TIE = IE /(IA +IE )
     
     #println("Taxa Acerto (Indefindos) =  ", TIA)
     #println("Taxa Erro   (Indefindos) =  ", TIE)
 
-    # Taxa Provavelmente Positivo Acerto/Erro  
+    # 4. Taxa Provavelmente Positivo Acerto/Erro  
     TPNA = PNA / (PNA + PNE)
     TPNE = PNE / (PNA + PNE )
+
+   # 5. Taxa Definitivamente Negativo Acerto/Erro
+   
+   TDNA = DNA /(DNA + DNE)
+   TDNE = DNE /(DNA + DNE )
+
 
     println("............................................")
     println("     Taxa de Acerto  |  Taxa de Erro ")
@@ -105,6 +121,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("Pro Positivo  : ",   TPPA, "  |       " , TPPE)
     println("Indefindos    : ",   TIA, "  |       " , TIE)
     println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
+    println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
 
 
@@ -129,9 +146,9 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
         println(file,"Valor Erro   (Def Positivo) =  ", DPE)
         println(file,"Valor Acerto (Def Positivo) =  ", PPA)
         println(file,"Valor Erro   (Def Positivo) =  ", PPE)
-        println(file,"Taxa Acerto (Indefindos) =  ", TIA)
-        println(file,"Taxa Erro   (Indefindos) =  ", TIE)
-        println(file,"Valor Acerto (Prob Negativo) = ", PNA)
+        println(file,"Taxa Acerto (Indefindos)    =  ", TIA)
+        println(file,"Taxa Erro   (Indefindos)    =  ", TIE)
+        println(file,"Valor Acerto (Prob Negativo)= ", PNA)
         println(file,"Valor Erro  (Prob Negativo) = ",  PNE)
         println(file, ".............................................")
         println(file,"     Taxa de Acerto  |  Taxa de Erro ")
@@ -139,6 +156,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
         println(file,"Pro Positivo  : ",   TPPA, "  |       " , TPPE)
         println(file, "Indefindos    : ",   TIA, "  |       " , TIE)
         println(file, "Pro Negativo  : ",   TPNA, "  |       " , TPNE)
+        println(file, "Def Negativo  : ",    TDNA, "  |       " , TDNE)
         println(file, ".............................................")
     end 
 
