@@ -1,4 +1,4 @@
-# Arquivo de leitura dos dados de covid 
+# Arquivo de para filtrar 
 # Data: 22/Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
@@ -18,7 +18,8 @@ function dividir_categorias(df_treino::DataFrame)
     ca = select(ca_treino, Not([:Column1, :COVID]))
     cb = select(cb_treino, Not([:Column1, :COVID]))
     C = select(df_treino, Not([:Column1, :COVID]))
-    return C, ca, cb
+    y_real = select(df_treino, :COVID)
+    return C, ca, cb, y_real 
     
 
 end

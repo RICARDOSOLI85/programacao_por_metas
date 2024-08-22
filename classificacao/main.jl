@@ -9,18 +9,16 @@ using Gurobi
 #-----------------------------------
 alpha =1.0;
 beta = 0.50;
-proporcao_treino = 0.3 
+proporcao_treino = 0.7; 
 #-------------------------------------
 
-# include 
-include("dados.jl")
-include("dividir.jl")
-include("filtro.jl")
-
-
 # dados 
+include("dados.jl")
 arquivo ="exames.csv"
 df = ler_csv(arquivo)
+
+# dividir 
+include("dividir.jl")
 df_treino, df_teste = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
 
@@ -32,7 +30,8 @@ println("Dados de teste (70%):")
 println(first(df_teste, 5))
 println(size(df_teste))
 
-# dividir 
+# Categorias
+include("filtro.jl") 
 C, ca, cb = dividir_categorias(df_treino::DataFrame)
 
 println("Categoria A (ca):")
@@ -47,8 +46,13 @@ println("Categoria C (C):")
 println(first(C,10))
 println(size(C))
 
+# balancear 
 
+
+
+# --------------------------
 # Implementar Modelo (1): 
+#---------------------------
 include("GP_1.jl") 
 include("metricas.jl")
 # funções 
