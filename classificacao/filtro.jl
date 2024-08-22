@@ -21,5 +21,5 @@ function dividir_categorias(df_treino::DataFrame)
     y_real = select(df_treino, :COVID)
     return C, ca, cb, y_real 
     
-
+    
 end
