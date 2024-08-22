@@ -13,7 +13,7 @@ cb = C[6:10,:];
 
 # parâmetros 
 alpha =1.0;
-beta = 0.60; 
+beta = 0.50; 
 
 # Implementar: 
 

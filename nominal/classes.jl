@@ -21,9 +21,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
 
 
     # Parte: A
-    # Metricas
-
-    
+    # Metricas   
 
     println(".......................................................")
     println("                        Métricas                       ")
@@ -135,8 +133,48 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
-   
-   
+
+
+    # B Calculo das medias de precisão TP, FP, FN, TN
+    TP = DPA + PPA 
+    FP = DPE + PPE 
+    ID = IA + IE 
+    FN = PNE + DNE 
+    TN = PNA + DNA 
+    soma = TP + FP + ID + FN + TN
+    println(" ")
+    println("--------------------------------------------------------------")
+    println("                      Matriz de Confusão                        ")
+    println("--------------------------------------------------------------")
+    println("|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
+    println("|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
+    println("---------------------------------------------------------------")
+    println("Indefinido    = ", ID)
+    println("Soma do Total = ", soma)
+
+    # Calcular a Acurácia 
+    accuracy = (TP + TN) / (TP + FN + FP +TN)
+
+    # Calculando precisão de Recall 
+    precision = TP / (TP + FP)
+    recall = TP / (TP + FN)
+
+    # Calcular F1 Score 
+    f1_score  = 2 * (precision * recall) / (precision + recall)
+
+    # Taxa de acerto e taxa de erro 
+
+    TPA = (DPA + PPA) / (DPA + PPA + DPE + PPE) 
+    TPE = (DPE + PPE) / (DPA + PPA + DPE + PPE)
+    TI  = (ID / soma)
+    TNA = (DNA + PNA) / (DNA + PNA + DNE + PNE) 
+    TNE = (DNE + PNE) / (DNA + PNA + DNE + PNE)
+    println("............................................")
+    println("         Taxa de Acerto |  Taxa de Erro ")
+    println(" Positivo   :   ",  TPA, "     |     " , TPE)
+    println(" Indefindo  :   ",   TI, "     |     " , TI)
+    println(" Negativo   :   ",    TNA, "     |     " , TNE)
+    println("............................................")
 
 
     # Salvar em um arquivo TXT
@@ -169,6 +207,27 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
         println(file, "Pro Negativo  : ",   TPNA, "  |       " , TPNE)
         println(file, "Def Negativo  : ",    TDNA, "  |       " , TDNE)
         println(file, ".............................................")
+        println(file," ")
+        println(file,"--------------------------------------------------------------")
+        println(file,"                      Matriz de Confusão                        ")
+        println(file,"--------------------------------------------------------------")
+        println(file,"|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
+        println(file,"|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
+        println(file,"---------------------------------------------------------------")
+        println(file,"Indefinido    = ", ID)
+        println(file,"Soma do Total = ", soma)
+        println(file,"-----------------------------")
+        println(file, "accuray    = ", accuracy)
+        println(file,"precision  = ", precision) 
+        println(file,"recall     = ", recall) 
+        println(file, "F1Score    = ", f1_score)
+        println(file,"............................................")
+        println(file,"         Taxa de Acerto |  Taxa de Erro ")
+        println(file," Positivo   :   ",  TPA, "     |     " , TPE)
+        println(file," Indefindo  :   ",   TI, "     |     " , TI)
+        println(file," Negativo   :   ",    TNA, "     |     " , TNE)
+        println(file,"............................................")
+        println(file,"*************************************************************\n")
 
     end 
     
