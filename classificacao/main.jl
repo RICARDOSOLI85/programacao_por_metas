@@ -23,5 +23,5 @@ include("metricas.jl")
 
 # Funções 
 FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)     # Modelo 1
-#calcular_metricas(modelo, C,x,xo,y_real,beta) 
-calcular_classes(FO, C, x, xo, y_real,beta)
+calcular_metricas(modelo, C,x,xo,y_real,beta) 
+#calcular_classes(FO, C, x, xo, y_real,beta)

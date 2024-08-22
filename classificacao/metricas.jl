@@ -43,7 +43,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
 
     # Correção do Falso Positivo 
     FPc = FP - ERc2 
-
+    a = FPc == FP
     # Calcular a Acurácia 
     accuracy = (TP + TN) / (TP + FN + FPc +TN)
 
@@ -53,11 +53,11 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
 
     # Calcular F1 Score 
 
-    f1_score  = 2 * (precision * recall) / (precision + recall)
+    f1_score  = 2 * (precision * recall) / (precision + recall);
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("                      Teste do Modelo GP_2                   ")
+    println("                      Teste do Modelo GP_1                 ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("variáveis  = ", x)
@@ -76,15 +76,17 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     println("Indefindos    = ", Indef)
     println("Falso Positivo Correto = ", FPc)
     println("----------------------------")
+    println("Resultado = ", a)
+    println("----------------------------")
     println("Acurácia    =  ", accuracy)
     println("precision   =  " , precision)
     println("recall      =  ", recall)
     println("F1Score     =  ", f1_score)
-    println("==================================================================")
+    println("========================================================")
     # Salvando os resultados em um arquivo de texto
-    open("resultados_gp2.txt", "a") do file
+    open("M1_sb.txt", "w") do file
     write(file," =============================================================== \n")
-    write(file,"                     Teste do Modelo GP_2 : D             \n")
+    write(file,"                     Teste do Modelo GP_1 : A             \n")
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
@@ -102,10 +104,12 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     write(file,"Erro Classe A =  $ERc1\n")
     write(file, "Erro Classe B =  $ERc2\n")
     write(file,"Indefindos    =  $Indef\n") 
-    write(file,"Falso Positivo Correto = $FPc\n") 
+    write(file,"Falso Positivo Correto = $FPc\n")
+    write(file,"----------------------------\n")
+    write(file,"Resultado = $a \n") 
     write(file,"-----------------------------\n")
-    write(file, "accuray    = $accuracy\n")
-    write(file,"precision  = $precision\n") 
+    write(file, "accuray     = $accuracy\n")
+    write(file,"precision   = $precision\n") 
     write(file,"recall      = $recall\n") 
     write(file, "F1Score     = $f1_score\n")
     write(file,"*****************************************************\n")
