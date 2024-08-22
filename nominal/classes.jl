@@ -18,8 +18,13 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("hiper+beta = ",hiper_up)
     println("hiperplano = ",wo)
     println("hiper-beta = ",hiper_down)
-    
+
+
+    # Parte: A
     # Metricas
+
+    
+
     println(".......................................................")
     println("                        Métricas                       ")
     println(".......................................................") 
@@ -86,46 +91,52 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     # Calculo das taxas 
     # 1. Taxa Definitivamente Positivo Acerto/Erro  
     TDPA = DPA/(DPA +DPE)
-    TDPE = DPA/(DPA +DPE)  
-
+    TDPE = DPE/(DPA +DPE)  
+    TDPA = round(TDPA, digits=2)
+    TDPE = round(TDPE, digits=2)
     #println("Taxa Acerto (Def Positivo) =  ", TDPA)
     #println("Taxa Erro   (Def Positivo) =  ", TDPE)
 
     # 2. Taxa Provavelmente Positivo Acerto/Erro  
     TPPA = PPA/(PPA + PPE)
-    TPPE = PPA/(PPA + PPE)  
-
+    TPPE = PPE/(PPA + PPE)
+    TPPA = round(TPPA, digits=2)
+    TPPE = round(TPPE, digits=2)
     #println("Taxa Acerto (Def Positivo) =  ", TPPA)
     #println("Taxa Erro   (Def Positivo) =  ", TPPE)
 
     # 3. Taxa dos valores indefinidos 
     TIA = IA /(IA +IE )
     TIE = IE /(IA +IE )
-    
+    TIA = round(TIA, digits=2)
+    TIE = round(TIE, digits=2)
     #println("Taxa Acerto (Indefindos) =  ", TIA)
     #println("Taxa Erro   (Indefindos) =  ", TIE)
 
     # 4. Taxa Provavelmente Positivo Acerto/Erro  
     TPNA = PNA / (PNA + PNE)
     TPNE = PNE / (PNA + PNE )
+    TPNA = round(TPNA, digits=2)
+    TPNE = round(TPNE, digits=2)
 
    # 5. Taxa Definitivamente Negativo Acerto/Erro
    
    TDNA = DNA /(DNA + DNE)
    TDNE = DNE /(DNA + DNE )
+   #TDNA = round(TPNA, digits=2)
+   #TDNE = round(TPNE, digits=2)
 
 
     println("............................................")
     println("     Taxa de Acerto  |  Taxa de Erro ")
-    println("Def Positivo  : ",   TDPA, "  |       " , TDPE)
-    println("Pro Positivo  : ",   TPPA, "  |       " , TPPE)
+    println("Def Positivo  : ",   TDPA, " |       " , TDPE)
+    println("Pro Positivo  : ",   TPPA, " |       " , TPPE)
     println("Indefindos    : ",   TIA, "  |       " , TIE)
     println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
-
-
-
+   
+   
 
 
     # Salvar em um arquivo TXT
@@ -152,18 +163,13 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
         println(file,"Valor Erro  (Prob Negativo) = ",  PNE)
         println(file, ".............................................")
         println(file,"     Taxa de Acerto  |  Taxa de Erro ")
-        println(file,"Def Positivo  : ",   TDPA, "  |       " , TDPE)
-        println(file,"Pro Positivo  : ",   TPPA, "  |       " , TPPE)
+        println(file,"Def Positivo  : ",   TDPA, " |       " , TDPE)
+        println(file,"Pro Positivo  : ",   TPPA, " |       " , TPPE)
         println(file, "Indefindos    : ",   TIA, "  |       " , TIE)
         println(file, "Pro Negativo  : ",   TPNA, "  |       " , TPNE)
         println(file, "Def Negativo  : ",    TDNA, "  |       " , TDNE)
         println(file, ".............................................")
+
     end 
-
-
-     
-
-
-
-
+    
 end
