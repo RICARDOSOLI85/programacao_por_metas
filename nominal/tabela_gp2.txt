@@ -1,0 +1,11 @@
+========================================
+Tabela de Resultado das Taxas - GP 2: A 
+========================================
+Função Objetivo  = 5.50
+variáveis  =  [0.0, 1.0]
+hiper+beta =  2.0
+hiperplano =  1.75
+hiper-beta =  1.5
+-----------------------------------------
+Taxa Acerto (Def Positivo) =  0.5
+Taxa Erro   (Def Positivo) =  0.5
