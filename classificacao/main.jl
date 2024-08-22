@@ -12,27 +12,19 @@ beta = 0.50;
 proporcao_treino = 0.7; 
 #-------------------------------------
 
-# dados 
+# 1. dados 
 include("dados.jl")
 arquivo ="exames.csv"
 df = ler_csv(arquivo)
 
-# dividir 
+# 2. dividir 
 include("dividir.jl")
 df_treino, df_teste = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
-
-println("Dados de treino (30%):")
-println(first(df_treino, 5))
-println(size(df_treino))
-
-println("Dados de teste (70%):")
-println(first(df_teste, 5))
-println(size(df_teste))
-
-# Categorias
+# 3. Categorias
+# Os valores de C e y_real estão dentro do treino, então seria validação. 
 include("filtro.jl") 
-C, ca, cb = dividir_categorias(df_treino::DataFrame)
+C, ca, cb, y_real = dividir_categorias(df_treino::DataFrame)
 
 println("Categoria A (ca):")
 println(first(ca,10))
@@ -46,7 +38,19 @@ println("Categoria C (C):")
 println(first(C,10))
 println(size(C))
 
-# balancear 
+println("Label :")
+println(first(y_real,100))
+println(size(y_real))
+
+# 4. Balancear 
+C_balanced, ca_balanced,   cb_balanced= balancear_categorias(C,ca,cb)
+
+println("ca_balanced = ", size(ca_balanced))
+println("cb_balanced = ", size(cb_balanced))
+println("C_balanced = ", size(C_balanced))
+println(first(ca_balanced,10))
+println(first(cb_balanced,10))
+   
 
 
 
