@@ -4,9 +4,9 @@
 
 function calcular_metricas(modelo,C,x,xo,y_real,beta)
     
-    n = length(x)
-    w = x 
-    wo = xo 
+    n = length(x);
+    w = x;
+    wo = xo;
     FO = JuMP.objective_value(modelo)
     #===============================
        for j=1:n 
@@ -15,12 +15,12 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     w = [w[j] for j in 1:n]
     ===============================# 
     # Calcular o Hiperplano 
-    c = Matrix(C)
-    y_modelo = c * w 
-    println("vetor hiperplano =" , y_modelo)  
+    c = Matrix(C);
+    y_modelo = c * w ;
+    #println("vetor hiperplano =" , y_modelo)  
     y_predito = y_modelo .>= wo 
-    y_real .== y_real 
-    y_pred    = y_modelo .== wo 
+    y_real .== y_real ;
+    y_pred    = y_modelo .== wo ;
     println("y_predito = ", y_predito)
     println("y_real    = ",  y_real)
     println("y_pred    = ", y_pred )

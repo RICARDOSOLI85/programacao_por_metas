@@ -29,10 +29,10 @@ function gp_det(C,ca,cb,alpha,beta)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    #@variable(modelo, 0 <= x[j=1:n] <= 1)      #A
+    @variable(modelo, 0 <= x[j=1:n] <= 1)      #A
     #@variable(modelo, -1 <= x[j=1:n] <= 1)     #B
     #@variable(modelo,x[j=1:n])                #C
-    @variable(modelo,-9<= x[j=1:n]<= 9)        #D
+    #@variable(modelo,-9<= x[j=1:n]<= 9)        #D
     @variable(modelo, x0) 
     @variables(modelo,
     begin 
@@ -63,14 +63,14 @@ function gp_det(C,ca,cb,alpha,beta)
    JuMP.all_variables(modelo)
    num_variables(modelo)
    #println(modelo)
-   FO = JuMP.objective_value(modelo)
-   xo = JuMP.value(x0)
-   x  = JuMP.value.(x)
+   FO = JuMP.objective_value(modelo);
+   xo = JuMP.value(x0);
+   x  = JuMP.value.(x);
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
    println("x[0] = ",  xo)
    for i=1:n 
-   println("x[$i] = ", JuMP.value.(x[i]))
+   println("x[$i] = ", JuMP.value.(x[i]));
    end
    
    return FO, xo, x, modelo 

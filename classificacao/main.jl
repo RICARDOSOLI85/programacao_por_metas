@@ -8,7 +8,7 @@ using Gurobi
 # Parâmetros (Escolher)
 #-----------------------------------
 alpha =1.0;
-beta = 0.50;
+beta = 0.00;
 proporcao_treino = 0.7; 
 #-------------------------------------
 
@@ -39,7 +39,7 @@ println(first(C,10))
 println(size(C))
 
 println("Label :")
-println(first(y_real,100))
+println(first(y_real,10))
 println(size(y_real))
 
 # 4. Balancear 
@@ -50,9 +50,8 @@ println("cb_balanced = ", size(cb_balanced))
 println("C_balanced = ", size(C_balanced))
 println(first(ca_balanced,10))
 println(first(cb_balanced,10))
+println(last(C_balanced,10))
    
-
-
 
 # --------------------------
 # Implementar Modelo (1): 
