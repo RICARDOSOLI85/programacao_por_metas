@@ -15,7 +15,7 @@ proporcao_treino = 0.3
 # include 
 include("dados.jl")
 include("dataframe.jl")
-include("categoria_a.jl")
+include("filtro.jl")
 
 
 # dados 
@@ -23,8 +23,6 @@ arquivo ="exames.csv"
 df = ler_csv(arquivo)
 df_treino, df_teste = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
-# dividir 
-ca, cb, C = dividir_categorias(df_treino::DataFrame)
 
 println("Dados de treino (30%):")
 println(first(df_treino, 5))
@@ -34,13 +32,20 @@ println("Dados de teste (70%):")
 println(first(df_teste, 5))
 println(size(df_teste))
 
+# dividir 
+C, ca, cb = dividir_categorias(df_treino::DataFrame)
+
 println("Categoria A (ca):")
-println(first(ca))
+println(first(ca,10))
 println(size(ca))
 
 println("Categoria B (cb):")
-println(first(cb))
+println(first(cb,10))
 println(size(cb))
+
+println("Categoria C (C):")
+println(first(C,10))
+println(size(C))
 
 
 # Implementar Modelo (1): 
