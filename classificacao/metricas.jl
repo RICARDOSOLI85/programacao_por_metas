@@ -84,7 +84,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     println("F1Score     =  ", f1_score)
     println("========================================================")
     # Salvando os resultados em um arquivo de texto
-    open("M1_sb.txt", "w") do file
+    open("resultados_teste1.txt", "w") do file
     write(file," =============================================================== \n")
     write(file,"                     Teste do Modelo GP_1 : A             \n")
     write(file," =============================================================== \n")

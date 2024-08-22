@@ -10,5 +10,5 @@ using MLDataPattern
 function ler_csv(arquivo::String)::DataFrame
     # Lê o arquivo CSV e retorna um DataFrame
     df = CSV.read(arquivo, DataFrame)
-    return exames 
+    return df 
 end
