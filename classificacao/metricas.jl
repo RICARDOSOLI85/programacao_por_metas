@@ -158,9 +158,9 @@ function calcular_metricas(modelo, C, x, xo, y_real, model_name)
           println(file, "|---------Modelo 1 B---------|")
         end
         if model_name == "GP_1C.jl"
-          println(file, "|---------Modelo 1 A---------|")
+          println(file, "|---------Modelo 1 C---------|")
         elseif model_name == "GP_1D.jl"
-          println(file, "|---------Modelo 1 B---------|")
+          println(file, "|---------Modelo 1 D---------|")
         end  
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)

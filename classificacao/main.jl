@@ -5,13 +5,6 @@
 using JuMP
 using Gurobi 
 
-# Parâmetros (Escolher)
-#-----------------------------------
-alpha =1.0;
-beta = 0.00;
-proporcao_treino = 0.7; 
-#-------------------------------------
-
 # 1. dados 
 include("dados.jl")
 arquivo ="exames.csv"
@@ -61,12 +54,14 @@ println(first(C,10))
 println(size(C))
 
 # 5. Balancear 
-include("dados.jl")
+include("balancear.jl")
 C_balanced, ca_balanced,   cb_balanced= balancear_categorias(C,ca,cb)
+ca = ca_balanced ;
+cb = cb_balanced ; 
 
-println("ca_balanced = ", size(ca_balanced))
-println("cb_balanced = ", size(cb_balanced))
-println("C_balanced = ", size(C_balanced))
+println("ca_balanced = ", size(ca))
+println("cb_balanced = ", size(cb))
+println("C_balanced = ", size(C))
 println(first(ca_balanced,10))
 println(first(cb_balanced,10))
 println(last(C_balanced,10))
@@ -83,42 +78,107 @@ modelo, x, xo = gp_det(C,ca,cb,alpha)
 calcular_metricas(modelo, C ,x,xo,y_real,model_name)
 
 
-# Teste automatizar ===============
+#++++++++++++++++++++++++++++++++++++
+# Parâmetros (Escolher)
+#++++++++++++++++++++++++++++++++++++++
+alpha =1.0;
+beta = 0.50;
+proporcao_treino = 0.7; 
+#-------------------------------------
+
+# --------------------------
+# Implementar Modelo (1)
+# * Automatizar *   
+# 
+#---------------------------
+
 # Incluir os arquivos das funções 
 include("GP_1A.jl")
 include("GP_1B.jl")
+include("GP_1C.jl")
+include("GP_1D.jl")
 include("metricas.jl")
 
 # Lista de Modelos 
-Set_Model_1= ["GP_1A","GP_1B"]
+Set_Model_1 = ["GP_1A.jl", "GP_1B.jl", "GP_1C.jl", "GP_1D.jl"]
 
 # Função para calcular cada modelo e as métricas 
 
 for model_name in Set_Model_1
-    println("Excecutando $model_name")
+    # Remove a extensão do nome do arquivo para comparação
+     println("Excecutando $model_name")
 
-    if model_name =="GP_1A"
+    if model_name =="GP_1A.jl"
         modelo, x, xo, = gp_det_1A(C,ca, cb, alpha)
         print(" Imprimir xo ", xo)
         calcular_metricas(modelo, C, x, xo, y_real, model_name)
 
-    elseif model_name =="GP_1B"
+    elseif model_name =="GP_1B.jl"
         modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
         calcular_metricas(modelo, C, x, xo, y_real, model_name)
+
+    elseif model_name =="GP_1C.jl"
+        modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
+        calcular_metricas(modelo, C, x, xo, y_real, model_name)
+
+    elseif model_name =="GP_1D.jl"
+        modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
+        calcular_metricas(modelo, C, x, xo, y_real, model_name)        
     end 
 end 
 
 
 
 
+# Incluir os arquivos das funções 
+include("GP_2A.jl")
+include("GP_2B.jl")
+include("GP_2C.jl")
+include("GP_2D.jl")
+include("classes.jl")
+
+# Lista de Modelos 
+Set_Model_1 = ["GP_2A.jl", "GP_2B.jl", "GP_2C.jl", "GP_2D.jl"]
+
+# Função para calcular cada modelo e as métricas 
+
+for model_name in Set_Model_1
+    # Remove a extensão do nome do arquivo para comparação
+     println("Excecutando $model_name")
+
+    if model_name =="GP_2A.jl"
+        modelo, x, xo, = gp_det_2A(C,ca, cb, alpha,beta)
+        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+        
+    elseif model_name =="GP_2B.jl"
+        modelo, x, xo, = gp_det2B(C,ca, cb, alpha,beta)
+        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+
+    elseif model_name =="GP_2C.jl"
+        modelo, x, xo, = gp_det2C(C,ca, cb, alpha,beta)
+        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+
+    elseif model_name =="GP_2D.jl"
+        modelo, x, xo, = gp_det2D(C,ca, cb, alpha,beta)
+        calcular_classes(FO, C, x, xo, y_real,beta, model_name)  
+    end 
+end 
+
+
+
+
+
+
+
 # Implementar Modelo (2): 
-include("GP_2.jl")
+xinclude("GP_2.jl")
 include("classes.jl")
 # funções 
 FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)
+model_name =="GP_2.jl"
 calcular_classes(FO, C, x, xo, y_real,beta)
 
-# Teste automatizar 
+
 # Exemplo
 #=
 C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];

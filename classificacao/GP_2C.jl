@@ -1,5 +1,5 @@
 # Modelo Robusto  para Problema de Classificação
-# Data: 21/Agosto/2024
+# Data: 23/Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
 using JuMP
@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_det(C,ca,cb,alpha,beta)
+function gp_det2C(C,ca,cb,alpha,beta)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
@@ -20,10 +20,7 @@ function gp_det(C,ca,cb,alpha,beta)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    @variable(modelo, 0 <= x[j=1:n] <= alpha)    #A
-    #@variable(modelo, -1 <= x[j=1:n] <= 1)      #B
-    #@variable(modelo,x[j=1:n])                  #C
-    #@variable(modelo,-9<=x[j=1:n]<= 9)           #D
+    @variable(modelo,x[j=1:n])                  #C
     @variable(modelo, xo) 
     @variables(modelo,
     begin 
@@ -54,20 +51,21 @@ function gp_det(C,ca,cb,alpha,beta)
    JuMP.all_variables(modelo)
    num_variables(modelo)
    #println(modelo)
-   FO = JuMP.objective_value(modelo);
-   xo = JuMP.value(xo);
-   x  = JuMP.value.(x);
+   FO = JuMP.objective_value(modelo)
+   xo = JuMP.value(xo)
+   #x  = JuMP.value.(x)
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
-   println("x[0] = ",  xo)
-   #for i=1:n 
-   #println("x[$i] = ", JuMP.value.(x[i]))
+   #println("w[0] = ",  xo)
+   println("w = ", w)
+   #for i=1:n
+   # println("x[$i] = ", JuMP.value.(x[i]))
    #end
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
    println("Time  =  ", time )
    
-   return FO, xo, x, modelo 
+   return FO, w, xo, modelo
 
 end 

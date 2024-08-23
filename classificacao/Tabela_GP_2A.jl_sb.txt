@@ -1,0 +1,47 @@
+========================================
+Tabela de Resultado das Taxas
+|---------Modelo 2 A---------|
+========================================
+Função Objetivo  = 213.00
+hiper+beta =  1.0
+hiperplano =  0.5
+hiper-beta =  0.0
+-----------------------------------------
+Valor Acerto (Def Positivo) =  34
+Valor Erro   (Def Positivo) =  12
+Valor Acerto (Def Positivo) =  0
+Valor Erro   (Def Positivo) =  0
+Taxa Acerto (Indefindos)    =  NaN
+Taxa Erro   (Indefindos)    =  NaN
+Valor Acerto (Prob Negativo)= 0
+Valor Erro  (Prob Negativo) = 0
+.............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.74 |       0.26
+Pro Positivo  : NaN |       NaN
+Indefindos    : NaN  |       NaN
+Pro Negativo  : NaN  |       NaN
+Def Negativo  : 0.71  |       0.29
+.............................................
+ 
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 34 | False Negative (FN)  = 84 ||
+|| False Positive (FP)  = 12 | True Negative  (TN) =  201 ||
+---------------------------------------------------------------
+Indefinido    = 0
+Soma do Total = 331
+-----------------------------
+accuray    = 0.7099697885196374
+precision  = 0.7391304347826086
+recall     = 0.288135593220339
+F1Score    = 0.41463414634146345
+............................................
+         Taxa de Acerto |  Taxa de Erro 
+ Positivo   :   0.7391304347826086     |     0.2608695652173913
+ Indefindo  :   0.0     |     0.0
+ Negativo   :   0.7052631578947368     |     0.29473684210526313
+............................................
+*************************************************************
+

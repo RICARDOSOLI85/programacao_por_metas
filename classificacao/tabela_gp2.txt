@@ -1,0 +1,46 @@
+========================================
+Tabela de Resultado das Taxas - GP 2: A 
+========================================
+Função Objetivo  = 7.42
+hiper+beta =  2.1399999999999997
+hiperplano =  1.5699999999999998
+hiper-beta =  0.9999999999999999
+-----------------------------------------
+Valor Acerto (Def Positivo) =  2
+Valor Erro   (Def Positivo) =  1
+Valor Acerto (Def Positivo) =  1
+Valor Erro   (Def Positivo) =  2
+Taxa Acerto (Indefindos)    =  NaN
+Taxa Erro   (Indefindos)    =  NaN
+Valor Acerto (Prob Negativo)= 2
+Valor Erro  (Prob Negativo) = 2
+.............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.67 |       0.33
+Pro Positivo  : 0.33 |       0.67
+Indefindos    : NaN  |       NaN
+Pro Negativo  : 0.5  |       0.5
+Def Negativo  : NaN  |       NaN
+.............................................
+ 
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 3 | False Negative (FN)  = 2 ||
+|| False Positive (FP)  = 3 | True Negative  (TN) =  2 ||
+---------------------------------------------------------------
+Indefinido    = 0
+Soma do Total = 10
+-----------------------------
+accuray    = 0.5
+precision  = 0.5
+recall     = 0.6
+F1Score    = 0.5454545454545454
+............................................
+         Taxa de Acerto |  Taxa de Erro 
+ Positivo   :   0.5     |     0.5
+ Indefindo  :   0.0     |     0.0
+ Negativo   :   0.5     |     0.5
+............................................
+*************************************************************
+

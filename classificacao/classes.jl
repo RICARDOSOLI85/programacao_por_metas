@@ -3,55 +3,63 @@
 # Nome: Ricardo Soares Oliveira 
 using Printf 
 
-function calcular_classes(FO, C, x, xo, y_real,beta)
-    n =length(x)
-    w = x
-    wo = xo
+function calcular_classes(FO, C, x, w, y_real,beta, model_name)
+   
+    n =length(x);
+    x = x;
+    wo =  xo;
     
-    # Calcula hiperplano 
-    c = Matrix(C)
-    y_modelo = c * w 
-    println("vetor hiperplano = ", y_modelo)
-    hiper_up   = wo + beta
-    hiper_down = wo - beta 
+    # 0.  Calcula hiperplano 
+    c = Matrix(C);
+    y_modelo = c * x;
+    #println("y_modelo =", y_modelo)
+
+     # 0.1 Tranformar o data frame y_real em vector (importante)
+    y_real = Matrix(y_real);
+    println(" tipo de variável y_ real =", typeof(y_real))
+
+    println("tipo wo, : ", typeof(wo))
+    println("tipo beta, : ", typeof(beta))
+
+    hiper_up   = wo .+ beta
+    hiper_down = wo .- beta 
     println("hiper+beta = ",hiper_up)
     println("hiperplano = ",wo)
     println("hiper-beta = ",hiper_down)
+   
 
 
     # Parte: A
-    # Metricas   
+    # Métricas   
 
     println(".......................................................")
     println("                        Métricas                       ")
     println(".......................................................") 
+    
     # 1. Definitivamente Positivo
     #    (Maior ou igual a hipeplano + beta)
-    y_def_pos = y_modelo .>= wo + beta    
-    println("y_definitvo_positivo = ", y_def_pos)
+    y_def_pos = y_modelo .>= wo + beta;    
+    #println("y_definitvo_positivo = ", y_def_pos)
     
     # 2. Provavelmente Positivo
     #    (Menor ao hipeplano + beta e ".&" Maior que hiperplano)
-    y_prob_pos = (y_modelo .< wo + beta) .& (y_modelo .> wo)
-    println("y_provavel_positivo = ", y_prob_pos)
-    println("y_real = ", y_real)
-    
+    y_prob_pos = (y_modelo .< wo + beta) .& (y_modelo .> wo);
+    #println("y_provavel_positivo = ", y_prob_pos)
+        
     # 3. Valores de Y Indefinidos
     # (Sobre o hiperplano )
-    y_indef = y_modelo .== wo
-    println("y_indef = ", y_indef)
-
+    y_indef = y_modelo .== wo;
+    #println("y_indef = ", y_indef)
+    
     # 4. Provavelmente Negativos 
-    y_prob_neg =  (y_modelo .< wo) .& (y_modelo .> wo - beta )
-    println("y_prob_neg = ", y_prob_neg)
+    y_prob_neg =  (y_modelo .< wo) .& (y_modelo .> wo - beta );
+    #println("y_prob_neg = ", y_prob_neg)
 
     # 5. Definitivamente Negativo 
-    y_def_neg = y_modelo .<= wo - beta
-    println("y_def_neg = ", y_def_neg) 
+    y_def_neg = y_modelo .<= wo - beta;
+    #println("y_def_neg = ", y_def_neg) 
 
-    
-
-    println(".......................................................")
+    #---------------------------------------------------------
     # 1. Definitivamente Positivo (valores de acertos e erros)
     DPA = sum((y_real .==1) .& (y_def_pos .==1))
     DPE = sum((y_real .==0) .& (y_def_pos .==1))
@@ -84,32 +92,26 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("Valor Acerto (Def Negativo)  = ", DNA)
     println("Valor Erro  (Def Negativo)   = ",  DNE)
 
-
     # Calculo das taxas 
+
     # 1. Taxa Definitivamente Positivo Acerto/Erro  
     TDPA = DPA/(DPA +DPE)
     TDPE = DPE/(DPA +DPE)  
     TDPA = round(TDPA, digits=2)
     TDPE = round(TDPE, digits=2)
-    #println("Taxa Acerto (Def Positivo) =  ", TDPA)
-    #println("Taxa Erro   (Def Positivo) =  ", TDPE)
-
+    
     # 2. Taxa Provavelmente Positivo Acerto/Erro  
     TPPA = PPA/(PPA + PPE)
     TPPE = PPE/(PPA + PPE)
     TPPA = round(TPPA, digits=2)
     TPPE = round(TPPE, digits=2)
-    #println("Taxa Acerto (Def Positivo) =  ", TPPA)
-    #println("Taxa Erro   (Def Positivo) =  ", TPPE)
-
+    
     # 3. Taxa dos valores indefinidos 
     TIA = IA /(IA +IE )
     TIE = IE /(IA +IE )
     TIA = round(TIA, digits=2)
     TIE = round(TIE, digits=2)
-    #println("Taxa Acerto (Indefindos) =  ", TIA)
-    #println("Taxa Erro   (Indefindos) =  ", TIE)
-
+    
     # 4. Taxa Provavelmente Positivo Acerto/Erro  
     TPNA = PNA / (PNA + PNE)
     TPNE = PNE / (PNA + PNE )
@@ -117,11 +119,10 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     TPNE = round(TPNE, digits=2)
 
    # 5. Taxa Definitivamente Negativo Acerto/Erro
-   
    TDNA = DNA /(DNA + DNE)
    TDNE = DNE /(DNA + DNE )
-   #TDNA = round(TPNA, digits=2)
-   #TDNE = round(TPNE, digits=2)
+   TDNA = round(TDNA, digits=2)
+   TDNE = round(TDNE, digits=2)
 
 
     println("............................................")
@@ -153,13 +154,16 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
 
     # Calcular a Acurácia 
     accuracy = (TP + TN) / (TP + FN + FP +TN)
-
+    println("accuracy = ", accuracy)
     # Calculando precisão de Recall 
     precision = TP / (TP + FP)
     recall = TP / (TP + FN)
+    println("precision = ", precision)
+    println("recall = ", recall)
 
     # Calcular F1 Score 
     f1_score  = 2 * (precision * recall) / (precision + recall)
+    println("f1_score = ", f1_score)
 
     # Taxa de acerto e taxa de erro 
 
@@ -168,6 +172,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     TI  = (ID / soma)
     TNA = (DNA + PNA) / (DNA + PNA + DNE + PNE) 
     TNE = (DNE + PNE) / (DNA + PNA + DNE + PNE)
+    println(" ")
     println("............................................")
     println("         Taxa de Acerto |  Taxa de Erro ")
     println(" Positivo   :   ",  TPA, "     |     " , TPE)
@@ -178,14 +183,25 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "tabela_gp2.txt"
+    filename = "Tabela_$(model_name)_sb.txt"
+    #filename = "Tabela_Modelo_1_Filtro_Teste.txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 
         println(file, "========================================")
-        println(file, "Tabela de Resultado das Taxas - GP 2: A ")
+        println(file, "Tabela de Resultado das Taxas")
+        # Personaliza a saída com base no nome do modelo
+        if model_name == "GP_2A.jl"
+          println(file, "|---------Modelo 2 A---------|")
+        elseif model_name == "GP_2B.jl"
+          println(file, "|---------Modelo 2 B---------|")
+        end
+        if model_name == "GP_2C.jl"
+          println(file, "|---------Modelo 2 C---------|")
+        elseif model_name == "GP_2D.jl"
+          println(file, "|---------Modelo 2 D---------|")
+        end  
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
-        println(file, "variáveis  =  ", x)
         println(file, "hiper+beta =  ",hiper_up)
         println(file, "hiperplano =  ",wo)
         println(file, "hiper-beta =  ",hiper_down)
