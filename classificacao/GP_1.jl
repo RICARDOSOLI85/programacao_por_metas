@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_det(C,ca,cb,alpha,beta)
+function gp_det(C,ca,cb,alpha)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
@@ -18,7 +18,6 @@ function gp_det(C,ca,cb,alpha,beta)
 
     println("---------Impressão dados de Entrada--------")
     println("Alpha = ", alpha)
-    println("Beta  = ", beta)
     println("Conj. treino (n)  = ", n)
     println("Dados de Teste    = ", n1+n2)
     println("Positivos CA (n1) = ", n1)
@@ -72,7 +71,11 @@ function gp_det(C,ca,cb,alpha,beta)
    for i=1:n 
    println("x[$i] = ", JuMP.value.(x[i]));
    end
+   status = termination_status(modelo)
+   time = solve_time(modelo)
+   println("Status = ", status )
+   println("Time  = ", time )
    
-   return FO, xo, x, modelo 
+   return modelo, x, xo  
 
 end 

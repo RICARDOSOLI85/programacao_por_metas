@@ -26,6 +26,9 @@ df_treino, df_teste = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 include("filtro.jl") 
 C, ca, cb, y_real = dividir_categorias(df_treino::DataFrame)
 
+# selecionando as primeiras linhas para testar no modelo
+
+
 println("Categoria A (ca):")
 println(first(ca,10))
 println(size(ca))
@@ -60,7 +63,12 @@ println(last(C_balanced,10))
 include("GP_1.jl") 
 include("metricas.jl")
 # funções 
-FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)    
+# Input
+C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
+y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
+ca = C[1:5,:]; 
+cb = C[6:10,:]; 
+modelo, x, xo = gp_det(C,ca,cb,alpha)    
 calcular_metricas(modelo, C,x,xo,y_real,beta)
 
 

@@ -2,24 +2,23 @@
                      Teste do Modelo GP_1 : A             
  =============================================================== 
  
-Função Objetivo = 23.344827586206907
-hiperplano      = 0.24137931034482757
+Função Objetivo = 4.0
+hiperplano      = 2.0
 ---------------------------------------------------------------
 Matriz de Confusão                     
 --------------------------------------------------------------- 
-|| True Positive (TP) = 144  | False Negative (FN) = 115 ||
-|| False Positive (FP) = 138 | True Negative (TN) = 374  ||
+|| True Positive (TP) = 3  | False Negative (FN) = 2 ||
+|| False Positive (FP) = 3 | True Negative (TN) = 2  ||
 --------------------------------------------------------------- 
 -----------------------------
-Erro Classe A =  20
-Erro Classe B =  36
-Indefindos    =  56
-Falso Positivo Correto = 102
+Erro Classe A =  1
+Erro Classe B =  2
+Indefindos    =  3
+Falso Positivo Correto = 1
 ----------------------------
-Resultado = false 
 -----------------------------
-accuray     = 0.7
-precision   = 0.59
-recall      = 0.56
-F1Score     = 0.57
+accuray     = 0.62
+precision   = 0.75
+recall      = 0.6
+F1Score     = 0.67
 *****************************************************
