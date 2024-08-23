@@ -20,19 +20,21 @@ df = ler_csv(arquivo)
 # 2. dividir
 # 2.1 Agora selecionar y_real do (dividir.jl) é realmente o teste do modelo 
 include("dividir.jl")
-df_treino, df_teste, y_real_test = dividir_dados(df::DataFrame, proporcao_treino::Float64)
+df_treino, df_teste, C_test, y_real_test = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
 
 # 3. Categorias
 # Os valores de C e y_real estão dentro do treino, então seria validação.
 # 3.1 Pegar o y_real do filtro é validação )pois ele vem do df_treino) 
 include("filtro.jl") 
-C, ca, cb, y_real_vald = dividir_categorias(df_treino::DataFrame)
+C_vald, ca, cb, y_real_vald = dividir_categorias(df_treino::DataFrame)
 
 # 4. Label Y ser Validação ou Teste (Escolha)
-#------------------------------------------------ 
-y_real = y_real_vald   # (Validação)
-#y_real = y_real_test   # (Teste)
+#------------------------------------------------
+ # Validação 
+#y_real = y_real_vald
+C = C_vald
+y_real = y_real_test   # (Teste)
 #------------------------------------------------ 
 
 println("Categoria A (ca):")

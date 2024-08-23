@@ -17,11 +17,11 @@ function dividir_categorias(df_treino::DataFrame)
     # usando a função select do DataFrames 
     ca = select(ca_treino, Not([:Column1, :COVID]));
     cb = select(cb_treino, Not([:Column1, :COVID]));
-    C = select(df_treino, Not([:Column1, :COVID]));
+    C_vald = select(df_treino, Not([:Column1, :COVID]));
     y_real_vald = select(df_treino, :COVID);
     
      
-    return C, ca, cb, y_real_vald 
+    return C_vald, ca, cb, y_real_vald 
     
 
 end
