@@ -6,6 +6,7 @@ using Printf
 
 function calcular_metricas(modelo, C, x, xo, y_real, model_name)
     
+    
     n = length(x);
     w = x;
     wo = xo;
@@ -144,18 +145,23 @@ function calcular_metricas(modelo, C, x, xo, y_real, model_name)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    #filename = "Tabela_$(model_name)_Filtro_Teste.txt"
-    filename = "Tabela_Modelo_1_Filtro_Teste.txt"
+    filename = "Tabela_$(model_name)_sb.txt"
+    #filename = "Tabela_Modelo_1_Filtro_Teste.txt"
     # abre o arquivo para a escrita 
     open(filename, "a") do file 
         println(file, "========================================")
         println(file, "Tabela de Resultado das Taxas")
         # Personaliza a saída com base no nome do modelo
         if model_name == "GP_1A.jl"
-          println(file, "Modelo 1 A - Filtro - Teste: ")
+          println(file, "|---------Modelo 1 A---------|")
         elseif model_name == "GP_1B.jl"
-          println(file, "Modelo 1  B - Filtro - Teste: ")
-        end 
+          println(file, "|---------Modelo 1 B---------|")
+        end
+        if model_name == "GP_1C.jl"
+          println(file, "|---------Modelo 1 A---------|")
+        elseif model_name == "GP_1D.jl"
+          println(file, "|---------Modelo 1 B---------|")
+        end  
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
         println(file,"Status = ", status)
