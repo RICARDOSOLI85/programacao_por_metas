@@ -4,7 +4,7 @@
 
 using Printf
 
-function calcular_metricas(modelo,C,x,xo,y_real)
+function calcular_metricas(modelo, C, x, xo, y_real, model_name)
     
     n = length(x);
     w = x;
@@ -144,12 +144,18 @@ function calcular_metricas(modelo,C,x,xo,y_real)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_GP1_Filtro_Teste.txt"
+    #filename = "Tabela_$(model_name)_Filtro_Teste.txt"
+    filename = "Tabela_Modelo_1_Filtro_Teste.txt"
     # abre o arquivo para a escrita 
     open(filename, "a") do file 
         println(file, "========================================")
         println(file, "Tabela de Resultado das Taxas")
-        println(file, " Modelo 1 - Filtro - Teste : D ")
+        # Personaliza a saída com base no nome do modelo
+        if model_name == "GP_1A.jl"
+          println(file, "Modelo 1 A - Filtro - Teste: ")
+        elseif model_name == "GP_1B.jl"
+          println(file, "Modelo 1  B - Filtro - Teste: ")
+        end 
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
         println(file,"Status = ", status)
