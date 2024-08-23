@@ -28,10 +28,10 @@ function gp_det(C,ca,cb,alpha)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    @variable(modelo, 0 <= x[j=1:n] <= 1)      #A
+    #@variable(modelo, 0 <= x[j=1:n] <= 1)      #A
     #@variable(modelo, -1 <= x[j=1:n] <= 1)     #B
     #@variable(modelo,x[j=1:n])                #C
-    #@variable(modelo,-1<= x[j=1:n]<= 1)        #D
+    @variable(modelo,-1<= x[j=1:n]<= 1)        #D
     @variable(modelo, x0) 
     @variables(modelo,
     begin 
@@ -74,7 +74,7 @@ function gp_det(C,ca,cb,alpha)
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
-   println("Time  =  s ", time )
+   println("Time  =  ", time )
    
    return modelo, x, xo  
 
