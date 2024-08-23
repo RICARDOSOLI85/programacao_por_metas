@@ -12,7 +12,7 @@ function dividir_dados(df::DataFrame, proporcao_treino::Float64)
     #println(m_treino)
 
     # Embaralhar os dados 
-    df_shuffled = exames[shuffle(1:m),:];
+    df_shuffled = df[shuffle(1:m),:];
     #println(df_shuffled)
 
     # Dividir os dados 
