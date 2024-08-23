@@ -12,14 +12,14 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     c = Matrix(C);
     y_modelo = c * w ;
     # Tranformar o data frame y_real em vector 
-    y_real = vec(y_real)
-    println("vetor hiperplano =" , y_modelo)  
-    y_predito = y_modelo .>= wo 
+    y_real = Matrix(y_real)
+    #println("vetor hiperplano =" , y_modelo)  
+    y_predito = y_modelo .>= wo ;
     y_real .== y_real ;
     y_pred    = y_modelo .== wo ;
-    println("y_predito = ", y_predito)
-    println("y_real    = ",  y_real)
-    println("y_pred    = ", y_pred )
+    #println("y_predito = ", y_predito)
+    #println("y_real    = ",  y_real)
+    #println("y_pred    = ", y_pred )
      
     # Calculando TP, FN, FP,TN 
     TP = sum((y_real .==1) .& (y_predito .==1))
@@ -27,7 +27,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     FP = sum((y_real .==0) .& (y_predito .==1))
     TN = sum((y_real .==0) .& (y_predito .==0))
 
-    
+       
     # Erros de classe e indefinido 
     ERc1 = sum((y_real .==1) .& (y_pred .==1))
     ERc2 = sum((y_real .==0) .& (y_pred .==1))
@@ -56,10 +56,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     println("                      Teste do Modelo GP_1                 ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
-    #println("variáveis  = ", x)
-    println("hiperplano + beta = ", wo + beta)
     println("Hiperlano       = ",  wo)
-    println("hiperplano - beta = ", wo - beta)
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
     println("--------------------------------------------------------------")
@@ -86,7 +83,6 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     write(file," =============================================================== \n")
     write(file," \n")
     write(file,"Função Objetivo = $FO\n")
-    #write(file,"variáveis      = $x\n")
     write(file,"hiperplano      = $xo\n")
     write(file,"---------------------------------------------------------------\n")
     write(file,                        "Matriz de Confusão                     \n")

@@ -43,6 +43,7 @@ println(first(y_real,10))
 println(size(y_real))
 
 # 4. Balancear 
+include("dados.jl")
 C_balanced, ca_balanced,   cb_balanced= balancear_categorias(C,ca,cb)
 
 println("ca_balanced = ", size(ca_balanced))
