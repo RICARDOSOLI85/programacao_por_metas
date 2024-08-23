@@ -72,9 +72,9 @@ function gp_det(C,ca,cb,alpha)
    println("x[$i] = ", JuMP.value.(x[i]));
    end
    status = termination_status(modelo)
-   time = solve_time(modelo)
+   time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
-   println("Time  = ", time )
+   println("Time  =  s ", time )
    
    return modelo, x, xo  
 

@@ -69,7 +69,7 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:]; 
 modelo, x, xo = gp_det(C,ca,cb,alpha)    
-calcular_metricas(modelo, C,x,xo,y_real,beta)
+calcular_metricas(modelo, C,x,xo,y_real)
 
 
 # Implementar Modelo (2): 

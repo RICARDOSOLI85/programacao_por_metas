@@ -2,7 +2,9 @@
 # Data: 22/ Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
-function calcular_metricas(modelo,C,x,xo,y_real,beta)
+using Printf
+
+function calcular_metricas(modelo,C,x,xo,y_real)
     
     n = length(x);
     w = x;
@@ -142,7 +144,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "tabela_gp1.txt"
+    filename = "tabela_exemplo.txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 
         println(file, "========================================")
