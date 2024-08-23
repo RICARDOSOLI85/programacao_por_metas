@@ -92,7 +92,7 @@ function calcular_metricas(modelo,C,x,xo,y_real)
 
     println("............................................")
     println("    Taxa de Acerto |  Taxa de Erro ")
-    println(" Positivo   : ",   TPA, "   |    " , TPE)
+    println(" Positivo   : ",   TPA, "  |    " , TPE)
     println(" Indefinido : ",   TIP, "  |    " , TIN)
     println(" Negativo   : ",   TNA, "  |    " , TNE)
     println("............................................")
@@ -146,9 +146,9 @@ function calcular_metricas(modelo,C,x,xo,y_real)
     # nome do arquivo 
     filename = "tabela_exemplo.txt"
     # abre o arquivo para a escrita 
-    open(filename, "w") do file 
+    open(filename, "a") do file 
         println(file, "========================================")
-        println(file, "Tabela de Resultado das Taxas - GP 1: A ")
+        println(file, "Tabela de Resultado das Taxas - GP 1: D ")
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
         println(file,"Status = ", status)
@@ -167,8 +167,8 @@ function calcular_metricas(modelo,C,x,xo,y_real)
         println(file,"Falso Positivo Correto = ", FPc)
         println(file,"Soma_C        = ", Soma_C)
         println(file,"............................................")
-        println(file,"   Taxa de Acerto  |  Taxa de Erro ")
-        println(file," Positivo   : ",   TPA, "  |    " , TPE)
+        println(file,"   Taxa de Acerto |  Taxa de Erro ")
+        println(file," Positivo   : ",   TPA, " |   " , TPE)
         println(file," Indefinido : ",   TIP, " |    " , TIN)
         println(file," Negativo   : ",   TNA, " |    " , TNE)
         println(file,"............................................")

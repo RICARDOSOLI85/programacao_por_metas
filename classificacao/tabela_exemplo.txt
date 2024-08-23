@@ -28,3 +28,93 @@ precision   =  0.75
 recall      =  0.6
 F1Score     =  0.67
 ********************************************
+========================================
+Tabela de Resultado das Taxas - GP 1: B 
+========================================
+Função Objetivo  = 0.00
+Status = OPTIMAL
+Time  = 0.0016
+-----------------------------------------
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 5 | False Negative (FN)  = 0 ||
+|| False Positive (FP)  = 2 | True Negative  (TN) =  3 ||
+---------------------------------------------------------------
+Erro Classe A = 1
+Erro Classe B = 2
+Indefindos    = 3
+Soma          = 10
+Falso Positivo Correto = 0
+Soma_C        = 8
+............................................
+   Taxa de Acerto  |  Taxa de Erro 
+ Positivo   : 1.0  |    0.0
+ Indefinido : 0.33 |    0.67
+ Negativo   : 1.0 |    0.0
+............................................
+Acurácia    =  1.0
+precision   =  1.0
+recall      =  1.0
+F1Score     =  1.0
+********************************************
+========================================
+Tabela de Resultado das Taxas - GP 1: C 
+========================================
+Função Objetivo  = 0.00
+Status = OPTIMAL
+Time  = 0.0004
+-----------------------------------------
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 5 | False Negative (FN)  = 0 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  5 ||
+---------------------------------------------------------------
+Erro Classe A = 1
+Erro Classe B = 0
+Indefindos    = 1
+Soma          = 10
+Falso Positivo Correto = 0
+Soma_C        = 10
+............................................
+   Taxa de Acerto  |  Taxa de Erro 
+ Positivo   : 1.0  |    0.0
+ Indefinido : 1.0 |    0.0
+ Negativo   : 1.0 |    0.0
+............................................
+Acurácia    =  1.0
+precision   =  1.0
+recall      =  1.0
+F1Score     =  1.0
+********************************************
+========================================
+Tabela de Resultado das Taxas - GP 1: D 
+========================================
+Função Objetivo  = 0.00
+Status = OPTIMAL
+Time  = 0.001
+-----------------------------------------
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 5 | False Negative (FN)  = 0 ||
+|| False Positive (FP)  = 1 | True Negative  (TN) =  4 ||
+---------------------------------------------------------------
+Erro Classe A = 0
+Erro Classe B = 0
+Indefindos    = 0
+Soma          = 10
+Falso Positivo Correto = 1
+Soma_C        = 10
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 1.0 |   0.0
+ Indefinido : NaN |    NaN
+ Negativo   : 0.8 |    0.2
+............................................
+Acurácia    =  0.9
+precision   =  0.83
+recall      =  1.0
+F1Score     =  0.91
+********************************************
