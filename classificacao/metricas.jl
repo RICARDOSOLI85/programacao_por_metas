@@ -144,11 +144,12 @@ function calcular_metricas(modelo,C,x,xo,y_real)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_GP1_filtro.txt"
+    filename = "Tabela_GP1_Filtro_Treino.txt"
     # abre o arquivo para a escrita 
-    open(filename, "a") do file 
+    open(filename, "w") do file 
         println(file, "========================================")
-        println(file, "Tabela de Resultado das Taxas - GP 1: A ")
+        println(file, "Tabela de Resultado das Taxas")
+        println(file, " Modelo 1 - Filtro - Validação : A ")
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
         println(file,"Status = ", status)

@@ -29,10 +29,10 @@ df_treino, df_teste, y_real_test = dividir_dados(df::DataFrame, proporcao_treino
 include("filtro.jl") 
 C, ca, cb, y_real_vald = dividir_categorias(df_treino::DataFrame)
 
-# Label Y ser Validação ou Teste (Escolha)
+# 4. Label Y ser Validação ou Teste (Escolha)
 #------------------------------------------------ 
-y_real = y_real_vald 
-y_real = y_real_test 
+y_real = y_real_vald   # (Validação)
+#y_real = y_real_test   # (Teste)
 #------------------------------------------------ 
 
 println("Categoria A (ca):")
@@ -51,7 +51,7 @@ println("Label :")
 println(first(y_real,10))
 println(size(y_real))
 
-# 4. Balancear 
+# 5. Balancear 
 include("dados.jl")
 C_balanced, ca_balanced,   cb_balanced= balancear_categorias(C,ca,cb)
 
@@ -66,17 +66,10 @@ println(last(C_balanced,10))
 # --------------------------
 # Implementar Modelo (1): 
 #---------------------------
+# input 
 include("GP_1.jl") 
 include("metricas.jl")
 # funções 
-# Input
-# Exemplo
-#=
-C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
-y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
-ca = C[1:5,:]; 
-cb = C[6:10,:];
-=# 
 modelo, x, xo = gp_det(C,ca,cb,alpha)    
 calcular_metricas(modelo, C,x,xo,y_real)
 
@@ -89,9 +82,10 @@ FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)
 #calcular_classes(FO, C, x, xo, y_real,beta)
 
 
+# Exemplo
 #=
-#C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
-#y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
-#ca = C[1:5,:]; 
-#cb = C[6:10,:]; 
+C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
+y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
+ca = C[1:5,:]; 
+cb = C[6:10,:];
 =# 

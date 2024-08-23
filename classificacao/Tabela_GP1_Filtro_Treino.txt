@@ -1,0 +1,31 @@
+========================================
+Tabela de Resultado das Taxas
+ Modelo 1 - Filtro - Validação : A 
+========================================
+Função Objetivo  = 21.65
+Status = OPTIMAL
+Time  = 0.0204
+-----------------------------------------
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 164 | False Negative (FN)  = 114 ||
+|| False Positive (FP)  = 138 | True Negative  (TN) =  355 ||
+---------------------------------------------------------------
+Erro Classe A = 15
+Erro Classe B = 31
+Indefindos    = 46
+Soma          = 771
+Falso Positivo Correto = 107
+Soma_C        = 740
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 0.59 |   0.41
+ Indefinido : 0.33 |    0.67
+ Negativo   : 0.77 |    0.23
+............................................
+Acurácia    =  0.7
+precision   =  0.61
+recall      =  0.59
+F1Score     =  0.6
+********************************************
