@@ -19,7 +19,10 @@ function dividir_dados(df::DataFrame, proporcao_treino::Float64)
     df_treino = df_shuffled[1:m_treino, :];
     df_teste  = df_shuffled[m_treino+1:end,:];
 
+    # selecionar a coluna para os testes 
+    y_real_test = select(df_teste, :COVID);
+
    
-    return df_treino, df_teste
+    return df_treino, df_teste, y_real_test
     
 end

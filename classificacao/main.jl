@@ -17,17 +17,23 @@ include("dados.jl")
 arquivo ="exames.csv"
 df = ler_csv(arquivo)
 
-# 2. dividir 
+# 2. dividir
+# 2.1 Agora selecionar y_real do (dividir.jl) é realmente o teste do modelo 
 include("dividir.jl")
-df_treino, df_teste = dividir_dados(df::DataFrame, proporcao_treino::Float64)
+df_treino, df_teste, y_real_test = dividir_dados(df::DataFrame, proporcao_treino::Float64)
+
 
 # 3. Categorias
-# Os valores de C e y_real estão dentro do treino, então seria validação. 
+# Os valores de C e y_real estão dentro do treino, então seria validação.
+# 3.1 Pegar o y_real do filtro é validação )pois ele vem do df_treino) 
 include("filtro.jl") 
-C, ca, cb, y_real = dividir_categorias(df_treino::DataFrame)
+C, ca, cb, y_real_vald = dividir_categorias(df_treino::DataFrame)
 
-# selecionando as primeiras linhas para testar no modelo
-
+# Label Y ser Validação ou Teste (Escolha)
+#------------------------------------------------ 
+y_real = y_real_vald 
+y_real = y_real_test 
+#------------------------------------------------ 
 
 println("Categoria A (ca):")
 println(first(ca,10))
@@ -64,10 +70,13 @@ include("GP_1.jl")
 include("metricas.jl")
 # funções 
 # Input
+# Exemplo
+#=
 C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
 y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
-cb = C[6:10,:]; 
+cb = C[6:10,:];
+=# 
 modelo, x, xo = gp_det(C,ca,cb,alpha)    
 calcular_metricas(modelo, C,x,xo,y_real)
 
