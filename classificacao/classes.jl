@@ -11,7 +11,6 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     # Calcula hiperplano 
     c = Matrix(C)
     y_modelo = c * w 
-    #y_modelo = [1 2 1.8 3 3 1 2 1.8 4 1]            # criando hipotetico apenas para modelar 
     println("vetor hiperplano = ", y_modelo)
     hiper_up   = wo + beta
     hiper_down = wo - beta 

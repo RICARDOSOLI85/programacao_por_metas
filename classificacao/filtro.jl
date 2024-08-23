@@ -19,7 +19,7 @@ function dividir_categorias(df_treino::DataFrame)
     cb = select(cb_treino, Not([:Column1, :COVID]));
     C = select(df_treino, Not([:Column1, :COVID]));
     y_real = select(df_treino, :COVID);
-    y_real = eachcol(y_real);
+    #y_real = eachcol(y_real);
      
     return C, ca, cb, y_real 
     
