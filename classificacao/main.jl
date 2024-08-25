@@ -85,15 +85,15 @@ println(size(C))
 # Implementar Modelo (2) : A, B, C e D
 #--------------------------------------
 # Filtro: Sem balanceamento   
-ca = ca_fil;
-cb = cb_fil; 
-C = C_teste; 
+#ca = ca_fil;
+#cb = cb_fil; 
+#C = C_teste; 
 #--------------------------------------
 #--------------------------------------
 # Balanceado balanceamento   
-#ca = ca_bal;
-#cb = cb_bal; 
-#C = C_teste; 
+ca = ca_bal;
+cb = cb_bal; 
+C = C_teste; 
 #----------------------------------------
 
 # Incluir os arquivos das funções 
@@ -171,17 +171,13 @@ end
 
 
 #=
-
 # Implementar Modelo (1): 
-
 include("GP_1.jl") 
 include("metricas.jl")
 # funções 
 modelo, x, xo = gp_det(C,ca,cb,alpha)    
 calcular_metricas(modelo, C ,x,xo,y_real,model_name)
-
 # Implementar Modelo (2): 
-
 include("GP_2A.jl")
 FO, modelo, x_vals, xo_val  = gp_det(C,ca,cb,alpha,beta)
 model_name =[" "] 
