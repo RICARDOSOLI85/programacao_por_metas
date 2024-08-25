@@ -15,13 +15,13 @@ function dividir_categorias(df_treino::DataFrame)
 
     # Remover a coluna COVID de ambos data frames e a coluna inicial 
     # usando a função select do DataFrames 
-    ca = select(ca_treino, Not([:Column1, :COVID]));
-    cb = select(cb_treino, Not([:Column1, :COVID]));
-    C_vald = select(df_treino, Not([:Column1, :COVID]));
-    y_real_vald = select(df_treino, :COVID);
+    ca_fil = select(ca_treino, Not([:Column1, :COVID]));
+    cb_fil = select(cb_treino, Not([:Column1, :COVID]));
+    C_treino_a = select(df_treino, Not([:Column1, :COVID]));
+    #y_real_vald = select(df_treino, :COVID);
     
      
-    return C_vald, ca, cb, y_real_vald 
+    return C_treino_a, ca_fil, cb_fil
     
 
 end

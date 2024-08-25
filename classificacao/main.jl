@@ -1,5 +1,6 @@
 # Modelo Robusto  para Problema de Classificação
 # Data: 27/Junho/2024
+# Versão atualizada 25/Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
 using JuMP
@@ -19,39 +20,48 @@ arquivo ="exames.csv"
 df = ler_csv(arquivo)
 
 # 2. dividir
-# 2.1 Agora selecionar y_real do (dividir.jl) é realmente o teste do modelo 
 include("dividir.jl")
-df_treino, df_teste, C_test, y_real_test = dividir_dados(df::DataFrame, proporcao_treino::Float64)
+df_treino, df_teste, C_teste, y_real = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
 
 # 3. Categorias
-# Os valores de C e y_real estão dentro do treino, então seria validação.
-# 3.1 Pegar o y_real do filtro é validação )pois ele vem do df_treino) 
 include("filtro.jl") 
-C_vald, ca, cb, y_real_vald = dividir_categorias(df_treino::DataFrame)
+C_treino_a, ca_fil, cb_fil = dividir_categorias(df_treino::DataFrame)
 
-# 4. Label Y ser Validação ou Teste (Escolha)
-#------------------------------------------------
-# (i) Validação 
-#y_real = y_real_vald
-#C = C_vald
+include("balancear.jl")
+balancear_categorias(C,ca,cb)
+C_treino_b, ca_bal, cb_bal = balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 
-# (ii) Teste
-y_real = y_real_test
-C = C_test 
 #------------------------------------------------ 
 
-println("Categoria A (ca):")
-println(first(ca,10))
-println(size(ca))
+println("Categoria A (filtro):")
+println(first(ca_fil,10))
+println(size(ca_fil))
 
-println("Categoria B (cb):")
-println(first(cb,10))
-println(size(cb))
+println("Categoria B (filtro):")
+println(first(cb_fil,10))
+println(size(cb_fil))
 
-println("Categoria C (C):")
-println(first(C,10))
-println(size(C))
+println(" Matrix C (filtro):")
+println(first(C_treino_a,10))
+println(size(C_treino_a))
+
+println("Categoria A (balanceado):")
+println(first(ca_bal,10))
+println(size(ca_bal))
+
+println("Categoria B (balanceado):")
+println(first(cb_bal,10))
+println(size(cb_bal))
+
+println(" Matrix C (balanceado):")
+println(first(C_treino_b,10))
+println(size(C_treino_b))
+
+println(" Matrix C * Teste *:")
+println(first(C_test,10))
+println(size(C_test))
+
 
 println("Label :")
 println(first(y_real,10))
@@ -61,19 +71,7 @@ println("Matriz :")
 println(first(C,10))
 println(size(C))
 
-# 5. Balancear 
-include("balancear.jl")
-C_balanced, ca_balanced,   cb_balanced= balancear_categorias(C,ca,cb)
-ca = ca_balanced ;
-cb = cb_balanced ; 
-
-println("ca_balanced = ", size(ca))
-println("cb_balanced = ", size(cb))
-println("C_balanced = ", size(C))
-println(first(ca_balanced,10))
-println(first(cb_balanced,10))
-println(last(C_balanced,10))
-   
+  
 
 # --------------------------
 # Implementar Modelo (1): 

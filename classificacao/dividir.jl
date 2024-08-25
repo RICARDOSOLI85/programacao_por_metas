@@ -20,11 +20,11 @@ function dividir_dados(df::DataFrame, proporcao_treino::Float64)
     df_teste  = df_shuffled[m_treino+1:end,:];
 
     # selecionar a coluna para os testes 
-    y_real_test = select(df_teste, :COVID);
+    y_real = select(df_teste, :COVID);
     # selecionar a matrix C para teste 
-    C_test = select(df_teste, Not([:Column1, :COVID])); 
+    C_teste = select(df_teste, Not([:Column1, :COVID])); 
 
    
-    return df_treino, df_teste, C_test, y_real_test
+    return df_treino, df_teste, C_teste, y_real
     
 end

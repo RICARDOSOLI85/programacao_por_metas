@@ -5,7 +5,7 @@
 using Random
 using DataFrames
 
-function balancear_categorias(C,ca,cb)
+function balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
     # ca e cb são data frames de duas Categorias
     ca_count = size(ca,1) # numero de elementos de A
     cb_count = size(cb,1) # numero de elementos de Balancear
@@ -15,12 +15,12 @@ function balancear_categorias(C,ca,cb)
 
     # Embaralhar os dados (2° vez) (1° :dividir.jl)
     # e seleciona k elementos para cada um dos data frames
-    ca_balanced = ca[shuffle(1:ca_count)[1:k],:]
-    cb_balanced = cb[shuffle(1:cb_count)[1:k],:]
+    ca_bal = ca[shuffle(1:ca_count)[1:k],:]
+    cb_bal = cb[shuffle(1:cb_count)[1:k],:]
 
     # Concatenar ca_balanced e cb_balanced
-    C_balanced = vcat(ca_balanced, cb_balanced)
-    return  C_balanced, ca_balanced,   cb_balanced
+    C_treino_b = vcat(ca_bal, cb_bal)
+    return  C_treino_b, ca_bal,   cb_bal
 
     
 end
