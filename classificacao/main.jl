@@ -5,6 +5,14 @@
 using JuMP
 using Gurobi 
 
+#.................................
+# Parâmetros (Escolher)
+#.................................
+alpha =1.0;
+beta = 0.50;
+proporcao_treino = 0.7; 
+#.................................
+
 # 1. dados 
 include("dados.jl")
 arquivo ="exames.csv"
@@ -78,13 +86,7 @@ modelo, x, xo = gp_det(C,ca,cb,alpha)
 calcular_metricas(modelo, C ,x,xo,y_real,model_name)
 
 
-#++++++++++++++++++++++++++++++++++++
-# Parâmetros (Escolher)
-#++++++++++++++++++++++++++++++++++++++
-alpha =1.0;
-beta = 0.50;
-proporcao_treino = 0.7; 
-#-------------------------------------
+
 
 # --------------------------
 # Implementar Modelo (1)
@@ -127,7 +129,12 @@ for model_name in Set_Model_1
     end 
 end 
 
-
+include("GP_2A.jl")
+FO, modelo, x_vals, xo_val  = gp_det(C,ca,cb,alpha,beta)
+model_name =[" "] 
+model_name =="GP_2.jl"
+include("classes.jl")
+calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
 
 
 # Incluir os arquivos das funções 
@@ -138,29 +145,29 @@ include("GP_2D.jl")
 include("classes.jl")
 
 # Lista de Modelos 
-Set_Model_1 = ["GP_2A.jl", "GP_2B.jl", "GP_2C.jl", "GP_2D.jl"]
+Set_Model_2 = ["GP_2A.jl", "GP_2B.jl", "GP_2C.jl", "GP_2D.jl"]
 
 # Função para calcular cada modelo e as métricas 
 
-for model_name in Set_Model_1
+for model_name in Set_Model_2
     # Remove a extensão do nome do arquivo para comparação
      println("Excecutando $model_name")
 
     if model_name =="GP_2A.jl"
-        modelo, x, xo, = gp_det_2A(C,ca, cb, alpha,beta)
-        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+        FO, modelo, x_vals, xo_val = gp_det2A(C,ca, cb, alpha,beta)
+        calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name) 
         
     elseif model_name =="GP_2B.jl"
-        modelo, x, xo, = gp_det2B(C,ca, cb, alpha,beta)
-        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+        FO, modelo, x_vals, xo_val = gp_det2B(C,ca, cb, alpha,beta)
+        calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name) 
 
     elseif model_name =="GP_2C.jl"
-        modelo, x, xo, = gp_det2C(C,ca, cb, alpha,beta)
-        calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+        FO, modelo, x_vals, xo_val = gp_det2C(C,ca, cb, alpha,beta)
+        calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
 
     elseif model_name =="GP_2D.jl"
-        modelo, x, xo, = gp_det2D(C,ca, cb, alpha,beta)
-        calcular_classes(FO, C, x, xo, y_real,beta, model_name)  
+        FO, modelo, x_vals, xo_val = gp_det2D(C,ca, cb, alpha,beta)
+        calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name) 
     end 
 end 
 
@@ -169,15 +176,16 @@ end
 
 
 
-
+#=
 # Implementar Modelo (2): 
-xinclude("GP_2.jl")
+include("GP_2.jl")
 include("classes.jl")
 # funções 
-FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)
+FO, modelo, x, xo = gp_det(C,ca,cb,alpha,beta)
+model_name =[" "] 
 model_name =="GP_2.jl"
-calcular_classes(FO, C, x, xo, y_real,beta)
-
+calcular_classes(FO, C, x, xo, y_real,beta, model_name)
+=#
 
 # Exemplo
 #=

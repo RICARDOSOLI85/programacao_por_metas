@@ -50,22 +50,19 @@ function gp_det2C(C,ca,cb,alpha,beta)
 
    JuMP.all_variables(modelo)
    num_variables(modelo)
-   #println(modelo)
-   FO = JuMP.objective_value(modelo)
-   xo = JuMP.value(xo)
-   #x  = JuMP.value.(x)
+   FO = JuMP.objective_value(modelo);
+   xo_val = JuMP.value(xo); # Alterado para evitar sobrescrita
+   x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
-   #println("w[0] = ",  xo)
-   println("w = ", w)
-   #for i=1:n
-   # println("x[$i] = ", JuMP.value.(x[i]))
-   #end
+   println("x[0] = ",  xo)
+   for i=1:n 
+   println("x[$i] = ", JuMP.value.(x[i]));
+   end
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
    println("Time  =  ", time )
    
-   return FO, w, xo, modelo
-
+   return FO, modelo, x_vals, xo_val 
 end 

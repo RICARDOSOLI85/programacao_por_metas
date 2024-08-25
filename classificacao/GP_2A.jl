@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_det_2A(C,ca,cb,alpha,beta)
+function gp_det2A(C,ca,cb,alpha,beta)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
@@ -50,22 +50,20 @@ function gp_det_2A(C,ca,cb,alpha,beta)
 
    JuMP.all_variables(modelo)
    num_variables(modelo)
-   #println(modelo)
-   FO = JuMP.objective_value(modelo)
-   xo = JuMP.value(xo)
-   #x  = JuMP.value.(x)
+   FO = JuMP.objective_value(modelo);
+   xo_val = JuMP.value(xo); # Alterado para evitar sobrescrita
+   x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
-   #println("w[0] = ",  xo)
-   println("w = ", w)
-   #for i=1:n
-   # println("x[$i] = ", JuMP.value.(x[i]))
-   #end
+   println("x[0] = ",  xo)
+   for i=1:n 
+   println("x[$i] = ", JuMP.value.(x[i]));
+   end
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
    println("Time  =  ", time )
    
-   return FO, w, xo, modelo
+   return FO, modelo, x_vals, xo_val 
 
-end 
+end  

@@ -3,20 +3,22 @@
 # Nome: Ricardo Soares Oliveira 
 using Printf 
 
-function calcular_classes(FO, C, x, w, y_real,beta, model_name)
-   
-    n =length(x);
-    x = x;
-    wo =  xo;
+function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name) 
+
+     
+    n =length(x_vals);
+    w = x_vals; 
+    wo =  xo_val;
     
     # 0.  Calcula hiperplano 
     c = Matrix(C);
-    y_modelo = c * x;
+    # #y_modelo = c * x;
+    y_modelo = c * w 
     #println("y_modelo =", y_modelo)
 
      # 0.1 Tranformar o data frame y_real em vector (importante)
     y_real = Matrix(y_real);
-    println(" tipo de variável y_ real =", typeof(y_real))
+    println("tipo de variável y_ real =", typeof(y_real))
 
     println("tipo wo, : ", typeof(wo))
     println("tipo beta, : ", typeof(beta))
@@ -38,7 +40,7 @@ function calcular_classes(FO, C, x, w, y_real,beta, model_name)
     
     # 1. Definitivamente Positivo
     #    (Maior ou igual a hipeplano + beta)
-    y_def_pos = y_modelo .>= wo + beta;    
+    y_def_pos = y_modelo .>= (wo + beta);    
     #println("y_definitvo_positivo = ", y_def_pos)
     
     # 2. Provavelmente Positivo
@@ -154,24 +156,29 @@ function calcular_classes(FO, C, x, w, y_real,beta, model_name)
 
     # Calcular a Acurácia 
     accuracy = (TP + TN) / (TP + FN + FP +TN)
-    println("accuracy = ", accuracy)
+    println("accuracy = ", round(accuracy,digits=2))
     # Calculando precisão de Recall 
     precision = TP / (TP + FP)
     recall = TP / (TP + FN)
-    println("precision = ", precision)
-    println("recall = ", recall)
+    println("precision = ", round(precision,digits=2))
+    println("recall = ", round(recall,digits=2))
 
     # Calcular F1 Score 
     f1_score  = 2 * (precision * recall) / (precision + recall)
-    println("f1_score = ", f1_score)
+    println("f1_score = ", round(f1_score,digits=2))
 
     # Taxa de acerto e taxa de erro 
 
-    TPA = (DPA + PPA) / (DPA + PPA + DPE + PPE) 
+    TPA = (DPA + PPA) / (DPA + PPA + DPE + PPE)
+    TPA = round(TPA,digits=2) 
     TPE = (DPE + PPE) / (DPA + PPA + DPE + PPE)
+    TPE = round(TPE,digits=2)
     TI  = (ID / soma)
-    TNA = (DNA + PNA) / (DNA + PNA + DNE + PNE) 
+    TI = round(TI,digits=2)
+    TNA = (DNA + PNA) / (DNA + PNA + DNE + PNE)
+    TNA = round(TNA,digits=2) 
     TNE = (DNE + PNE) / (DNA + PNA + DNE + PNE)
+    TNE = round(TNE, digits=2)
     println(" ")
     println("............................................")
     println("         Taxa de Acerto |  Taxa de Erro ")
@@ -232,10 +239,10 @@ function calcular_classes(FO, C, x, w, y_real,beta, model_name)
         println(file,"Indefinido    = ", ID)
         println(file,"Soma do Total = ", soma)
         println(file,"-----------------------------")
-        println(file, "accuray    = ", accuracy)
-        println(file,"precision  = ", precision) 
-        println(file,"recall     = ", recall) 
-        println(file, "F1Score    = ", f1_score)
+        println(file, "accuray    = ", round(accuracy,digits=2))
+        println(file,"precision  = ", round(precision,digits=2)) 
+        println(file,"recall     = ", round(recall,digits=2)) 
+        println(file, "F1Score    = ",  round(f1_score,digits=2))
         println(file,"............................................")
         println(file,"         Taxa de Acerto |  Taxa de Erro ")
         println(file," Positivo   :   ",  TPA, "     |     " , TPE)
