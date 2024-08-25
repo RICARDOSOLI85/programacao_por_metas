@@ -68,8 +68,8 @@ println(first(y_real,10))
 println(size(y_real))
 
 println("Matriz :")
-println(first(C,10))
-println(size(C))
+println(first(C_teste,10))
+println(size(C_teste))
 
 
 # --------------------------
@@ -85,15 +85,15 @@ println(size(C))
 # Implementar Modelo (2) : A, B, C e D
 #--------------------------------------
 # Filtro: Sem balanceamento   
-#ca = ca_fil;
-#cb = cb_fil; 
-#C = C_teste; 
+ca = ca_fil;
+cb = cb_fil; 
+C = C_teste; 
 #--------------------------------------
 #--------------------------------------
 # Balanceado balanceamento   
-ca = ca_bal;
-cb = cb_bal; 
-C = C_teste; 
+#ca = ca_bal;
+#cb = cb_bal; 
+#C = C_teste; 
 #----------------------------------------
 
 # Incluir os arquivos das funções 
@@ -122,11 +122,11 @@ for model_name in Set_Model_1
         calcular_metricas(modelo, C, x, xo, y_real, model_name)
 
     elseif model_name =="GP_1C.jl"
-        modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
+        modelo, x, xo, = gp_det_1C(C,ca,cb,alpha)
         calcular_metricas(modelo, C, x, xo, y_real, model_name)
 
     elseif model_name =="GP_1D.jl"
-        modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
+        modelo, x, xo, = gp_det_1D(C,ca, cb, alpha)
         calcular_metricas(modelo, C, x, xo, y_real, model_name)        
     end 
 end 

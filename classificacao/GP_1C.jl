@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_det(C,ca,cb,alpha)
+function gp_det_1C(C,ca,cb,alpha)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
