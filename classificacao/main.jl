@@ -29,7 +29,7 @@ include("filtro.jl")
 C_treino_a, ca_fil, cb_fil = dividir_categorias(df_treino::DataFrame)
 
 include("balancear.jl")
-balancear_categorias(C,ca,cb)
+balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 C_treino_b, ca_bal, cb_bal = balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 
 #------------------------------------------------ 
@@ -59,8 +59,8 @@ println(first(C_treino_b,10))
 println(size(C_treino_b))
 
 println(" Matrix C * Teste *:")
-println(first(C_test,10))
-println(size(C_test))
+println(first(C_teste,10))
+println(size(C_teste))
 
 
 println("Label :")

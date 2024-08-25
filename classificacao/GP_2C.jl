@@ -53,7 +53,7 @@ function gp_det2C(C,ca,cb,alpha,beta)
    FO = JuMP.objective_value(modelo);
    xo_val = JuMP.value(xo); # Alterado para evitar sobrescrita
    x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita
-   println("-------------Imprimindo a Solução do Modelo---------")
+   println("-------------Imprimindo a Solução do Modelo 2C--------")
    println("F[O] = ",  FO)
    println("x[0] = ",  xo)
    for i=1:n 

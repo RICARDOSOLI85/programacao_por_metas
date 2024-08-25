@@ -190,7 +190,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name)_cb.txt"
+    filename = "Tabela_$(model_name)_sb.txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 

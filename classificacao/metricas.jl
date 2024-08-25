@@ -145,7 +145,7 @@ function calcular_metricas(modelo, C ,x,xo,y_real,model_name)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name)_cb.txt"
+    filename = "Tabela_$(model_name)_sb.txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "a") do file 
