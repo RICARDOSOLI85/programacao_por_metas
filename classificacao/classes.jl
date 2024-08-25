@@ -3,7 +3,7 @@
 # Nome: Ricardo Soares Oliveira 
 using Printf 
 
-function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name) 
+function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
 
      
     n =length(x_vals);
@@ -191,7 +191,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     # Salvar em um arquivo TXT
     # nome do arquivo 
     filename = "Tabela_$(model_name)_sb.txt"
-    #filename = "Tabela_Modelo_1_Filtro_Teste.txt"
+    #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 
         println(file, "========================================")

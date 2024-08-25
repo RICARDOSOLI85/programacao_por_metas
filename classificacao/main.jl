@@ -71,26 +71,30 @@ println("Matriz :")
 println(first(C,10))
 println(size(C))
 
-  
 
 # --------------------------
 # Implementar Modelo (1): 
 #---------------------------
-# input 
-include("GP_1.jl") 
-include("metricas.jl")
-# funções 
-modelo, x, xo = gp_det(C,ca,cb,alpha)    
-calcular_metricas(modelo, C ,x,xo,y_real,model_name)
 
 
 
 
-# --------------------------
-# Implementar Modelo (1)
-# * Automatizar *   
-# 
-#---------------------------
+
+# -------------------------=-----------
+# Implementar Modelo (1) : A, B, C e D
+# Implementar Modelo (2) : A, B, C e D
+#--------------------------------------
+# Filtro: Sem balanceamento   
+ca = ca_fil;
+cb = cb_fil; 
+C = C_teste; 
+#--------------------------------------
+#--------------------------------------
+# Balanceado balanceamento   
+#ca = ca_bal;
+#cb = cb_bal; 
+#C = C_teste; 
+#----------------------------------------
 
 # Incluir os arquivos das funções 
 include("GP_1A.jl")
@@ -126,14 +130,6 @@ for model_name in Set_Model_1
         calcular_metricas(modelo, C, x, xo, y_real, model_name)        
     end 
 end 
-
-include("GP_2A.jl")
-FO, modelo, x_vals, xo_val  = gp_det(C,ca,cb,alpha,beta)
-model_name =[" "] 
-model_name =="GP_2.jl"
-include("classes.jl")
-calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
-
 
 # Incluir os arquivos das funções 
 include("GP_2A.jl")
@@ -175,20 +171,26 @@ end
 
 
 #=
-# Implementar Modelo (2): 
-include("GP_2.jl")
-include("classes.jl")
+
+# Implementar Modelo (1): 
+
+include("GP_1.jl") 
+include("metricas.jl")
 # funções 
-FO, modelo, x, xo = gp_det(C,ca,cb,alpha,beta)
+modelo, x, xo = gp_det(C,ca,cb,alpha)    
+calcular_metricas(modelo, C ,x,xo,y_real,model_name)
+
+# Implementar Modelo (2): 
+
+include("GP_2A.jl")
+FO, modelo, x_vals, xo_val  = gp_det(C,ca,cb,alpha,beta)
 model_name =[" "] 
 model_name =="GP_2.jl"
-calcular_classes(FO, C, x, xo, y_real,beta, model_name)
-=#
-
+include("classes.jl")
+calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
 # Exemplo
-#=
 C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
 y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:];
-=# 
+=#
