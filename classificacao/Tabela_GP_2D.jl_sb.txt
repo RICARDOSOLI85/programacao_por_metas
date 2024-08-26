@@ -2,13 +2,13 @@
 Tabela de Resultado das Taxas
 |---------Modelo 2 D---------|
 ========================================
-Função Objetivo  = 213.00
+Função Objetivo  = 212.00
 hiper+beta =  1.0
 hiperplano =  0.5
 hiper-beta =  0.0
 -----------------------------------------
-Valor Acerto (Def Positivo) =  39
-Valor Erro   (Def Positivo) =  15
+Valor Acerto (Def Positivo) =  40
+Valor Erro   (Def Positivo) =  14
 Valor Acerto (Def Positivo) =  0
 Valor Erro   (Def Positivo) =  0
 Taxa Acerto (Indefindos)    =  NaN
@@ -17,31 +17,31 @@ Valor Acerto (Prob Negativo)= 0
 Valor Erro  (Prob Negativo) = 0
 .............................................
      Taxa de Acerto  |  Taxa de Erro 
-Def Positivo  : 0.72 |       0.28
+Def Positivo  : 0.74 |       0.26
 Pro Positivo  : NaN |       NaN
 Indefindos    : NaN  |       NaN
 Pro Negativo  : NaN  |       NaN
-Def Negativo  : 0.71  |       0.29
+Def Negativo  : 0.7  |       0.3
 .............................................
  
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
-|| True Positive  (TP)  = 39 | False Negative (FN)  = 81 ||
-|| False Positive (FP)  = 15 | True Negative  (TN) =  196 ||
+|| True Positive  (TP)  = 40 | False Negative (FN)  = 83 ||
+|| False Positive (FP)  = 14 | True Negative  (TN) =  194 ||
 ---------------------------------------------------------------
 Indefinido    = 0
 Soma do Total = 331
 -----------------------------
 accuray    = 0.71
-precision  = 0.72
-recall     = 0.32
+precision  = 0.74
+recall     = 0.33
 F1Score    = 0.45
 ............................................
          Taxa de Acerto |  Taxa de Erro 
- Positivo   :   0.72     |     0.28
+ Positivo   :   0.74     |     0.26
  Indefindo  :   0.0     |     0.0
- Negativo   :   0.71     |     0.29
+ Negativo   :   0.7     |     0.3
 ............................................
 *************************************************************
 

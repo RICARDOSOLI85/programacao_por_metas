@@ -246,3 +246,34 @@ precision   =  0.56
 recall      =  0.43
 F1Score     =  0.49
 ********************************************
+========================================
+Tabela de Resultado das Taxas
+|---------Modelo 1 D---------|
+========================================
+Função Objetivo  = 23.47
+Status = OPTIMAL
+Time  = 0.0133
+-----------------------------------------
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 83 | False Negative (FN)  = 40 ||
+|| False Positive (FP)  = 53 | True Negative  (TN) =  155 ||
+---------------------------------------------------------------
+Erro Classe A = 0
+Erro Classe B = 0
+Indefindos    = 0
+Soma          = 331
+Falso Positivo Correto = 53
+Soma_C        = 331
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 0.67 |   0.33
+ Indefinido : NaN |    NaN
+ Negativo   : 0.75 |    0.25
+............................................
+Acurácia    =  0.72
+precision   =  0.61
+recall      =  0.67
+F1Score     =  0.64
+********************************************

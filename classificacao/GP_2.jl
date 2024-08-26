@@ -51,27 +51,6 @@ function gp_det(C,ca,cb,alpha,beta)
 
    #print(modelo)
    
-   #=
-
-   JuMP.all_variables(modelo)
-   num_variables(modelo)
-   #println(modelo)
-   FO = JuMP.objective_value(modelo);
-   xo = JuMP.value(xo);
-   x  = JuMP.value.(x);
-   println("-------------Imprimindo a Solução do Modelo---------")
-   println("F[O] = ",  FO)
-   println("x[0] = ",  xo)
-   #for i=1:n 
-   #println("x[$i] = ", JuMP.value.(x[i]))
-   #end
-   status = termination_status(modelo)
-   time = round(solve_time(modelo),digits=4)
-   println("Status = ", status )
-   println("Time  =  ", time )
-   
-   return FO, xo, x, model=#
- 
    JuMP.all_variables(modelo)
    num_variables(modelo)
    FO = JuMP.objective_value(modelo);
