@@ -21,23 +21,18 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
     alpha = alpha; 
     gama = gama; 
 
-    # criando duas variantes de gama
-    gama_a = gama[1:n1]; 
-    gama_b = gama[1:n2]; 
-
     # criar o modelo
     modelo = JuMP.Model(Gurobi.Optimizer)
     
     # Variaveis
-    #@variable(modelo, 0 <= x[j=1:n] <=1)
-    @variable(modelo, 0 <= x[j=1:n] <= 1)  
+    @variable(modelo, 0 <= x[j=1:m] <= 1)  
     @variable(modelo, xo_target)              
     @variables(modelo,                
     begin
         pos_a[1:n1] >= 0 
         pos_b[1:n2] >= 0
         neg_a[1:n1] >= 0 
-        pos_b[1:n2] >= 0
+        neg_b[1:n2] >= 0
     end)
     # variáveis do modelo Robusto
     @variables(modelo, 
@@ -53,14 +48,6 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
     # função Objetivo
     @objective(modelo,Min, sum(neg_a[i] for i=1:n1) + sum(pos_b[i] for i=1:n2))
 
-    # Restrições
-    @constraint(modelo, rest1[i in 1:m], 
-    sum(A[i,j]*x[j] for j in 1:n)+ 
-    sum(p[i,j] for j in 1:n)- 
-    pos[i] + 
-    neg[i] + 
-    gama[i]*z[i] ==b[i])
-
     # restrições 
     @constraints(modelo, 
     begin
@@ -69,7 +56,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
     neg_a[i] - pos_a[i] + 
     gama_a[i] * z_a[i] == xo_target
     rest2[i=1:n2], sum(cb[i,j]*x[j] for j in 1:m)+
-    sum(p_b[i:j] for j in 1:m) +
+    sum(p_b[i,j] for j in 1:m) +
     neg_b[i] - pos_b[i] + 
     gama_b[i] * z_b[i] == xo_target  
     end
@@ -85,7 +72,25 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
    
     # resolver 
     optimize!(modelo)
-    print(modelo)
+    #print(modelo)
+    JuMP.all_variables(modelo)
+   num_variables(modelo)
+   #println(modelo)
+   FO = JuMP.objective_value(modelo);
+   xo = JuMP.value(xo_target);
+   x  = JuMP.value.(x);
+   println("-------------Imprimindo a Solução do Modelo---------")
+   println("F[O] = ",  FO)
+   println("x[0] = ",  xo)
+   for i=1:m
+   println("x[$i] = ", JuMP.value.(x[i]));
+   end
+   status = termination_status(modelo)
+   time = round(solve_time(modelo),digits=4)
+   println("Status = ", status )
+   println("Time  =  ", time )
+   
+   return modelo, x, xo_target  
 
  
 

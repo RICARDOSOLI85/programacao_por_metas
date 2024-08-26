@@ -9,9 +9,11 @@ using Gurobi
 # Parâmetros (Escolher)
 #.................................
 alpha =1.0;
-beta = 0.50;
+Beta = [0.50, 1.0];
 proporcao_treino = 0.7;
-epsilon = 0.10; 
+epsilon = 0.10;             # Desvio na Matriz 
+#Gama = [1,2,3];             # número de linhas sujeito a incerteza
+Gama =[0]; 
 #.................................
 
 # 1. dados 
@@ -53,18 +55,34 @@ C = C_teste;
 #C = C_teste; 
 #----------------------------------------
 
-# 4. Matriz de incerteza
-include("matrizincerteza.jl")
+
+
+#--------------------------------------------------
+# Implementar o modelo Robusto RGP 
+#-------------------------------------------------
+alpha = 1
+gama = 10
+include("RGP_M1.jl")
+include("parametrovetor.jl")
+include("matrizesincerteza.jl")
+
+
 ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
+gama_a, gama_b = criavetor_gama(ca,cb,gama)
+gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
 
-println("ca_hat = ", ca_hat)
-println("ca_hat = ", cb_hat)
+for gama in Gama
+    # 4 Matriz de incerteza
+    ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
 
+    # 5. Parâmetro gama vetorial 
+    gama_a, gama_b = criavetor_gama(ca,cb,gama)
 
-
-
-
-
+    # 6. Implementar o Modelo RGP_1
+    gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha)
+    
+    # 7. Imprimir resultados. 
+end 
 
 
 
