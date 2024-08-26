@@ -130,6 +130,7 @@ end
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
    println("Time  =  ", time )
+
    println("F[O] = ",  FO)
    println("x[0] = ",  xo_target)
    
