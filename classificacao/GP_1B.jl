@@ -29,7 +29,7 @@ function gp_det_1B(C,ca,cb,alpha)
 
     #Variáveis 
     @variable(modelo, -1 <= x[j=1:n] <= 1)     #B
-    @variable(modelo, x0) 
+    @variable(modelo, xo) 
     @variables(modelo,
     begin 
     n_a[1:n1] >= 0
@@ -45,8 +45,8 @@ function gp_det_1B(C,ca,cb,alpha)
     # restrições
     @constraints(modelo,
     begin 
-    ca[i=1:n1], sum(ca[i,j]*x[j] for j in 1:n) + n_a[i] - p_a[i] == x0 
-    cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == x0 
+    ca[i=1:n1], sum(ca[i,j]*x[j] for j in 1:n) + n_a[i] - p_a[i] == xo 
+    cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == xo 
     end
     )
     
@@ -60,7 +60,7 @@ function gp_det_1B(C,ca,cb,alpha)
    num_variables(modelo)
    #println(modelo)
    FO = JuMP.objective_value(modelo);
-   xo = JuMP.value(x0);
+   xo = JuMP.value(xo);
    x  = JuMP.value.(x);
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
