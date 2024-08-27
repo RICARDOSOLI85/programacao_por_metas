@@ -23,9 +23,6 @@ function robusto_modelo1(C,ca,cb,alpha,gama)
 
     # variáveis
     @variable(modelo, 0 <= x[j=1:m] <= alpha)
-    #@variable(modelo,  -alpha <=x[j=1:m] <= alpha)
-    #@variable(modelo, x[j=1:m])
-    #@variable(modelo, x[j=1:m] <=9) 
     @variable(modelo, target)
     @variables(modelo,
     begin
