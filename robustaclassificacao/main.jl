@@ -60,16 +60,28 @@ C = C_teste;
 #--------------------------------------------------
 # Implementar o modelo Robusto RGP 
 #-------------------------------------------------
-alpha = 1
-gama = 10
+# Solicita ao usuário para inserir os valores de gama
+println("Insira os valores para o parâmetro gama (separados por espaço):")
+input_Gama = readline()
+
+# Converte a entrada do usuário para um vetor de números inteiros
+Gama = parse.(Int, split(input_Gama))
+
+println("Valores de gama inseridos: ", Gama)
+
+
+#alpha = 1
+#gama = 5
 include("RGP_M1.jl")
 include("parametrovetor.jl")
 include("matrizesincerteza.jl")
 
 
-ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
-gama_a, gama_b = criavetor_gama(ca,cb,gama)
-gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
+#ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
+#gama_a, gama_b = criavetor_gama(ca,cb,gama)
+#gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
+
+
 
 for gama in Gama
     # 4 Matriz de incerteza
@@ -79,7 +91,8 @@ for gama in Gama
     gama_a, gama_b = criavetor_gama(ca,cb,gama)
 
     # 6. Implementar o Modelo RGP_1
-    gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha)
+    gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
+
     
     # 7. Imprimir resultados. 
 end 
@@ -183,3 +196,4 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:];
 =#
+=# 

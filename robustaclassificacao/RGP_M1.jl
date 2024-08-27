@@ -51,6 +51,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
 
     # função Objetivo
     @objective(modelo,Min, sum(neg_a[i] for i=1:n1) + sum(pos_b[i] for i=1:n2))
+   
 
     # restrições 
     #=
@@ -110,7 +111,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
    for i=1:m
    println("x[$i] = ", JuMP.value.(x[i]));
    end
-   #=
+   
    for i in 1:n1
     if value(pos_a[i]) > 0
         println("pos_a[$i] = ", value(pos_a[i]))
@@ -127,7 +128,7 @@ end
             println("neg_b[$i] = ", value(neg_b[i]))
         end 
     end
-    =#
+    #=
     for i in 1:n1
         if value(z[i]) > 0
               println("z[$i]:n1 = ", value(z[i]))
@@ -152,7 +153,7 @@ end
             end
         end
     end
-   
+   =#
     
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
