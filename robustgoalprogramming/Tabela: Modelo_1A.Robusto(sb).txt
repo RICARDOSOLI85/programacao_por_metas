@@ -1,29 +1,29 @@
 ........................................
  Solução do modelo : Modelo_1A.Robusto(sb)
 ........................................
-Função Objetivo (FO) = 4.0
-Target  x[o]         = 2.0
+Função Objetivo (FO) = 2.0000000000000004
+Target  x[o]         = 4.4
 Solução x[j]         = [0.0, 1.0]
-N. variáveis         = 23
+N. variáveis         = 53
 sol[1] = 0.0
 sol[2] = 1.0
 Status = OPTIMAL
-Time   = 0.0004 s
+Time   = 0.0005 s
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
-|| True Positive  (TP)  = 3 | False Negative (FN)  = 2 ||
-|| False Positive (FP)  = 3 | True Negative  (TN) =  2 ||
+|| True Positive  (TP)  = 0 | False Negative (FN)  = 5 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  5 ||
 ---------------------------------------------------------------
  
 ............................................
     Taxa de Acerto  |  Taxa de Erro 
- Positivo   : 0.6   |    0.4
- Indefinido : 0.33  |    0.67
- Negativo   : 0.67  |    0.33
+ Positivo   : 0.0   |    1.0
+ Indefinido : NaN  |    NaN
+ Negativo   : 1.0  |    0.0
 ............................................
-Acurácia    =  0.62
-precision   =  0.75
-recall      =  0.6
-F1Score     =  0.67
+Acurácia    =  0.5
+precision   =  NaN
+recall      =  0.0
+F1Score     =  NaN
 *******************************************

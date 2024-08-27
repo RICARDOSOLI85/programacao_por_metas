@@ -23,7 +23,7 @@ ga, gb = cria_vetor_gama(ca,cb,gama)
 
 # Implementar o modelo Robusto de GP
 include("RPG_1A.jl")
-FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
+FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
 model_name ="Modelo_1A.Robusto(sb)"
 # Imprimir os resultados do Modelo Robusto e salvar
 include("metricas.jl")
