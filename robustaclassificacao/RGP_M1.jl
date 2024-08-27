@@ -16,7 +16,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
     (n,m) = size(C); 
     n1 = size(ca,1);
     n2 = size(cb,1);
-    #n = max(n1,n2) 
+    n = max(n1,n2) 
 
     # parametros 
     gama_a = gama*ones(size(ca,1));
@@ -36,7 +36,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
         neg_b[1:n2] >= 0
     end)
     # variáveis do modelo Robusto
-    
+    #=
     @variables(modelo, 
     begin
         p_a[1:n1,1:m] >= 0 
@@ -44,25 +44,29 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
         z_a[1:n1]     >= 0
         z_b[1:n2]     >= 0
     end)
-    
-    #@variable(modelo, p[1:n,1:m]>=0)
-    #@variable(modelo, z[1:n]>=0)
+    =#
+    @variable(modelo, p[1:n,1:m]>=0)
+    @variable(modelo, z[1:n]>=0)
    
 
     # função Objetivo
     @objective(modelo,Min, sum(neg_a[i] for i=1:n1) + sum(pos_b[i] for i=1:n2))
 
     # restrições 
-    @constraint(modelo, rest1[i=1:n1], 
+    #=
+    @constraints(modelo, 
+    begin
+    rest1[i=1:n1], 
     sum(ca[i,j]*x[j] for j in 1:m) + 
     sum(p_a[i,j] for j in 1:m) + 
     neg_a[i] - pos_a[i] + 
-    gama_a[i] * z_a[i] == xo_target)
-    @constraint(modelo, rest2[i=1:n2], 
+    gama_a[i] * z_a[i] == xo_target
+    rest2[i=1:n2], 
     sum(cb[i,j]*x[j] for j in 1:m)+
     sum(p_b[i,j] for j in 1:m) +
     neg_b[i] - pos_b[i] + 
     gama_b[i] * z_b[i] == xo_target  
+    end
     )
 
     @constraints(modelo, 
@@ -70,11 +74,7 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
         rest3[i in 1:n1, j in 1:m], z_a[i] + p_a[i,j] >= ca_hat[i,j] * x[j]
         rest4[i in 1:n2, j in 1:m], z_b[i] + p_b[i,j] >= cb_hat[i,j] * x[j]
     end)
-    
-    @constraint(modelo, rest5[1:m], sum(x[j] for j in 1:m) ==1)
-
-    # valores de z[i] e p[i,j] juntos n=max(n1,n2)
-    #=
+    =#
     @constraint(modelo, rest1[i=1:n1], 
     sum(ca[i,j]*x[j] for j in 1:m) + 
     sum(p[i,j] for j in 1:m) + 
@@ -92,13 +92,13 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
         rest3[i in 1:n1, j in 1:m], z[i] + p[i,j] >= ca_hat[i,j] * x[j]
         rest4[i in 1:n2, j in 1:m], z[i] + p[i,j] >= cb_hat[i,j] * x[j]
     end)
-    =#
+    
+    @constraint(modelo, rest5[1:m], sum(x[j] for j in 1:m) ==1)
    
-   
-   # resolver 
-   optimize!(modelo)
-   #print(modelo)
-   JuMP.all_variables(modelo)
+    # resolver 
+    optimize!(modelo)
+    #print(modelo)
+    JuMP.all_variables(modelo)
    num_variables(modelo)
    #println(modelo)
    FO = JuMP.objective_value(modelo);
@@ -129,26 +129,26 @@ end
     end
     =#
     for i in 1:n1
-        if value(z_a[i]) > 0
+        if value(z[i]) > 0
               println("z[$i]:n1 = ", value(z[i]))
         end
     end 
     for i in 1:n2
-        if value(z_b[i]) > 0
+        if value(z[i]) > 0
             println("z[$i]:n2 = ", value(z[i]))
         end
     end 
     for j in 1:m
         for i in 1:n1
-            if value(p_a[i,j]) > 0
-                println("p_a[($i,$j)]:n1 = ", value(p_a[i,j]))
+            if value(p[i,j]) > 0
+                println("p[($i,$j)]:n1 = ", value(p[i,j]))
             end
         end
     end 
     for j in 1:m
         for i in 1:n2
-            if value(p_b[i,j]) > 0
-                println("p_b[($i,$j)]:n2 = ", value(p_b[i,j]))
+            if value(p[i,j]) > 0
+                println("p[($i,$j)]:n2 = ", value(p[i,j]))
             end
         end
     end
