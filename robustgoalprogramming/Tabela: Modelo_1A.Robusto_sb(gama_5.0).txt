@@ -9,13 +9,17 @@ N. variáveis         = 53
 sol[1] = 0.0
 sol[2] = 1.0
 Status = OPTIMAL
-Time   = 0.001 s
+Time   = 0.0006 s
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
 || True Positive  (TP)  = 0 | False Negative (FN)  = 5 ||
 || False Positive (FP)  = 0 | True Negative  (TN) =  5 ||
 ---------------------------------------------------------------
+Erro Classe A = 0
+Erro Classe B = 0
+Indefindos    = 0
+Soma          = 10
 Falso Positivo Correto = 0
 Soma_atual             = 10
 ............................................

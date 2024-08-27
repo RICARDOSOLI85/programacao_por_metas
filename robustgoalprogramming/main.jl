@@ -25,16 +25,16 @@ for gama in Gammas
     println(" Testando o modelo para gama = $gama")
 
     # Criar as matrizes dos desvios 
-    ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
+    global  ca_hat, cb_hat = calcular_desvios(ca,cb,epsilon)
 
     # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
-    ga, gb = cria_vetor_gama(ca,cb,gama)
+    global  ga, gb = cria_vetor_gama(ca,cb,gama)
 
     # Implementar o modelo Robusto de Goal Programming 
-    FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
+    global  FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     
     # Imprimir os resultados do Modelo Robusto e salvar
-    model_name ="Modelo_1A.Robusto_sb(gama_$gama)"
+    global  model_name ="Modelo_1A.Robusto_sb(gama_$gama)"
     calcular_metricas(C::Matrix,y_real::Vector,gama::Float64,
     modelo::Model,tar::Float64,sol::Vector{Float64},
     model_name::String)
