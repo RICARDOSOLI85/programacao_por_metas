@@ -34,7 +34,7 @@ for gama in Gammas
     global  FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     
     # Imprimir os resultados do Modelo Robusto e salvar
-    global  model_name ="Modelo_1A.Robusto_sb(gama_$gama)"
+    global  model_name ="Modelo_1D.Robusto_sb(gama_$gama)"
     calcular_metricas(C::Matrix,y_real::Vector,gama::Float64,
     modelo::Model,tar::Float64,sol::Vector{Float64},
     model_name::String)

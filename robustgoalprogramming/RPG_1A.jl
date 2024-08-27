@@ -22,7 +22,10 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     # variáveis
-    @variable(modelo, 0 <= x[j=1:m] <= alpha)
+    #@variable(modelo, 0 <= x[j=1:m] <= alpha)
+    #@variable(modelo, -alpha <= x[j=1:m] <= alpha)
+    #@variable(modelo, x[j=1:m])
+    @variable(modelo, x[j=1:m] <= 9)
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -42,14 +45,6 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     @objective(modelo, Min, sum(n_a[i] for i=1:n1) + sum(p_b[i] for i=1:n2))
 
     # restrições 
-    # alteração:b 
-    #=
-    @constraints(modelo,
-    begin
-        rest1[i=1:n1], sum(ca[i,j]*x[j] for j in 1:m) + n_a[i] - p_a[i] == target 
-        rest2[i=1:n2], sum(cb[i,j]*x[j] for j in 1:m) + n_b[i] - p_b[i] == target
-    end)
-    =#
     @constraints(modelo,
     begin
         rest1[i=1:n1], sum(ca[i,j]*x[j] for j in 1:m) + 
