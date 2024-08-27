@@ -17,7 +17,8 @@ function calcular_desvios(ca,cb,epsilon)
             if ca[i,j] == 0
                 ca_hat[i,j] = epsilon;               
             elseif ca[i,j] == 1
-                ca_hat[i,j] = ca[i,j] * (1 - epsilon);                
+                #ca_hat[i,j] = ca[i,j] * (1 - epsilon);
+                ca_hat[i,j] = - epsilon;                
             end 
             
         end 
@@ -30,7 +31,8 @@ function calcular_desvios(ca,cb,epsilon)
             if cb[i,j] == 0
                 cb_hat[i,j] = epsilon;
             elseif cb[i,j] == 1
-                cb_hat[i,j] = cb[i,j] * (1 - epsilon);
+                #cb_hat[i,j] = cb[i,j] * (1 - epsilon);
+                cb_hat[i,j] = - epsilon;
             end
         end
     end
