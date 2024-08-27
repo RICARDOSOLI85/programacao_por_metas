@@ -2,7 +2,7 @@
 # Nome: Ricardo Soares Oliveira
 # Data 27/Agosto/2024 
 
-function calcular_metricas(C::Matrix,y_real::Vector,FO::Float64,
+function calcular_metricas(C::Matrix,y_real::Vector,gama::Float64,
     modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String)
     
     # leitura
@@ -120,6 +120,7 @@ function calcular_metricas(C::Matrix,y_real::Vector,FO::Float64,
 
     println(".................................................")
     println("   Imprimindo a solução do modelo Robusto 1 A ")
+    println("        O valor de Gama é (Γ =  ", gama, ")")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
@@ -146,6 +147,7 @@ function calcular_metricas(C::Matrix,y_real::Vector,FO::Float64,
     open(filename, "w") do file
         println(file,"........................................")
         println(file," Solução do modelo : $(model_name)" )
+        println(file, "O valor de Gama é (Γ = ", gama, ")")
         println(file,"........................................")
         println(file,"Função Objetivo (FO) = ", FO)
         println(file,"Target  x[o]         = ", tar)
@@ -162,7 +164,8 @@ function calcular_metricas(C::Matrix,y_real::Vector,FO::Float64,
         println(file,"|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
         println(file,"|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
         println(file,"---------------------------------------------------------------")
-        println(file," ")
+        println(file,"Falso Positivo Correto = ", FPc)
+        println(file,"Soma_atual             = ", Soma_C)
         println(file,"............................................")
         println(file,"    Taxa de Acerto  |  Taxa de Erro ")
         println(file," Positivo   : ",   TPA, "   |    " , TPE)

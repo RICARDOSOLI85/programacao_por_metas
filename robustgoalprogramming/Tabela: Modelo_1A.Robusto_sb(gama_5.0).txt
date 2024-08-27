@@ -1,5 +1,5 @@
 ........................................
- Solução do modelo : Modelo_1A.Robusto(sb)
+ Solução do modelo : Modelo_1A.Robusto_sb(gama_5.0)
 O valor de Gama é (Γ = 5.0)
 ........................................
 Função Objetivo (FO) = 2.0000000000000004
@@ -9,14 +9,15 @@ N. variáveis         = 53
 sol[1] = 0.0
 sol[2] = 1.0
 Status = OPTIMAL
-Time   = 0.0005 s
+Time   = 0.001 s
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
 || True Positive  (TP)  = 0 | False Negative (FN)  = 5 ||
 || False Positive (FP)  = 0 | True Negative  (TN) =  5 ||
 ---------------------------------------------------------------
- 
+Falso Positivo Correto = 0
+Soma_atual             = 10
 ............................................
     Taxa de Acerto  |  Taxa de Erro 
  Positivo   : 0.0   |    1.0
