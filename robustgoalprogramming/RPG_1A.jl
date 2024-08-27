@@ -52,18 +52,25 @@ function robusto_modelo1(C,ca,cb,alpha,gama)
 
     # Impressão 
     println(modelo)
+    println(".................................................")
     println("   Imprimindo a solução do modelo Robusto 1 A ")
+    println(".................................................")
     FO     = JuMP.objective_value(modelo)
-    target = JuMP.value(target)
+    tar = JuMP.value(target)
+    sol = JuMP.value.(x)
+    NV= num_variables(modelo)
     println("Função Objetivo (FO) = ", FO)
-    println("Target (t) = ", target)
+    println("Target (t)           = ", tar)
+    println("Solução x[j]         = ", sol)
+    println("N. variáveis         = ", NV)
     for j=1:m 
         println("x[$j] = ", JuMP.value.(x[j]))
     end 
     Status = termination_status(modelo)
     time = round(solve_time(modelo), digits=4)
     println("Status = ", Status)
-    println("Time = ", time)
-    
+    println("Time   = ", time, " s")
+    println(".................................................")
+    return FO, modelo, tar, sol   
 end
 

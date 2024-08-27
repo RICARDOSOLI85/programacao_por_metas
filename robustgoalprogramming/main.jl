@@ -14,4 +14,9 @@ beta = 0.50;
 gama = 5.0; 
 # Implementar o modelo Robusto de GP
 include("RPG_1A.jl")
-robusto_modelo1(C,ca,cb,alpha,gama)
+FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,gama)
+
+# Imprimir os resultados do Modelo Robusto e salvar
+include("metricas.jl")
+calcular_metricas(C,y_real,FO,modelo,tar,sol)
+
