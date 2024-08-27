@@ -15,8 +15,10 @@ gama = 5.0;
 # Implementar o modelo Robusto de GP
 include("RPG_1A.jl")
 FO, modelo, tar, sol = robusto_modelo1(C,ca,cb,alpha,gama)
-
+model_name ="Modelo_1A.Robusto(sb)"
 # Imprimir os resultados do Modelo Robusto e salvar
 include("metricas.jl")
-calcular_metricas(C,y_real,FO,modelo,tar,sol)
+calcular_metricas(C::Matrix,y_real::Vector,FO::Float64,
+    modelo::Model,tar::Float64,sol::Vector{Float64},
+    model_name::String)
 

@@ -51,7 +51,7 @@ function robusto_modelo1(C,ca,cb,alpha,gama)
     optimize!(modelo)
 
     # Impressão 
-    println(modelo)
+    #println(modelo)
     println(".................................................")
     println("   Imprimindo a solução do modelo Robusto 1 A ")
     println(".................................................")
