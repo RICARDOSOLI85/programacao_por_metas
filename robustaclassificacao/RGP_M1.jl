@@ -106,10 +106,11 @@ function gp_rob_1(C,ca,cb,ca_hat,cb_hat,alpha,gama)
    x  = JuMP.value.(x);
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
-   println("x[0] = ",  xo_target)
+   println("x[0]:target  = ",  xo_target)
    for i=1:m
    println("x[$i] = ", JuMP.value.(x[i]));
    end
+   #=
    for i in 1:n1
     if value(pos_a[i]) > 0
         println("pos_a[$i] = ", value(pos_a[i]))
@@ -126,6 +127,33 @@ end
             println("neg_b[$i] = ", value(neg_b[i]))
         end 
     end
+    =#
+    for i in 1:n1
+        if value(z[i]) > 0
+              println("z[$i]:n1 = ", value(z[i]))
+        end
+    end 
+    for i in 1:n2
+        if value(z[i]) > 0
+            println("z[$i]:n2 = ", value(z[i]))
+        end
+    end 
+    for j in 1:m
+        for i in 1:n1
+            if value(p[i,j]) > 0
+                println("p[($i,$j)]:n1 = ", value(p[i,j]))
+            end
+        end
+    end 
+    for j in 1:m
+        for i in 1:n2
+            if value(p[i,j]) > 0
+                println("p[($i,$j)]:n2 = ", value(p[i,j]))
+            end
+        end
+    end
+   
+    
    status = termination_status(modelo)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
@@ -135,7 +163,4 @@ end
    println("x[0] = ",  xo_target)
    
    return modelo, x, xo_target  
-
- 
-
 end 
