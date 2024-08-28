@@ -142,12 +142,13 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
 
     # Salvar em um arquivo TXT
     # nome do arquivo
-    filename = "Tabela :$(model_name).txt"
+    #filename = "Tabela :$(model_name).txt"
+    filename = "Tabela_$(model_name)_Gama_$(gama).txt"
     # abre o arquivo para a escrita
     open(filename, "w") do file
         println(file,"........................................")
         println(file," Solução do modelo : $(model_name)" )
-        println(file, "O valor de Gama é (Γ = ", gama, ")")
+        #println(file, "O valor de Gama é (Γ = ", gama, ")")
         println(file,"........................................")
         println(file,"Função Objetivo (FO) = ", FO)
         println(file,"Target  x[o]         = ", tar)
