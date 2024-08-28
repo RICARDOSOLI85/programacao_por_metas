@@ -14,10 +14,10 @@ function dividir_categorias(df_treino::DataFrame)
     # função select 
     ca_filtro = select(ca_treino, Not([:Column1, :COVID]));
     cb_filtro = select(cb_treino, Not([:Column1, :COVID]));
+    
+    # selecionar a matriz para o teste
+    C_treino = select(df_treino, Not([:Column1,:COVID]));
 
-    println("ca_filtro ", ca_filtro)
-    println("cb_filtro ", cb_filtro)
-
-    return ca_filtro, cb_filtro 
+    return C_treino, ca_filtro, cb_filtro 
     
 end

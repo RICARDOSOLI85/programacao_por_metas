@@ -2,7 +2,7 @@
 # Data: 27/Agosto/2024
 # Nome: Ricardo Soares Oliveira
 
-function calcular_desvios(ca,cb,epsilon)
+function calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
     # dimensões
     (n1,m) = size(ca);
     (n2,m) = size(cb);

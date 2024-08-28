@@ -13,7 +13,7 @@ TBW
 function robusto_modelo1(C::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
-    ga::Vector{Float64},gb::Vector{Float64})
+    gama_a::Vector{Float64},gama_b::Vector{Float64})
 
     # leitura 
     (n,m) = size(C)
@@ -40,8 +40,8 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     # alteração:a
     @variables(modelo,
     begin
-        p[i=1:max(n1,n2),j=1:m] >= 0
-        z[i=1:max(n1,n2)]       >=0
+        p[i=1:n,j=1:m] >= 0
+        z[i=1:n]       >=0
     end)
 
     # função objetivo
@@ -51,10 +51,10 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     @constraints(modelo,
     begin
         rest1[i=1:n1], sum(ca[i,j]*x[j] for j in 1:m) + 
-        sum(p[i,j] for j in 1:m) + ga[i]*z[i] + 
+        sum(p[i,j] for j in 1:m) + gama_a[i]*z[i] + 
         n_a[i] - p_a[i] == target 
         rest2[i=1:n2], sum(cb[i,j]*x[j] for j in 1:m) + 
-        sum(p[i,j] for j in 1:m) + gb[i]*z[i] +
+        sum(p[i,j] for j in 1:m) + gama_b[i]*z[i] +
         n_b[i] - p_b[i] == target
     end)
 
