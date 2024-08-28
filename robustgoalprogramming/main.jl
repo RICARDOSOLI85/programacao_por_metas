@@ -7,8 +7,8 @@
 #.........................................................
 alpha =1.0;
 beta = 0.50; 
-Epsilons = [0.10, 0.20, 0.30, 0.40, 0.50];  
-Gammas = [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 10.0]; 
+Epsilons = [0.10, 0.20, 0.30];  
+Gammas = [0.0, 1.0, 3.0, 5.0, 7.0, 10.0]; 
 proporcao_treino = 0.70; 
 #----------------------------------------------------------
 #     Leitura e Processamento dos dados 
@@ -47,8 +47,8 @@ for epsilon in Epsilons
 
     # configurar o conjunto de dados a ser utilizado (filtro ou balanceado)
     # Modelo com Filtro 
-    ca = ca_filtro; 
-    cb = cb_filtro; 
+    global  ca = ca_filtro; 
+    global  cb = cb_filtro; 
     # Modelo balanceado 
     # ca = ca_balanceado; 
     # cb = cb_balanceado; 
@@ -72,10 +72,10 @@ for epsilon in Epsilons
 
         # Imprimir os resultados do Modelo Robusto e salvar
         C = C_teste 
-        model_name ="Resul. : Robusto GP_1 "
+        model_name ="Res.:Robusto GP_1_A_sb "
         calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-        modelo::Model,tar::Float64,sol::Vector{Float64},
-        model_name::String,epsilon::Float64)  
+        modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+        epsilon::Float64) 
 
         println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
     end 

@@ -7,8 +7,8 @@ using Random
 
 function dividir_dados(df::DataFrame, proporcao_treino::Float64)
     # definir a semente para gerar o mesmo embaralhamento
-    Random.seed!(2357)
-    
+    #Random.seed!(2357)
+
     # dimensões
     (m,n) = size(df);
     m_treino = Int(round(proporcao_treino * m));

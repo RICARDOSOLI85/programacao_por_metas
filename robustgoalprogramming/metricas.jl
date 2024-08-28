@@ -144,7 +144,7 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
     # Salvar em um arquivo TXT
     # nome do arquivo
     #filename = "Tabela :$(model_name).txt"
-    filename = "Tabela_$(model_name)_Γ_$(gama)_ϵ_$(epsilon).txt"
+    filename = "Tab.$(model_name)_Γ_$(gama)_ϵ_$(epsilon).txt"
     # abre o arquivo para a escrita
     open(filename, "w") do file
         println(file,"........................................")

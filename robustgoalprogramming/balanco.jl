@@ -6,7 +6,8 @@ using Random
 
 function balancear_categorias(ca_filtro::DataFrame, cb_filtro::DataFrame)
     # definir a semente para gerar o mesmo embaralhamento
-    Random.seed!(2357)
+    #Random.seed!(2357)
+
     # dimensao 
     ca_count = size(ca_filtro,1);
     cb_count = size(cb_filtro,1); 
