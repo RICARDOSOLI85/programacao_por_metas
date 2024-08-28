@@ -77,6 +77,48 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
 
     #println("Valor Acerto (Def Negativo)  = ", DNA)
     #println("Valor Erro  (Def Negativo)   = ",  DNE)
+
+       # Calculo das taxas 
+
+    # 1. Taxa Definitivamente Positivo Acerto/Erro  
+    TDPA = DPA/(DPA +DPE)
+    TDPE = DPE/(DPA +DPE)  
+    TDPA = round(TDPA, digits=2)
+    TDPE = round(TDPE, digits=2)
+    
+    # 2. Taxa Provavelmente Positivo Acerto/Erro  
+    TPPA = PPA/(PPA + PPE)
+    TPPE = PPE/(PPA + PPE)
+    TPPA = round(TPPA, digits=2)
+    TPPE = round(TPPE, digits=2)
+    
+    # 3. Taxa dos valores indefinidos 
+    TIA = IA /(IA +IE )
+    TIE = IE /(IA +IE )
+    TIA = round(TIA, digits=2)
+    TIE = round(TIE, digits=2)
+    
+    # 4. Taxa Provavelmente Positivo Acerto/Erro  
+    TPNA = PNA / (PNA + PNE)
+    TPNE = PNE / (PNA + PNE )
+    TPNA = round(TPNA, digits=2)
+    TPNE = round(TPNE, digits=2)
+
+   # 5. Taxa Definitivamente Negativo Acerto/Erro
+   TDNA = DNA /(DNA + DNE)
+   TDNE = DNE /(DNA + DNE )
+   TDNA = round(TDNA, digits=2)
+   TDNE = round(TDNE, digits=2)
+
+
+    println("............................................")
+    println("     Taxa de Acerto  |  Taxa de Erro ")
+    println("Def Positivo  : ",   TDPA, " |       " , TDPE)
+    println("Pro Positivo  : ",   TPPA, " |       " , TPPE)
+    println("Indefindos    : ",   TIA, "  |       " , TIE)
+    println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
+    println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
+    println("............................................")
     
     
     
