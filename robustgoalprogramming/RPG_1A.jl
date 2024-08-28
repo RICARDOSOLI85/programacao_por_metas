@@ -10,7 +10,10 @@ using Gurobi
 
 TBW
 """
-function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
+function robusto_modelo1(C::DataFrame,ca::DataFrame,
+    cb::DataFrame,alpha::Float64,
+    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+    ga::Vector{Float64},gb::Vector{Float64})
 
     # leitura 
     (n,m) = size(C)
@@ -25,7 +28,7 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     @variable(modelo, 0 <= x[j=1:m] <= alpha)
     #@variable(modelo, -alpha <= x[j=1:m] <= alpha)
     #@variable(modelo, x[j=1:m])
-    #@variable(modelo, x[j=1:m] <= 9)
+    #@variable(modelo, x[j=1:m] <= 1)
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -37,8 +40,8 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     # alteração:a
     @variables(modelo,
     begin
-        p[i=1:n,j=1:m] >= 0
-        z[i=1:n]       >=0
+        p[i=1:max(n1,n2),j=1:m] >= 0
+        z[i=1:max(n1,n2)]       >=0
     end)
 
     # função objetivo
@@ -57,8 +60,8 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
 
     @constraints(modelo,
     begin
-        rest3[i in 1:n1, j in 1:m], z[i] + p[i,j] >= ca_hat[i,j] * x[j]
-        rest4[i in 1:n2, j in 1:m], z[i] + p[i,j] >= cb_hat[i,j] * x[j]
+        rest3[i in 1:n1, j in 1:m], z[i] + p[i,j] >= ca_desvio[i,j] * x[j]
+        rest4[i in 1:n2, j in 1:m], z[i] + p[i,j] >= cb_desvio[i,j] * x[j]
     end)
 
 
@@ -83,7 +86,7 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
     for j=1:m 
         println("x[$j] = ", JuMP.value.(x[j]))
     end
-
+    #=
     for i in 1:n2
         if value(z[i]) > 0
             println("z[$i]:n2 = ", value(z[i]))
@@ -103,6 +106,7 @@ function robusto_modelo1(C,ca,cb,alpha,ca_hat,cb_hat,ga,gb)
             end
         end
     end
+    =#
     Status = termination_status(modelo)
     time = round(solve_time(modelo), digits=4)
     println("Status = ", Status)

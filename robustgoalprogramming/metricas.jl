@@ -2,7 +2,7 @@
 # Nome: Ricardo Soares Oliveira
 # Data 27/Agosto/2024 
 
-function calcular_metricas(C::Matrix,y_real::Vector,gama::Float64,
+function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
     modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String)
     
     # leitura
@@ -13,23 +13,23 @@ function calcular_metricas(C::Matrix,y_real::Vector,gama::Float64,
     # Calcular o hiperplano 
     c = Matrix(C); 
     y_modelo = c * solucao; 
-    println("vetor target = " , y_modelo) 
+    #println("vetor target = " , y_modelo) 
     
     # Transformar o data frame em um vetor Float
-    #y_real = Matrix(y_real)
+    y_real = Matrix(y_real);
     
     # 1.0 Calcular as Métricas
     println(" ")
     println("           Métricas                ")
     # y_predito: Estou selecionando maior ou igual ao hiperplano
-    y_predito = y_modelo .>= target
-    y_real = y_real 
+    y_predito = y_modelo .>= target;
+    y_real = y_real; 
     # y_pred : Estou selecionando os pontos no hiperplano
-    y_pred = y_modelo .== target 
+    y_pred = y_modelo .== target; 
 
-    println("y_predito = " , y_predito) 
-    println("y_pred = " , y_pred) 
-    println("y_real = " , y_real)
+    #println("y_predito = " , y_predito) 
+    #println("y_pred = " , y_pred) 
+    #println("y_real = " , y_real)
 
     # 2. Calcular TP, FN, FP, TN 
     TP = sum((y_real .==1) .& (y_predito .==1))

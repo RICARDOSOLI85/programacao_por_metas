@@ -7,32 +7,34 @@ function calcular_desvios(ca,cb,epsilon)
     (n1,m) = size(ca);
     (n2,m) = size(cb);
 
-    ca_hat = zeros(n1,m);
-    cb_hat = zeros(n2,m);
+    ca_desvio = zeros(n1,m);
+    cb_desvio = zeros(n2,m);
 
     # Dados binários 
-    #=
     # Processamento da Matriz ca 
     for i in 1:n1
-        for j in 1:m 
-            if ca[i,j] == 0
-                ca_hat[i,j] = epsilon;
-            elseif ca[i,j] == 1
-                ca_hat = - epsilon; 
+        for j in 1:m
+            if ca[i,j] < 1 
+                ca_desvio[i,j] = epsilon;               
+            elseif ca[i,j] > 0 
+                ca_desvio[i,j] = - epsilon;                
             end 
-        end
-    end 
+            
+        end 
+    end
     # Processamento da Matriz cb 
-    for i in 1:n1
-        for j in 1:m 
-            if cb[i,j] == 0
-                cb_hat[i,j] = epsilon;
-            elseif cb[i,j] == 1
-                cb_hat = - epsilon; 
-            end 
+    for i in 1:n2
+        for j in 1:m
+            if cb[i,j] < 1
+                cb_desvio[i,j] = epsilon;
+            elseif cb[i,j] > 0 
+                cb_desvio[i,j] = - epsilon;
+            end
         end
-    end 
-    =#
+    end
+    
+    
+    #=
     # Dados não binários
     for i in 1:n1
         for j in 1:m
@@ -46,7 +48,7 @@ function calcular_desvios(ca,cb,epsilon)
     end 
     ca_hat
     cb_hat
-
-    return ca_hat, cb_hat
+    =#
     
+    return ca_desvio, cb_desvio    
 end
