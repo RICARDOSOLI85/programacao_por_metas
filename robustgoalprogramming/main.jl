@@ -7,7 +7,7 @@
 #.........................................................
 alpha =1.0;
 beta = 0.50; 
-epsilon = 0.10; 
+Epsilons = [0.10, 0.20, 0.30, 0.40, 0.50];  
 Gammas = [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 10.0]; 
 proporcao_treino = 0.70; 
 #----------------------------------------------------------
@@ -34,49 +34,51 @@ ca_balanceado, cb_balanceado= balancear_categorias(ca_filtro::DataFrame, cb_filt
 #----------------------------------------------------------
 #     Implementar o Modelos e imprimir as soluções  
 #----------------------------------------------------------
-# Modelo com Filtro 
-ca = ca_filtro; 
-cb = cb_filtro; 
-# Modelo balanceado 
-# ca = ca_balanceado; 
-# cb = cb_balanceado; 
 
-
-
-#------------------------------
 include("matrizes.jl")
 include("gama.jl")
 include("RPG_1A.jl")
 include("metricas.jl")
 
- 
 
-# Implementar o modelo com as variações de Γ (Gamma)
-for gama in Gammas
-    println(" Testando o modelo para gama = $gama")
+# ϵ : implementar o modelo para cada valor de (Epsilon)
+for epsilon in Epsilons
+    println(" Teste do modelo para epsilon = $epsilon")
 
-    # Criar as matrizes dos desvios 
-    global  ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
+    # configurar o conjunto de dados a ser utilizado (filtro ou balanceado)
+    # Modelo com Filtro 
+    ca = ca_filtro; 
+    cb = cb_filtro; 
+    # Modelo balanceado 
+    # ca = ca_balanceado; 
+    # cb = cb_balanceado; 
+    
+    # Γ:   implementar o modelo para cada valor de (Gamma)
+    for gama in Gammas
+        println(" Testando o modelo para gama = $gama")
+        
+        # Criar as matrizes dos desvios 
+        global  ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
 
-    # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
-    global gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
+        # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
+        global gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
 
-    # Implementar o modelo Robusto de Goal Programming 
-    C = C_treino 
-    global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
-    cb::DataFrame,alpha::Float64,
-    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
-    gama_a::Vector{Float64},gama_b::Vector{Float64})
+        # Implementar o modelo Robusto de Goal Programming 
+        C = C_treino 
+        global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
+                cb::DataFrame,alpha::Float64,
+                ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+                gama_a::Vector{Float64},gama_b::Vector{Float64})
 
-    # Imprimir os resultados do Modelo Robusto e salvar
-    C = C_teste 
-    model_name ="Modelo_1A.Robusto_sb"
-    calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-    modelo::Model,tar::Float64,sol::Vector{Float64},
-    model_name::String)  
+        # Imprimir os resultados do Modelo Robusto e salvar
+        C = C_teste 
+        model_name ="Resul. : Robusto GP_1 "
+        calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+        modelo::Model,tar::Float64,sol::Vector{Float64},
+        model_name::String,epsilon::Float64)  
 
-    println("Resultado para gama = $gama: Função Objetivo = $FO\n")
-
+        println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
+    end 
 end
 
 

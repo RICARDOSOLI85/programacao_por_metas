@@ -3,8 +3,9 @@
 # Data 27/Agosto/2024 
 
 function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-    modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String)
-    
+    modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+    epsilon::Float64)
+
     # leitura
     n = length(sol);
     target = tar;
@@ -143,12 +144,13 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
     # Salvar em um arquivo TXT
     # nome do arquivo
     #filename = "Tabela :$(model_name).txt"
-    filename = "Tabela_$(model_name)_Gama_$(gama).txt"
+    filename = "Tabela_$(model_name)_Γ_$(gama)_ϵ_$(epsilon).txt"
     # abre o arquivo para a escrita
     open(filename, "w") do file
         println(file,"........................................")
         println(file," Solução do modelo : $(model_name)" )
-        #println(file, "O valor de Gama é (Γ = ", gama, ")")
+        println(file, "O valor de Gama é (Γ = ", gama, ")")
+        println(file, "O valor de Epsilo é (ϵ = ", epsilon, ")")
         println(file,"........................................")
         println(file,"Função Objetivo (FO) = ", FO)
         println(file,"Target  x[o]         = ", tar)
