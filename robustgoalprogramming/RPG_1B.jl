@@ -1,6 +1,6 @@
 # Modelo Programação por Metas Robusto
 # Nome: Ricardo Soares Oliveira
-# Data 27/Agosto/2024
+# Data 28/Agosto/2024
 
 using JuMP
 using Gurobi
@@ -25,10 +25,7 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     # variáveis
-    @variable(modelo, 0 <= x[j=1:m] <= alpha)
-    #@variable(modelo, -alpha <= x[j=1:m] <= alpha)
-    #@variable(modelo, x[j=1:m])
-    #@variable(modelo, x[j=1:m] <= 1)
+    @variable(modelo, -alpha <= x[j=1:m] <= alpha)
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -65,8 +62,7 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     end)
 
 
-    @constraint(modelo, sum(x[j] for j in 1:m) == 1)
-
+    
     # resolver o modelo
     optimize!(modelo)
 
@@ -93,4 +89,3 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     println(".................................................")
     return FO, modelo, tar, sol   
 end
-

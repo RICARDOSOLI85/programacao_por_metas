@@ -8,8 +8,9 @@
 alpha =1.0;
 beta = 0.50; 
 Epsilons = [0.10, 0.20, 0.30];  
-Gammas = [0.0, 1.0, 3.0, 5.0, 7.0, 10.0]; 
+Gammas = [1.0, 3.0, 5.0, 7.0, 10.0]; 
 proporcao_treino = 0.70; 
+
 #----------------------------------------------------------
 #     Leitura e Processamento dos dados 
 #----------------------------------------------------------
@@ -19,13 +20,12 @@ include("divisao.jl")
 include("filtro.jl")
 include("balanco.jl")
 
-# leitura dos dados 
+# leitura dos dados
+arquivo="exames.csv"  
 df = ler_arquivo(arquivo::String)
-
-# divisão entre treino e teste 
 C_teste, df_treino, df_teste, y_real = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
-# delecionar categorias A e B 
+# selecionar categorias A e B 
 C_treino, ca_filtro, cb_filtro = dividir_categorias(df_treino::DataFrame)
 
 # balancear as categorias A = B 
@@ -34,50 +34,53 @@ ca_balanceado, cb_balanceado= balancear_categorias(ca_filtro::DataFrame, cb_filt
 #----------------------------------------------------------
 #     Implementar o Modelos e imprimir as soluções  
 #----------------------------------------------------------
-
 include("matrizes.jl")
 include("gama.jl")
 include("RPG_1A.jl")
+include("RPG_1B.jl")
+include("RPG_1C.jl")
+include("RPG_1D.jl")
 include("metricas.jl")
 
-
-# ϵ : implementar o modelo para cada valor de (Epsilon)
-for epsilon in Epsilons
-    println(" Teste do modelo para epsilon = $epsilon")
-
-    # configurar o conjunto de dados a ser utilizado (filtro ou balanceado)
-    # Modelo com Filtro 
-    global  ca = ca_filtro; 
-    global  cb = cb_filtro; 
-    # Modelo balanceado 
-    # ca = ca_balanceado; 
-    # cb = cb_balanceado; 
+# teste para configuração : Filtro e balanceado
+for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
+    (ca_balanceado,cb_balanceado,"(cb)")]
+    println(" configuração para $modelo_nome")
     
-    # Γ:   implementar o modelo para cada valor de (Gamma)
-    for gama in Gammas
-        println(" Testando o modelo para gama = $gama")
+    # ϵ : implementar o modelo para cada valor de (Epsilon)
+    for epsilon in Epsilons
+        println(" Teste do modelo para epsilon = $epsilon")
         
-        # Criar as matrizes dos desvios 
-        global  ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
+        # configurar o conjunto de dados  
+        #global  ca = ca;
+        #global  cb = cb;  
+        
+        # Γ:   implementar o modelo para cada valor de (Gamma)
+        for gama in Gammas
+            println(" Testando o modelo para gama = $gama")   
+            
+            # Criar as matrizes dos desvios 
+            global  ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
 
-        # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
-        global gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
+            # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
+            global gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
 
-        # Implementar o modelo Robusto de Goal Programming 
-        C = C_treino 
-        global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
+            # Implementar o modelo Robusto de Goal Programming 
+            C = C_treino 
+            global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
                 cb::DataFrame,alpha::Float64,
                 ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
                 gama_a::Vector{Float64},gama_b::Vector{Float64})
 
-        # Imprimir os resultados do Modelo Robusto e salvar
-        C = C_teste 
-        model_name ="Res.:Robusto GP_1_A_sb "
-        calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-        modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-        epsilon::Float64) 
+            # Imprimir os resultados do Modelo Robusto e salvar
+            C = C_teste 
+            model_name ="RGP_1_A"
+            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+            epsilon::Float64,modelo_nome::String)
 
-        println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
+            println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
+        end 
     end 
 end
 

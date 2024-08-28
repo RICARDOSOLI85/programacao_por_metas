@@ -25,10 +25,7 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     # variáveis
-    @variable(modelo, 0 <= x[j=1:m] <= alpha)
-    #@variable(modelo, -alpha <= x[j=1:m] <= alpha)
-    #@variable(modelo, x[j=1:m])
-    #@variable(modelo, x[j=1:m] <= 1)
+    @variable(modelo, x[j=1:m])
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -93,4 +90,3 @@ function robusto_modelo1(C::DataFrame,ca::DataFrame,
     println(".................................................")
     return FO, modelo, tar, sol   
 end
-
