@@ -19,8 +19,8 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     # Transformar o data frame em um vetor Float
     y_real = Matrix(y_real);
 
-    hiper_up   = wo .+ beta
-    hiper_down = wo .- beta 
+    hiper_up   = target .+ beta
+    hiper_down = target .- beta 
     println("hiper+beta = ",hiper_up)
     println("hiperplano = ",wo)
     println("hiper-beta = ",hiper_down)
