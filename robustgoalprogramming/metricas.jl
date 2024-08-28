@@ -142,13 +142,19 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
     println(".................................................")
 
     # Salvar em um arquivo TXT
+    
+    # Defina o caminho do diretório onde deseja salvar o arquivo
+    diretorio = "Resultados:RPG1"
+    # Cria o diretório se ele não existir
+    mkpath(diretorio)
     # nome do arquivo
     #filename = "Tabela :$(model_name).txt"
-    filename = "Tab.$(model_name)_$(modelo_nome)_Γ_$(gama)_ϵ_$(epsilon).txt"
+    filename = joinpath(diretorio,"$(model_name)_$(modelo_nome)_Γ_$(gama)_ϵ_$(epsilon).txt")
     # abre o arquivo para a escrita
     open(filename, "w") do file
         println(file,"........................................")
         println(file," Solução do modelo : $(model_name)" )
+        println(file," filtro/balanceado : $(modelo_nome)" )
         println(file, "O valor de Gama é (Γ = ", gama, ")")
         println(file, "O valor de Epsilo é (ϵ = ", epsilon, ")")
         println(file,"........................................")
@@ -189,11 +195,6 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
 
 
 
-    
-
-
-
-
-
+    return resultados 
     
 end

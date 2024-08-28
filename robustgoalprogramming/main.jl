@@ -42,8 +42,8 @@ include("RPG_1C.jl")
 include("RPG_1D.jl")
 include("metricas.jl")
 
-# Lista de Modelos 
-Set_model_1 = ["RPG_1A.jl", "RPG_1B.jl", "RPG_1C.jl", "RPG_1D.jl"]
+# Inicializar o dicionário de resultados
+resultados = Dict{String, Dict{Tuple{Float64, Float64}, Dict{String, Any}}}()
 
 # teste para configuração : Filtro e balanceado
 for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
@@ -133,12 +133,17 @@ for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
                             modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
                             epsilon::Float64,modelo_nome::String)
                 end
+
+               
+
                 println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
             end     
            
         end 
     end 
 end
+
+
 
 
 
