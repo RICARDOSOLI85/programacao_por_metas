@@ -8,7 +8,7 @@
 alpha =1.0;
 beta = 0.50; 
 epsilon = 0.10; 
-Gammas = [0.0, 1.0, 2.0, 5.0, 7.0, 10.0]; 
+Gammas = [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 10.0]; 
 proporcao_treino = 0.70; 
 #----------------------------------------------------------
 #     Leitura e Processamento dos dados 
@@ -49,20 +49,7 @@ include("gama.jl")
 include("RPG_1A.jl")
 include("metricas.jl")
 
-gama = 1.0     
-ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
-gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
-C = C_treino
-FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
-    cb::DataFrame,alpha::Float64,
-    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
-    gama_a::Vector{Float64},gama_b::Vector{Float64})
-
-model_name ="Modelo_1A.Robusto_sb"
-C = C_teste 
-calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-    modelo::Model,tar::Float64,sol::Vector{Float64},
-    model_name::String) 
+ 
 
 # Implementar o modelo com as variações de Γ (Gamma)
 for gama in Gammas
@@ -94,8 +81,23 @@ end
 
 
 
-
 #=
+gama = 1.0     
+ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
+gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
+C = C_treino
+FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
+    cb::DataFrame,alpha::Float64,
+    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+    gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+model_name ="Modelo_1A.Robusto_sb"
+C = C_teste 
+calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+    modelo::Model,tar::Float64,sol::Vector{Float64},
+    model_name::String)
+
+ ##    
 # Exemplo 
 C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
 y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
