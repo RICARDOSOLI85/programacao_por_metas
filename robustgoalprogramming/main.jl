@@ -42,6 +42,9 @@ include("RPG_1C.jl")
 include("RPG_1D.jl")
 include("metricas.jl")
 
+# Lista de Modelos 
+Set_Model_1 = ["RPG_1A.jl", "RPG_1B.jl", "RPG_1C.jl", "RPG_1D.jl"]
+
 # teste para configuração : Filtro e balanceado
 for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
     (ca_balanceado,cb_balanceado,"(cb)")]
@@ -65,21 +68,74 @@ for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
             # Criar os vetores Γ (Gamma) sujeitas a incerteza em cada linha
             global gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
 
-            # Implementar o modelo Robusto de Goal Programming 
-            C = C_treino 
-            global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
-                cb::DataFrame,alpha::Float64,
-                ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
-                gama_a::Vector{Float64},gama_b::Vector{Float64})
+            # Implementar o modelo Robusto de Goal Programming
+            # Para as quatro categorias A,B,C, e D 
+            for model_name in Set_model_1
+                prinln("Excecutando o $model_name")
 
-            # Imprimir os resultados do Modelo Robusto e salvar
-            C = C_teste 
-            model_name ="RGP_1_A"
-            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-            epsilon::Float64,modelo_nome::String)
+                # Modelo 1 A 
+                
+                if model_name == "RPG_1A.jl"
+                    C = C_treino; 
+                    global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
+                            cb::DataFrame,alpha::Float64,
+                            ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+                            gama_a::Vector{Float64},gama_b::Vector{Float64})
 
-            println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
+                # Imprimir os resultados do Modelo Robusto e salvar
+                            C = C_teste 
+                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+                            epsilon::Float64,modelo_nome::String)
+
+                # Modelo 1 B            
+
+                elseif model_name == "RPG_1B.jl"
+                    C = C_treino; 
+                    global  FO, modelo, tar, sol = robusto_modelo2(C::DataFrame,ca::DataFrame,
+                            cb::DataFrame,alpha::Float64,
+                            ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+                            gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+                # Imprimir os resultados do Modelo Robusto e salvar
+                            C = C_teste 
+                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+                            epsilon::Float64,modelo_nome::String)
+
+                # Modelo 1 C 
+
+                elseif model_name == "RPG_1C.jl"
+                    C = C_treino; 
+                    global  FO, modelo, tar, sol = robusto_modelo3(C::DataFrame,ca::DataFrame,
+                            cb::DataFrame,alpha::Float64,
+                            ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+                            gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+                # Imprimir os resultados do Modelo Robusto e salvar
+                            C = C_teste 
+                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+                            epsilon::Float64,modelo_nome::String)
+
+               # Modelo 1 D
+
+                elseif model_name == "RPG_1D.jl"
+                    C = C_treino; 
+                    global  FO, modelo, tar, sol = robusto_modelo4(C::DataFrame,ca::DataFrame,
+                            cb::DataFrame,alpha::Float64,
+                            ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+                            gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+                # Imprimir os resultados do Modelo Robusto e salvar
+                            C = C_teste 
+                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
+                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+                            epsilon::Float64,modelo_nome::String)
+                end
+                println("Resultado para gama = $gama e epsilon = $epsilon: Função Objetivo = $FO\n")
+            end     
+           
         end 
     end 
 end

@@ -10,7 +10,7 @@ using Gurobi
 
 TBW
 """
-function robusto_modelo1(C::DataFrame,ca::DataFrame,
+function robusto_modelo3(C::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64})
