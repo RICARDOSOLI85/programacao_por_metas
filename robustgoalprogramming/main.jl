@@ -72,6 +72,9 @@ calcular_classes(C::Matrix{Int64},y_real::Vector{Int64},gama::Float64,beta::Floa
 modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
 epsilon::Float64,modelo_nome::String)
 
+include("curvaroc.jl")
+plotar_curva(C::Matrix{Int64},y_real::Vector{Int64},sol::Vector{Float64},tar::Float64)
+
 #=
 # teste para configuração : Filtro e balanceado
 for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
@@ -198,3 +201,4 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:]; 
 =#
+
