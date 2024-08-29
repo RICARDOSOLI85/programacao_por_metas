@@ -41,10 +41,38 @@ include("RPG_1B.jl")
 include("RPG_1C.jl")
 include("RPG_1D.jl")
 include("metricas.jl")
-
+include("classes.jl")
 # Inicializar o dicionário de resultados
 resultados = Dict{String, Dict{Tuple{Float64, Float64}, Dict{String, Any}}}()
 
+include("RPG_2A.jl")
+#ca = ca_filtro;
+#cb = cb_filtro;
+#C  = C_treino; 
+# ---
+C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
+y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
+ca = C[1:5,:]; 
+cb = C[6:10,:]
+epsilon = 0.10; 
+gama = 1.0;
+beta = 0.57; 
+ca_desvio, cb_desvio = calcular_desvios(ca::Matrix{Int64},cb::Matrix{Int64},epsilon::Float64)
+gama_a, gama_b = cria_vetor_gama(ca::Matrix{Int64},cb::Matrix{Int64},gama::Float64)
+
+FO, modelo, tar, sol = robusto_modelo_2(C::Matrix{Int64},ca::Matrix{Int64},
+    cb::Matrix{Int64},alpha::Float64,beta::Float64,
+    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+    gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+model_name = "RPG_2A.jl"
+modelo_nome ="sb"
+
+calcular_classes(C::Matrix{Int64},y_real::Vector{Int64},gama::Float64,beta::Float64,
+modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
+epsilon::Float64,modelo_nome::String)
+
+#=
 # teste para configuração : Filtro e balanceado
 for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
     (ca_balanceado,cb_balanceado,"(cb)")]
@@ -143,7 +171,7 @@ for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
     end 
 end
 
-
+=#
 
 
 

@@ -2,7 +2,7 @@
 # Nome: Ricardo Soares Oliveira
 # Data 28/Agosto/2024 
 
-function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Float64,
+function calcular_classes(C::Matrix{Int64},y_real::Vector{Int64},gama::Float64,beta::Float64,
     modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
     epsilon::Float64,modelo_nome::String)
 
@@ -14,15 +14,15 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     # Calcular o hiperplano 
     c = Matrix(C); 
     y_modelo = c * solucao; 
-    #println("vetor target = " , y_modelo) 
+    println("vetor target = " , y_modelo) 
     
     # Transformar o data frame em um vetor Float
-    y_real = Matrix(y_real);
+    #y_real = Matrix(y_real);
 
     hiper_up   = target .+ beta
     hiper_down = target .- beta 
     println("hiper+beta = ",hiper_up)
-    println("hiperplano = ",wo)
+    println("hiperplano = ",target)
     println("hiper-beta = ",hiper_down)
     
     
@@ -49,36 +49,34 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     # 1. Definitivamente Positivo (valores de acertos e erros)
     DPA = sum((y_real .==1) .& (y_def_pos .==1))
     DPE = sum((y_real .==0) .& (y_def_pos .==1))
-    #println("Valor Acerto (Def Positivo)  = ", DPA)
-    #println("Valor Erro   (Def. Positivo) = ", DPE)
+    println("Valor Acerto (Def Positivo)  = ", DPA)
+    println("Valor Erro   (Def. Positivo) = ", DPE)
 
     # 2. Provavelmente Positivo (Valores de acertos e erros)
     PPA = sum((y_real .== 1) .& (y_prob_pos .==1))
     PPE = sum((y_real .== 0) .& (y_prob_pos .==1))
-    #println("Valor Acerto (Prob Positivo) = ", PPA)
-    #println("Valor Erro   (Prob Positivo) = ",  PPE)
+    println("Valor Acerto (Prob Positivo) = ", PPA)
+    println("Valor Erro   (Prob Positivo) = ",  PPE)
 
     # 3. Indefinidos (sobre o hiperplano)
     IA = sum((y_real .==1) .& (y_indef .==1))
     IE = sum((y_real .==0) .& (y_indef .==1))
-    #println("Valores Acerto (Indefinidos) = ", IA)
-    #println("Valores Erro  (Indefinidos)  = ", IE)
+    println("Valores Acerto (Indefinidos) = ", IA)
+    println("Valores Erro  (Indefinidos)  = ", IE)
 
     # 4. Provavelmente Negativos (Valores de acertos e erros)
     PNA = sum((y_real .==0).&(y_prob_neg .==1))
-    PNE = sum((y_real .==0) .& (y_prob_neg .==1))
-
-    #println("Valor Acerto (Prob Negativo) = ", PNA)
-    #println("Valor Erro  (Prob Negativo)  = ",  PNE)
+    PNE = sum((y_real .==1) .& (y_prob_neg .==1))
+    println("Valor Acerto (Prob Negativo) = ", PNA)
+    println("Valor Erro  (Prob Negativo)  = ",  PNE)
 
     # 5. Definitivamente Negativo (Valores de acertos e erros)
     DNA = sum((y_real .==0) .& (y_def_neg .==1))
     DNE = sum((y_real .==1) .& (y_def_neg .==1))
+    println("Valor Acerto (Def Negativo)  = ", DNA)
+    println("Valor Erro  (Def Negativo)   = ",  DNE)
 
-    #println("Valor Acerto (Def Negativo)  = ", DNA)
-    #println("Valor Erro  (Def Negativo)   = ",  DNE)
-
-       # Calculo das taxas 
+    # Calculo das taxas 
 
     # 1. Taxa Definitivamente Positivo Acerto/Erro  
     TDPA = DPA/(DPA +DPE)
@@ -113,44 +111,19 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
 
     println("............................................")
     println("     Taxa de Acerto  |  Taxa de Erro ")
-    println("Def Positivo  : ",   TDPA, " |       " , TDPE)
-    println("Pro Positivo  : ",   TPPA, " |       " , TPPE)
-    println("Indefindos    : ",   TIA, "  |       " , TIE)
+    println("Def Positivo  : ",    TDPA, " |       " , TDPE)
+    println("Pro Positivo  : ",    TPPA, " |       " , TPPE)
+    println("Indefindos    : ",    TIA, "  |       " , TIE)
     println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    # y_predito: Estou selecionando maior ou igual ao hiperplano
-    y_predito = y_modelo .>= target;
-    y_real = y_real; 
-    # y_pred : Estou selecionando os pontos no hiperplano
-    y_pred = y_modelo .== target; 
-
-    #println("y_predito = " , y_predito) 
-    #println("y_pred = " , y_pred) 
-    #println("y_real = " , y_real)
-
-    # 2. Calcular TP, FN, FP, TN 
-    TP = sum((y_real .==1) .& (y_predito .==1))
-    FN = sum((y_real .==1) .& (y_predito .==0))
-    FP = sum((y_real .==0) .& (y_predito .==1))
-    TN = sum((y_real .==0) .& (y_predito .==0))
-
+    TP = DPA + PPA;
+    FP = DPE + PPE; 
+    ID = IA + IE; 
+    FN = DNE + PNE; 
+    TN = PNA + DNA;  
+    Soma = TP + FP + ID + FN + TN 
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
     println("--------------------------------------------------------------")
@@ -158,25 +131,10 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     println("|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
     println("---------------------------------------------------------------")
     
-    # 2.1 Erros nas classes e o indefinido 
-    # Estou retirando com ERc2 a classe do tipo B sobre o hiperplano
-    Erc1 = sum((y_real .==1) .& (y_pred .==1))
-    Erc2 = sum((y_real .==0 ) .& (y_pred .==1))
-    Indefinidos = Erc1 + Erc2 
-    Soma = TP + FN + FP + TN 
-
-    println("Erro Classe A = ", Erc1)
-    println("Erro Classe B = ", Erc2)
-    println("Indefindos    = ", Indefinidos)
+    println("Indefindos    = ", ID)
     println("Soma          = ", Soma)
 
-    # 2.2 Correção do Falso Positivo 
-    FPc = FP - Erc2 
-    Soma_C = TP +FN + FPc + TN 
-    println("Falso Positivo Correto = ", FPc)
-    println("Soma_atual             = ", Soma_C)
-
-      # 3. Taxa Positivo acerto/erro  
+    # 3. Taxa Positivo acerto/erro  
     TPA = TP  /(TP + FN)
     TPE = FN / (TP + FN)
     TPA = round(TPA, digits=2)
@@ -185,8 +143,8 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     #println("Taxa Positivo erro   = ",   TPE)
 
     # 4. Taxa Indefinidos Positivo/Negativo : sobre o hiperplano 
-    TIP = Erc1 / (Erc1 + Erc2) 
-    TIN = Erc2 / (Erc1 + Erc2)
+    TIP = IA / (IA + IE) 
+    TIN = IE  / (IA + IE) 
     TIP = round(TIP, digits=2)
     TIN = round(TIN, digits=2)
     #println("Taxa Positivo acerto = ",  TIP)
@@ -194,8 +152,8 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
    
 
      # 5. Taxa Negativo Acerto Erro  
-     TNA = TN  /(TN + FPc)   # Falso Positivo C 
-     TNE = FPc / (FPc + TN)
+     TNA = TN  /(TN + FP)   # Falso Positivo C 
+     TNE = FP / (FP + TN)
      TNA = round(TNA, digits=2)
      TNE = round(TNE, digits=2)
      #println("Taxa Positivo acerto = ", TNA)
@@ -210,11 +168,11 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
 
     # 4 Medidas de precisão 
     # Calcular a Acurácia (Optei por retirar FPc da acc e prec)
-    accuracy = (TP + TN) / (TP + FN + FPc +TN)
+    accuracy = (TP + TN) / (TP + FN + FP +TN)
     accuracy = round(accuracy, digits=2)
 
     # Calculando precisão de Recall 
-    precision = TP / (TP + FPc)
+    precision = TP / (TP + FP)
     recall = TP / (TP + FN)
     precision = round(precision, digits=2)
     recall = round(recall, digits=2)
@@ -235,6 +193,8 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     println(".................................................")
     println("   Imprimindo a solução do modelo Robusto 1 A ")
     println("        O valor de Gama é (Γ =  ", gama, ")")
+    println("        O valor de Beta é (Β =  ", beta, ")")
+    println("        O valor de Epsilon é(Ε =  ", beta, ")")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
@@ -257,7 +217,7 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
     # Salvar em um arquivo TXT
     
     # Defina o caminho do diretório onde deseja salvar o arquivo
-    diretorio = "Resultados: RPG1"
+    diretorio = "Resultados: RPG_2"
     # Cria o diretório se ele não existir
     mkpath(diretorio)
     # nome do arquivo
@@ -280,18 +240,26 @@ function calcular_classes(C::DataFrame,y_real::DataFrame,gama::Float64,beta::Flo
         end 
         println(file,"Status = ", Status)
         println(file,"Time   = ", time, " s")
+        println(file,"hiper+beta = ",hiper_up)
+        println(file,"hiperplano = ",target)
+        println(file,"hiper-beta = ",hiper_down)
+        println(file,"............................................")
+        println(file,"............................................")
+        println(file,"     Taxa de Acerto  |  Taxa de Erro ")
+        println(file,"Def Positivo  : ",    TDPA, " |       " , TDPE)
+        println(file,"Pro Positivo  : ",    TPPA, "  |       " , TPPE)
+        println(file,"Indefindos    : ",    TIA, "  |       " , TIE)
+        println(file,"Pro Negativo  : ",    TPNA, " |       " , TPNE)
+        println(file,"Def Negativo  : ",    TDNA, "  |       " , TDNE)
+        println(file,"............................................................")
         println(file,"--------------------------------------------------------------")
         println(file,"                      Matriz de Confusão                        ")
         println(file,"--------------------------------------------------------------")
         println(file,"|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
         println(file,"|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
         println(file,"---------------------------------------------------------------")
-        println(file,"Erro Classe A = ", Erc1)
-        println(file,"Erro Classe B = ", Erc2)
-        println(file,"Indefindos    = ", Indefinidos)
+        println(file,"Indefindos    = ", ID)
         println(file,"Soma          = ", Soma)
-        println(file,"Falso Positivo Correto = ", FPc)
-        println(file,"Soma_atual             = ", Soma_C)
         println(file,"............................................")
         println(file,"    Taxa de Acerto  |  Taxa de Erro ")
         println(file," Positivo   : ",   TPA, "   |    " , TPE)

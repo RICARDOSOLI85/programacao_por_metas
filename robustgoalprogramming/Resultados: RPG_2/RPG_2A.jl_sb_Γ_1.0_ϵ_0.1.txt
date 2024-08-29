@@ -1,0 +1,45 @@
+........................................
+ Solução do modelo : RPG_2A.jl
+ filtro/balanceado : sb
+O valor de Gama é (Γ = 1.0)
+O valor de Epsilo é (ϵ = 0.1)
+........................................
+Função Objetivo (FO) = 6.559999999999999
+Target  x[o]         = 2.43
+Solução x[j]         = [0.0, 1.0]
+N. variáveis         = 53
+sol[1] = 0.0
+sol[2] = 1.0
+Status = OPTIMAL
+Time   = 0.0003 s
+hiper+beta = 3.0
+hiperplano = 2.43
+hiper-beta = 1.8600000000000003
+............................................
+............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.67 |       0.33
+Pro Positivo  : NaN  |       NaN
+Indefindos    : NaN  |       NaN
+Pro Negativo  : 0.67 |       0.33
+Def Negativo  : 0.5  |       0.5
+............................................................
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 2 | False Negative (FN)  = 3 ||
+|| False Positive (FP)  = 1 | True Negative  (TN) =  4 ||
+---------------------------------------------------------------
+Indefindos    = 0
+Soma          = 10
+............................................
+    Taxa de Acerto  |  Taxa de Erro 
+ Positivo   : 0.4   |    0.6
+ Indefinido : NaN  |    NaN
+ Negativo   : 0.8  |    0.2
+............................................
+Acurácia    =  0.6
+precision   =  0.67
+recall      =  0.4
+F1Score     =  0.5
+*******************************************

@@ -6,14 +6,23 @@ using JuMP
 using Gurobi
 
 """
-    robusto_modelo1(C,ca,cb,alpha,beta,gama)
-
-TBW
-"""
-function robusto_modelo1(C::DataFrame,ca::DataFrame,
+    robusto_modelo_2(C::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,beta::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+TBW
+"""
+#function robusto_modelo_2(C::DataFrame,ca::DataFrame,
+#    cb::DataFrame,alpha::Float64,beta::Float64,
+#    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+#    gama_a::Vector{Float64},gama_b::Vector{Float64})
+
+function robusto_modelo_2(C::Matrix{Int64},ca::Matrix{Int64},
+    cb::Matrix{Int64},alpha::Float64,beta::Float64,
+    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
+    gama_a::Vector{Float64},gama_b::Vector{Float64})
+        
 
     # leitura 
     (n,m) = size(C)
