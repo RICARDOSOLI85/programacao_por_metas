@@ -6,8 +6,7 @@ using Printf
 function calcular_classes(FO, C, x, xo, y_real,beta)
     n =length(x)
     w = x
-    wo = xo
-    
+    wo = xo    
     # Calcula hiperplano 
     c = Matrix(C)
     y_modelo = c * w 
@@ -18,6 +17,10 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("hiper+beta = ",hiper_up)
     println("hiperplano = ",wo)
     println("hiper-beta = ",hiper_down)
+    println("x[0] = ",  xo)
+    for i=1:n 
+      println("x[$i] = ", JuMP.value.(x[i]))
+    end
 
 
     # Parte: A
@@ -73,7 +76,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
 
     # 4. Provavelmente Negativos (Valores de acertos e erros)
     PNA = sum((y_real .==0).&(y_prob_neg .==1))
-    PNE = sum((y_real .==0) .& (y_prob_neg .==1))
+    PNE = sum((y_real .==1) .& (y_prob_neg .==1))
 
     println("Valor Acerto (Prob Negativo) = ", PNA)
     println("Valor Erro  (Prob Negativo)  = ",  PNE)
@@ -132,7 +135,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     println("Indefindos    : ",   TIA, "  |       " , TIE)
     println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
-    println("............................................")
+    println("....................................................")
 
 
     # B Calculo das medias de precisão TP, FP, FN, TN
@@ -142,7 +145,7 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     FN = PNE + DNE 
     TN = PNA + DNA 
     soma = TP + FP + ID + FN + TN
-    println(" ")
+    println(" ............. Modelo 2 A $beta ...................")
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
     println("--------------------------------------------------------------")
@@ -161,6 +164,11 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
 
     # Calcular F1 Score 
     f1_score  = 2 * (precision * recall) / (precision + recall)
+
+    println( "accuray    = ", accuracy)
+    println("precision  = ", precision) 
+    println("recall     = ", recall) 
+    println("F1Score    = ", f1_score)
 
     # Taxa de acerto e taxa de erro 
 
@@ -183,10 +191,14 @@ function calcular_classes(FO, C, x, xo, y_real,beta)
     # abre o arquivo para a escrita 
     open(filename, "w") do file 
         println(file, "========================================")
-        println(file, "Tabela de Resultado das Taxas - GP 2: A ")
+        println(file, "Tabela de Resultado das Taxas - GP 2: A $beta ")
         println(file, "========================================")
         @printf(file, "Função Objetivo  = %.2f\n", FO)
         println(file, "variáveis  =  ", x)
+        println(file,"x[0] = ",  xo)
+        for i=1:n 
+            println(file,"x[$i] = ", JuMP.value.(x[i]))
+        end
         println(file, "hiper+beta =  ",hiper_up)
         println(file, "hiperplano =  ",wo)
         println(file, "hiper-beta =  ",hiper_down)

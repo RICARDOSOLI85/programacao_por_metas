@@ -57,7 +57,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("                      Teste do Modelo GP_2                   ")
+    println("                      Teste do Modelo GP_1                   ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("variáveis  = ", x)

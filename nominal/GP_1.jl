@@ -31,8 +31,8 @@ function gp_det(C,ca,cb,alpha,beta)
     #Variáveis 
     #@variable(modelo, 0 <= x[j=1:n] <= 1)      #A
     #@variable(modelo, -1 <= x[j=1:n] <= 1)     #B
-    #@variable(modelo,x[j=1:n])                #C
-    @variable(modelo,-9<= x[j=1:n]<= 9)        #D
+    @variable(modelo,x[j=1:n])                #C
+    #@variable(modelo,-9<= x[j=1:n]<= 9)        #D
     @variable(modelo, x0) 
     @variables(modelo,
     begin 

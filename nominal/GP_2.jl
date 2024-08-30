@@ -19,11 +19,16 @@ function gp_det(C,ca,cb,alpha,beta)
     # modelo
     modelo = JuMP.Model(Gurobi.Optimizer)
 
-    #Variáveis 
-    @variable(modelo, 0 <= x[j=1:n] <= alpha)    #A
-    #@variable(modelo, -1 <= x[j=1:n] <= 1)      #B
-    #@variable(modelo,x[j=1:n])                  #C
-    #@variable(modelo,-9<=x[j=1:n]<= 9)           #D
+    # Variáveis
+    if variação == "A"
+        @variable(modelo, 0 <= x[j = 1:n] <= alpha)  # A
+    elseif variação == "B"
+        @variable(modelo, -1 <= x[j = 1:n] <= 1)  # B
+    elseif variação == "C"
+        @variable(modelo, x[j = 1:n])  # C
+    elseif variação == "D"
+        @variable(modelo, -9 <= x[j = 1:n] <= 9)  # D
+    end
     @variable(modelo, xo) 
     @variables(modelo,
     begin 
@@ -35,7 +40,7 @@ function gp_det(C,ca,cb,alpha,beta)
     )
 
     # função Objetivo 
-    @objective(modelo, Min, sum(n_a[i] for i=1:n1) + sum(p_b[i] for i=1:n2))
+    #@objective(modelo, Min, sum(n_a[i] for i=1:n1) + sum(p_b[i] for i=1:n2))
 
     # restrições
     @constraints(modelo,

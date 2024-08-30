@@ -19,8 +19,8 @@ beta = 0.50;
 
 #include("GP_1.jl")
 include("GP_2.jl")
-include("metricas.jl")
-
+#include("metricas.jl")
+include("classes.jl")
 # Funções 
 FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)     # Modelo 1
 #calcular_metricas(modelo, C,x,xo,y_real,beta) 
