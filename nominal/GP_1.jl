@@ -10,7 +10,7 @@ using Gurobi
 #  Modelo de programação de Metas #
 #======================================================#
 
-function gp_det(C,ca,cb,alpha,beta)
+function gp_det1(C, ca, cb, alpha, beta, variacao)
     # leitura 
     (m,n) = size(C);
     n1 = size(ca,1);
@@ -29,10 +29,15 @@ function gp_det(C,ca,cb,alpha,beta)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    #@variable(modelo, 0 <= x[j=1:n] <= 1)      #A
-    #@variable(modelo, -1 <= x[j=1:n] <= 1)     #B
-    @variable(modelo,x[j=1:n])                #C
-    #@variable(modelo,-9<= x[j=1:n]<= 9)        #D
+    if variacao == "A"
+        @variable(modelo, 0 <= x[j = 1:n] <= alpha)  # A
+    elseif variacao == "B"
+        @variable(modelo, -1 <= x[j = 1:n] <= 1)     # B
+    elseif variacao == "C"
+        @variable(modelo, x[j = 1:n])               # C
+    elseif variacao == "D"
+        @variable(modelo, -9 <= x[j = 1:n] <= 9)  # D
+    end
     @variable(modelo, x0) 
     @variables(modelo,
     begin 
@@ -53,7 +58,11 @@ function gp_det(C,ca,cb,alpha,beta)
     cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == x0 
     end
     )
-    @constraint(modelo, sum(x[j] for j in 1:n) ==1)
+    # Apenas para os modelos A, C e D adiciona a restrição de soma
+    if variacao != "B"
+        @constraint(modelo, sum(x[j] for j in 1:n) == 1)
+    end
+
 
     # solve modelo
     optimize!(modelo)
