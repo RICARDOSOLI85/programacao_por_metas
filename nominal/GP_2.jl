@@ -70,7 +70,7 @@ function  gp_det2(C, ca, cb, alpha, beta, variacao)
    println("F[O] = ",  FO)
    println("x[0] = ",  xo)
    println("beta =", beta)
-   for i=1:n 
+   for i=1:n
    println("x[$i] = ", JuMP.value.(x[i]))
    end
    
