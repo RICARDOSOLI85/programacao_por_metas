@@ -26,6 +26,8 @@ FO, xo, x, modelo = gp_det(C,ca,cb,alpha,beta)     # Modelo 1
 #calcular_metricas(modelo, C,x,xo,y_real,beta) 
 calcular_classes(FO, C, x, xo, y_real,beta)
 =# 
+FO, xo, x, modelo = gp_det2(C, ca, cb, alpha, beta, "C")  # Supondo que `gp_det2` é a função para o GP2
+calcular_classes(FO, C, x, xo, y_real, beta, "C")
 
 # Implementar:
 # Lista de variações
@@ -36,21 +38,17 @@ include("GP_2.jl");
 include("metricas.jl");
 include("classes.jl");
 # Loop para testar cada variação para o modelo GP1 e GP2
-for variacao in variacoes
-    println("Testando variação: $variacao")
-    
-    for x_value in intervalo_x
-        println("Testando x no intervalo: $x_value")
-        
+for variacao in Variacoes
+     println("Testando variação: $variacao")
+              
         # Testar o modelo GP1
         println("Executando GP1 com variação $variacao")
-        FO1, xo1, x1, modelo1 = gp_det1(C, ca, cb, alpha, beta, variacao)
-        calcular_metricas(modelo1, C, x1, xo1, y_real, beta, variacao)
+        FO, xo, x, modelo = gp_det1(C, ca, cb, alpha, beta, variacao)
+        calcular_metricas(modelo, C, x, xo, y_real, beta, variacao)
                 
         # Testar o modelo GP2
         println("Executando GP2 com variação $variacao")
-        FO2, xo2, x2, modelo2 = gp_det2(C, ca, cb, alpha, beta, variacao)  # Supondo que `gp_det2` é a função para o GP2
-        calcular_metricas(modelo2, C, x2, xo2, y_real, beta, variacao)
-        calcular_classes(FO2, C, x2, xo2, y_real, beta)
-    end
+        FO, xo, x, modelo = gp_det2(C, ca, cb, alpha, beta, variacao)  # Supondo que `gp_det2` é a função para o GP2
+        calcular_classes(FO, C, x, xo, y_real, beta, variacao)
+    
 end

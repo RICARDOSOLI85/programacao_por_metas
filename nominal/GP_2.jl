@@ -22,13 +22,13 @@ function  gp_det2(C, ca, cb, alpha, beta, variacao)
     #Variáveis 
     
     if variacao == "A"
-        @variable(modelo, 0 <= x[j = 1:n] <= alpha)  # A
+        @variable(modelo, 0 <= x[j = 1:n] <= alpha) 
     elseif variacao == "B"
-        @variable(modelo, -1 <= x[j = 1:n] <= 1)     # B
+        @variable(modelo, -1 <= x[j = 1:n] <= 1)    
     elseif variacao == "C"
-        @variable(modelo, x[j = 1:n])               # C
+        @variable(modelo, x[j = 1:n])               
     elseif variacao == "D"
-        @variable(modelo, -9 <= x[j = 1:n] <= 9)  # D
+        @variable(modelo, -9 <= x[j = 1:n] <= 9)  
     end
     @variable(modelo, xo) 
     @variables(modelo,
@@ -69,6 +69,7 @@ function  gp_det2(C, ca, cb, alpha, beta, variacao)
    println("-------------Imprimindo a Solução do Modelo---------")
    println("F[O] = ",  FO)
    println("x[0] = ",  xo)
+   println("beta =", beta)
    for i=1:n 
    println("x[$i] = ", JuMP.value.(x[i]))
    end

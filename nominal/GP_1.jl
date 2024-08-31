@@ -16,27 +16,18 @@ function gp_det1(C, ca, cb, alpha, beta, variacao)
     n1 = size(ca,1);
     n2 = size(cb,1); 
 
-    println("---------Impressão dados de Entrada--------")
-    println("Alpha = ", alpha)
-    println("Beta  = ", beta)
-    println("Conj. treino (n)  = ", n)
-    println("Dados de Teste    = ", n1+n2)
-    println("Positivos CA (n1) = ", n1)
-    println("Negativos CB (n2) = ", n2)
-    println("------------------------------------------------")
-
     # modelo
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
     if variacao == "A"
-        @variable(modelo, 0 <= x[j = 1:n] <= alpha)  # A
+        @variable(modelo, 0 <= x[j = 1:n] <= alpha)  
     elseif variacao == "B"
-        @variable(modelo, -1 <= x[j = 1:n] <= 1)     # B
+        @variable(modelo, -1 <= x[j = 1:n] <= 1)     
     elseif variacao == "C"
-        @variable(modelo, x[j = 1:n])               # C
+        @variable(modelo, x[j = 1:n])              
     elseif variacao == "D"
-        @variable(modelo, -9 <= x[j = 1:n] <= 9)  # D
+        @variable(modelo, -9 <= x[j = 1:n] <= 9)  
     end
     @variable(modelo, x0) 
     @variables(modelo,
@@ -50,7 +41,7 @@ function gp_det1(C, ca, cb, alpha, beta, variacao)
 
     # função Objetivo 
     @objective(modelo, Min, sum(n_a[i] for i=1:n1) + sum(p_b[i] for i=1:n2))
-
+   
     # restrições
     @constraints(modelo,
     begin 
@@ -58,6 +49,7 @@ function gp_det1(C, ca, cb, alpha, beta, variacao)
     cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == x0 
     end
     )
+   
     # Apenas para os modelos A, C e D adiciona a restrição de soma
     if variacao != "B"
         @constraint(modelo, sum(x[j] for j in 1:n) == 1)

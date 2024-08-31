@@ -2,18 +2,13 @@
 # Data: 22/ Agosto/2024
 # Nome: Ricardo Soares Oliveira 
 
-function calcular_metricas(modelo,C,x,xo,y_real,beta)
+function  calcular_metricas(modelo, C, x, xo, y_real, beta, variacao)
     
     n = length(x)
-    w = x 
+    w = [JuMP.value(x[j]) for j in 1:n]
     wo = xo 
     FO = JuMP.objective_value(modelo)
-    #===============================
-       for j=1:n 
-        w[j] = JuMP.value(x[j])
-    end 
-    w = [w[j] for j in 1:n]
-    ===============================# 
+    
     # Calcular o Hiperplano 
     c = Matrix(C)
     y_modelo = c * w 
@@ -57,7 +52,7 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("            Resultados:Modelo_GP_1:$variacao_Β_$beta         ")
+    println("            Resultados:Modelo_GP_1:$variacao Β_$beta         ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("variáveis  = ", x)
@@ -81,35 +76,38 @@ function calcular_metricas(modelo,C,x,xo,y_real,beta)
     println("recall      =  ", recall)
     println("F1Score     =  ", f1_score)
     println("==================================================================")
+    
     # Salvando os resultados em um arquivo de texto
-    open("Resultados:Modelo_GP_1:$variacao_Β_$beta.txt", "a") do file
-    write(file," =============================================================== \n")
-    write(file,"               Resultados:Modelo_GP_1:$variacao_Β_$beta          \n")
-    write(file," =============================================================== \n")
-    write(file," \n")
-    write(file,"Função Objetivo = $FO\n")
-    write(file,"variáveis      = $x\n")
-    write(file,"hiperplano + beta  = $hiper_up\n")
-    write(file,"hiperplano      = $xo\n")
-    write(file,"hiperplano - beta  = $hiper_down\n")
-    write(file,"---------------------------------------------------------------\n")
-    write(file,                        "Matriz de Confusão                     \n")
-    write(file,"--------------------------------------------------------------- \n")   
-    write(file, "|| True Positive (TP) = $TP  | False Negative (FN) = $FN ||\n")
-    write(file, "|| False Positive (FP) = $FP | True Negative (TN) = $TN  ||\n")
-    write(file,"--------------------------------------------------------------- \n")   
-    write(file,"-----------------------------\n")
-    write(file,"Erro Classe A =  $ERc1\n")
-    write(file, "Erro Classe B =  $ERc2\n")
-    write(file,"Indefindos    =  $Indef\n") 
-    write(file,"Falso Positivo Correto = $FPc\n") 
-    write(file,"-----------------------------\n")
-    write(file, "accuray    = $accuracy\n")
-    write(file,"precision  = $precision\n") 
-    write(file,"recall      = $recall\n") 
-    write(file, "F1Score     = $f1_score\n")
-    write(file,"*****************************************************\n")
-  end 
+     open("Resultados: GP_1_$variacao α = $alpha.txt", "a") do file
+      write(file, """
+      ===============================================================
+                    Resultados:Modelo_GP_1:$variacao Β_$beta
+      ===============================================================
+      
+      Função Objetivo = $FO
+      variáveis      = $w
+      hiperplano + beta  = $hiper_up
+      hiperplano      = $xo
+      hiperplano - beta  = $hiper_down
+      ---------------------------------------------------------------
+                                  Matriz de Confusão
+      ---------------------------------------------------------------
+      || True Positive (TP) = $TP  | False Negative (FN) = $FN ||
+      || False Positive (FP) = $FP | True Negative (TN) = $TN  ||
+      ---------------------------------------------------------------
+      -----------------------------
+      Erro Classe A =  $ERc1
+      Erro Classe B =  $ERc2
+      Indefindos    =  $Indef
+      Falso Positivo Correto = $FPc
+      -----------------------------
+      Acurácia    = $accuracy
+      precision   = $precision
+      recall      = $recall
+      F1Score     = $f1_score
+      ******************************************************************
+      """)
+  end
     
 end
 
