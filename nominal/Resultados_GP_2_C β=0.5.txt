@@ -1,0 +1,50 @@
+===============================================================
+              Resultados: Modelo_GP_2: C β_0.5
+===============================================================
+
+Função Objetivo = 0.0
+Variáveis = x[1] = -2.0000000000000004
+x[2] = 3.0000000000000004
+x[0] = -3.5000000000000013
+hiper+beta = -3.0000000000000013
+hiperplano = -3.5000000000000013
+hiper-beta = -4.000000000000002
+-----------------------------------------
+Valor Acerto (Def Positivo) = 4
+Valor Erro (Def Positivo) = 0
+Valor Acerto (Def Positivo) = 1
+Valor Erro (Def Positivo) = 0
+Taxa Acerto (Indefindos) = NaN
+Taxa Erro (Indefindos) = NaN
+Valor Acerto (Prob Negativo) = 1
+Valor Erro (Prob Negativo) = 0
+println("Valor Acerto (Def Negativo)  4
+println("Valor Erro  (Def Negativo)   0
+.............................................
+     Taxa de Acerto | Taxa de Erro
+Def Positivo  : 1.0 | 0.0
+Pro Positivo  : 1.0 | 0.0
+Indefindos    : NaN | NaN
+Pro Negativo  : 1.0 | 0.0
+Def Negativo  : 1.0 | 0.0
+ .............................................
+ --------------------------------------------------------------
+                    Matriz de Confusão
+--------------------------------------------------------------
+|| True Positive (TP) = 5 | False Negative (FN) = 0 ||
+|| False Positive (FP) = 0 | True Negative (TN) = 5 ||
+ --------------------------------------------------------------
+Indefinido = 0
+Soma do Total = 10
+-----------------------------
+Accuracy = 1.0
+Precision = 1.0
+Recall = 1.0
+F1 Score = 1.0
+............................................
+     Taxa de Acerto | Taxa de Erro
+Positivo   : 1.0 | 0.0
+Indefindo  : 0.0 | 0.0
+Negativo   : 1.0 | 0.0
+............................................
+*************************************************************

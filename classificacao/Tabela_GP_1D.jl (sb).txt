@@ -1,10 +1,10 @@
 ========================================
 Tabela de Resultado das Taxas
-|---------Modelo 1 B---------|
+|---------Modelo 1 D---------|
 ========================================
-Função Objetivo  = 0.00
+Função Objetivo  = 11.00
 Status = OPTIMAL
-Time  = 0.0041
+Time  = 0.0058
 -----------------------------------------
 --------------------------------------------------------------
                       Matriz de Confusão                        
@@ -12,20 +12,20 @@ Time  = 0.0041
 || True Positive  (TP)  = 115 | False Negative (FN)  = 0 ||
 || False Positive (FP)  = 216 | True Negative  (TN) =  0 ||
 ---------------------------------------------------------------
-Erro Classe A = 115
-Erro Classe B = 216
-Indefindos    = 331
+Erro Classe A = 88
+Erro Classe B = 205
+Indefindos    = 293
 Soma          = 331
-Falso Positivo Correto = 0
-Soma_C        = 115
+Falso Positivo Correto = 11
+Soma_C        = 126
 ............................................
    Taxa de Acerto |  Taxa de Erro 
  Positivo   : 1.0 |   0.0
- Indefinido : 0.35 |    0.65
- Negativo   : NaN |    NaN
+ Indefinido : 0.3 |    0.7
+ Negativo   : 0.0 |    1.0
 ............................................
-Acurácia    =  1.0
-precision   =  1.0
+Acurácia    =  0.91
+precision   =  0.91
 recall      =  1.0
-F1Score     =  1.0
+F1Score     =  0.95
 ********************************************

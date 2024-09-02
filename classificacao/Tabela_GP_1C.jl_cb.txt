@@ -2,123 +2,30 @@
 Tabela de Resultado das Taxas
 |---------Modelo 1 C---------|
 ========================================
-Função Objetivo  = 0.00
+Função Objetivo  = 14.27
 Status = OPTIMAL
-Time  = 0.0116
+Time  = 0.0062
 -----------------------------------------
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
-|| True Positive  (TP)  = 119 | False Negative (FN)  = 0 ||
-|| False Positive (FP)  = 212 | True Negative  (TN) =  0 ||
+|| True Positive  (TP)  = 73 | False Negative (FN)  = 42 ||
+|| False Positive (FP)  = 84 | True Negative  (TN) =  132 ||
 ---------------------------------------------------------------
-Erro Classe A = 119
-Erro Classe B = 212
-Indefindos    = 331
+Erro Classe A = 3
+Erro Classe B = 15
+Indefindos    = 18
 Soma          = 331
-Falso Positivo Correto = 0
-Soma_C        = 119
+Falso Positivo Correto = 69
+Soma_C        = 316
 ............................................
    Taxa de Acerto |  Taxa de Erro 
- Positivo   : 1.0 |   0.0
- Indefinido : 0.36 |    0.64
- Negativo   : NaN |    NaN
+ Positivo   : 0.63 |   0.37
+ Indefinido : 0.17 |    0.83
+ Negativo   : 0.66 |    0.34
 ............................................
-Acurácia    =  1.0
-precision   =  1.0
-recall      =  1.0
-F1Score     =  1.0
-********************************************
-========================================
-Tabela de Resultado das Taxas
-|---------Modelo 1 C---------|
-========================================
-Função Objetivo  = 0.00
-Status = OPTIMAL
-Time  = 0.0107
------------------------------------------
---------------------------------------------------------------
-                      Matriz de Confusão                        
---------------------------------------------------------------
-|| True Positive  (TP)  = 117 | False Negative (FN)  = 0 ||
-|| False Positive (FP)  = 214 | True Negative  (TN) =  0 ||
----------------------------------------------------------------
-Erro Classe A = 117
-Erro Classe B = 214
-Indefindos    = 331
-Soma          = 331
-Falso Positivo Correto = 0
-Soma_C        = 117
-............................................
-   Taxa de Acerto |  Taxa de Erro 
- Positivo   : 1.0 |   0.0
- Indefinido : 0.35 |    0.65
- Negativo   : NaN |    NaN
-............................................
-Acurácia    =  1.0
-precision   =  1.0
-recall      =  1.0
-F1Score     =  1.0
-********************************************
-========================================
-Tabela de Resultado das Taxas
-|---------Modelo 1 C---------|
-========================================
-Função Objetivo  = 22.81
-Status = OPTIMAL
-Time  = 0.0151
------------------------------------------
---------------------------------------------------------------
-                      Matriz de Confusão                        
---------------------------------------------------------------
-|| True Positive  (TP)  = 75 | False Negative (FN)  = 42 ||
-|| False Positive (FP)  = 68 | True Negative  (TN) =  146 ||
----------------------------------------------------------------
-Erro Classe A = 22
-Erro Classe B = 29
-Indefindos    = 51
-Soma          = 331
-Falso Positivo Correto = 39
-Soma_C        = 302
-............................................
-   Taxa de Acerto |  Taxa de Erro 
- Positivo   : 0.64 |   0.36
- Indefinido : 0.43 |    0.57
- Negativo   : 0.79 |    0.21
-............................................
-Acurácia    =  0.73
-precision   =  0.66
-recall      =  0.64
-F1Score     =  0.65
-********************************************
-========================================
-Tabela de Resultado das Taxas
-|---------Modelo 1 C---------|
-========================================
-Função Objetivo  = 21.00
-Status = OPTIMAL
-Time  = 0.0164
------------------------------------------
---------------------------------------------------------------
-                      Matriz de Confusão                        
---------------------------------------------------------------
-|| True Positive  (TP)  = 67 | False Negative (FN)  = 52 ||
-|| False Positive (FP)  = 63 | True Negative  (TN) =  149 ||
----------------------------------------------------------------
-Erro Classe A = 8
-Erro Classe B = 11
-Indefindos    = 19
-Soma          = 331
-Falso Positivo Correto = 52
-Soma_C        = 320
-............................................
-   Taxa de Acerto |  Taxa de Erro 
- Positivo   : 0.56 |   0.44
- Indefinido : 0.42 |    0.58
- Negativo   : 0.74 |    0.26
-............................................
-Acurácia    =  0.68
-precision   =  0.56
-recall      =  0.56
+Acurácia    =  0.65
+precision   =  0.51
+recall      =  0.63
 F1Score     =  0.56
 ********************************************

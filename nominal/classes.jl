@@ -5,7 +5,7 @@ using Printf
 
 function calcular_classes(FO, C, x, xo, y_real, beta, variacao)
     n =length(x)
-    w = x
+    w = [JuMP.value(x[j]) for j in 1:n]
     wo = xo    
     # Calcula hiperplano 
     c = Matrix(C)
@@ -180,60 +180,59 @@ function calcular_classes(FO, C, x, xo, y_real, beta, variacao)
     println(" Negativo   :   ",    TNA, "     |     " , TNE)
     println("............................................")
 
-
-    # Salvando os resultados em um arquivo de texto
-    open("Resultados: GP_1_$variacao α = $alpha.txt", "a") do file
-        write(file, """
-        ===============================================================
-                      Resultados:Modelo_GP_1:$variacao Β_$beta
-        ===============================================================
-        
-        Função Objetivo = $FO
-        variáveis  =  $x
-        x[0] = $xo)
-        $(join(["x[$i] = $(JuMP.value(x[i]))" for i in 1:n], "\n"))
-        hiper+beta =  $hiper_up)
-        hiperplano =  $wo)
-        hiper-beta =  $hiper_down)
-        -----------------------------------------
-        Valor Acerto (Def Positivo) =  $DPA
-        Valor Erro   (Def Positivo) =  $DPE
-        Valor Acerto (Def Positivo) =  $PPA
-        Valor Erro   (Def Positivo) =  $PPE
-        Taxa Acerto (Indefindos)    =  $TIA
-        Taxa Erro   (Indefindos)    =  $TIE
-        Valor Acerto (Prob Negativo)=  $PNA
-        Valor Erro  (Prob Negativo) =  $PNE
-        .............................................
-             Taxa de Acerto  |  Taxa de Erro ")
-        Def Positivo  : $TDPA, " |      $TDPE)
-        Pro Positivo  : $TPPA, " |       $TPPE)
-        Indefindos    : $TIA, "  |       $TIE)
-        Pro Negativo  : $TPNA, "  |       $TPNE)
-        "Def Negativo  : $TDNA, "  |       $TDNE)
-         .............................................")
-         " " 
-         --------------------------------------------------------------")
-                            Matriz de Confusão                        ")
-        --------------------------------------------------------------")
-        || True Positive  (TP)  = $TP, " | False Negative (FN)  = $FN  ||")
-        || False Positive (FP)  = $FP, " | True Negative  (TN) =  $TN  ||") 
-         ---------------------------------------------------------------")
-        Indefinido    = $ID)
-        Soma do Total = $soma)
-        -----------------------------")
-        accuray    = $accuracy)
-        precision  = $precision) 
-        recall     = $recall) 
-        F1Score    = $f1_score)
-        ............................................")
-                 Taxa de Acerto |  Taxa de Erro ")
-        Positivo   :     $TPA       |      $TPE)
-        Indefindo  :      $TI      |      $TI)
-        Negativo   :      $TNA      |     $TNE)
-        ............................................")
-        *************************************************************
-      """)
-  end
+# Salvando os resultados em um arquivo de texto
+ open("Resultados_GP_2_$variacao β=$beta.txt", "w") do file
+    write(file, """
+    ===============================================================
+                  Resultados: Modelo_GP_2: $variacao β_$beta
+    ===============================================================
     
+    Função Objetivo = $FO
+    Variáveis = $(join(["x[$i] = $(JuMP.value(x[i]))" for i in 1:length(x)], "\n"))
+    x[0] = $xo
+    hiper+beta = $hiper_up
+    hiperplano = $wo
+    hiper-beta = $hiper_down
+    -----------------------------------------
+    Valor Acerto (Def Positivo) = $DPA
+    Valor Erro (Def Positivo) = $DPE
+    Valor Acerto (Def Positivo) = $PPA
+    Valor Erro (Def Positivo) = $PPE
+    Taxa Acerto (Indefindos) = $TIA
+    Taxa Erro (Indefindos) = $TIE
+    Valor Acerto (Prob Negativo) = $PNA
+    Valor Erro (Prob Negativo) = $PNE
+    println("Valor Acerto (Def Negativo)  $DNA
+    println("Valor Erro  (Def Negativo)   $DNE
+    .............................................
+         Taxa de Acerto | Taxa de Erro
+    Def Positivo  : $TDPA | $TDPE
+    Pro Positivo  : $TPPA | $TPPE
+    Indefindos    : $TIA | $TIE
+    Pro Negativo  : $TPNA | $TPNE
+    Def Negativo  : $TDNA | $TDNE
+     .............................................
+     --------------------------------------------------------------
+                        Matriz de Confusão
+    --------------------------------------------------------------
+    || True Positive (TP) = $TP | False Negative (FN) = $FN ||
+    || False Positive (FP) = $FP | True Negative (TN) = $TN ||
+     --------------------------------------------------------------
+    Indefinido = $ID
+    Soma do Total = $soma
+    -----------------------------
+    Accuracy = $accuracy
+    Precision = $precision
+    Recall = $recall
+    F1 Score = $f1_score
+    ............................................
+         Taxa de Acerto | Taxa de Erro
+    Positivo   : $TPA | $TPE
+    Indefindo  : $TI | $TI
+    Negativo   : $TNA | $TNE
+    ............................................
+    *************************************************************
+    """)
+  end
+
 end

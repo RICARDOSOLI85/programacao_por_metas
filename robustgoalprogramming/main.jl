@@ -50,6 +50,7 @@ include("RPG_2A.jl")
 #cb = cb_filtro;
 #C  = C_treino; 
 # ---
+
 C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
 y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
@@ -73,7 +74,7 @@ modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
 epsilon::Float64,modelo_nome::String)
 
 include("curvaroc.jl")
-plotar_curva(C::Matrix{Int64},y_real::Vector{Int64},sol::Vector{Float64},tar::Float64)
+plotar_curva(C,y_real,sol,tar)
 
 #=
 # teste para configuração : Filtro e balanceado
@@ -202,3 +203,5 @@ ca = C[1:5,:];
 cb = C[6:10,:]; 
 =#
 
+include("curvaroc.jl")
+plotar_curva(C,y_real,sol,tar)

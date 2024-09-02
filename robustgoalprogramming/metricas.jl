@@ -144,7 +144,7 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
     # Salvar em um arquivo TXT
     
     # Defina o caminho do diretório onde deseja salvar o arquivo
-    diretorio = "Resultados:RPG1"
+    diretorio = "Resultados: RPG1"
     # Cria o diretório se ele não existir
     mkpath(diretorio)
     # nome do arquivo

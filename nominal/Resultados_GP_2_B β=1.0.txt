@@ -1,0 +1,50 @@
+===============================================================
+              Resultados: Modelo_GP_2: B β_1.0
+===============================================================
+
+Função Objetivo = 3.0
+Variáveis = x[1] = -1.0
+x[2] = 1.0
+x[0] = -2.0
+hiper+beta = -1.0
+hiperplano = -2.0
+hiper-beta = -3.0
+-----------------------------------------
+Valor Acerto (Def Positivo) = 3
+Valor Erro (Def Positivo) = 0
+Valor Acerto (Def Positivo) = 0
+Valor Erro (Def Positivo) = 0
+Taxa Acerto (Indefindos) = 1.0
+Taxa Erro (Indefindos) = 0.0
+Valor Acerto (Prob Negativo) = 0
+Valor Erro (Prob Negativo) = 0
+println("Valor Acerto (Def Negativo)  5
+println("Valor Erro  (Def Negativo)   1
+.............................................
+     Taxa de Acerto | Taxa de Erro
+Def Positivo  : 1.0 | 0.0
+Pro Positivo  : NaN | NaN
+Indefindos    : 1.0 | 0.0
+Pro Negativo  : NaN | NaN
+Def Negativo  : 0.8333333333333334 | 0.16666666666666666
+ .............................................
+ --------------------------------------------------------------
+                    Matriz de Confusão
+--------------------------------------------------------------
+|| True Positive (TP) = 3 | False Negative (FN) = 1 ||
+|| False Positive (FP) = 0 | True Negative (TN) = 5 ||
+ --------------------------------------------------------------
+Indefinido = 1
+Soma do Total = 10
+-----------------------------
+Accuracy = 0.8888888888888888
+Precision = 1.0
+Recall = 0.75
+F1 Score = 0.8571428571428571
+............................................
+     Taxa de Acerto | Taxa de Erro
+Positivo   : 1.0 | 0.0
+Indefindo  : 0.1 | 0.1
+Negativo   : 0.8333333333333334 | 0.16666666666666666
+............................................
+*************************************************************

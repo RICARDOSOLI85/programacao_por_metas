@@ -190,7 +190,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name)_sb.txt"
+    filename = "Tabela_$(model_name) \beta $beta(sb).txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 
@@ -221,6 +221,8 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
         println(file,"Taxa Erro   (Indefindos)    =  ", TIE)
         println(file,"Valor Acerto (Prob Negativo)= ", PNA)
         println(file,"Valor Erro  (Prob Negativo) = ",  PNE)
+        println(file,"Valor Acerto (Def Negativo)  = ", DNA)
+        println(file,"Valor Erro  (Def Negativo)   = ",  DNE)
         println(file, ".............................................")
         println(file,"     Taxa de Acerto  |  Taxa de Erro ")
         println(file,"Def Positivo  : ",   TDPA, " |       " , TDPE)
