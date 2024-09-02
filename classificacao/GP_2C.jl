@@ -48,8 +48,8 @@ function gp_det2C(C,ca,cb,alpha,beta)
 
    #print(modelo) 
 
-   JuMP.all_variables(modelo)
-   num_variables(modelo)
+   num = num_variables(modelo)
+   println("numero variáveis = ", num)
    FO = JuMP.objective_value(modelo);
    xo_val = JuMP.value(xo); # Alterado para evitar sobrescrita
    x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita

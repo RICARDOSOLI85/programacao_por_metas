@@ -48,8 +48,9 @@ function gp_det2A(C,ca,cb,alpha,beta)
 
    #print(modelo) 
 
-   JuMP.all_variables(modelo)
-   num_variables(modelo)
+  
+   num = num_variables(modelo)
+   println("numero variáveis = ", num)
    FO = JuMP.objective_value(modelo);
    xo_val = JuMP.value(xo); # Alterado para evitar sobrescrita
    x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita
@@ -63,6 +64,7 @@ function gp_det2A(C,ca,cb,alpha,beta)
    time = round(solve_time(modelo),digits=4)
    println("Status = ", status )
    println("Time  =  ", time )
+  
    
    return FO, modelo, x_vals, xo_val 
 

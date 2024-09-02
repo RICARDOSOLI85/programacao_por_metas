@@ -1,7 +1,9 @@
 # Modelo Robusto  para Problema de Classificação
 # Data: 21/ Agosto/2024
 # Nome: Ricardo Soares Oliveira 
+
 using Printf 
+using Statistics 
 
 function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_name)
 
@@ -9,7 +11,8 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     n =length(x_vals);
     w = x_vals; 
     wo =  xo_val;
-    
+    media = mean(w)
+    println("média das variáveis = " , media)
     # 0.  Calcula hiperplano 
     c = Matrix(C);
     # #y_modelo = c * x;
@@ -35,7 +38,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     # Métricas   
 
     println(".......................................................")
-    println("                        Métricas                       ")
+    println("       Métricas  $model_name                    ")
     println(".......................................................") 
     
     # 1. Definitivamente Positivo

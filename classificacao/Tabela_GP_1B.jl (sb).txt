@@ -4,24 +4,24 @@ Tabela de Resultado das Taxas
 ========================================
 Função Objetivo  = 0.00
 Status = OPTIMAL
-Time  = 0.005
+Time  = 0.0063
 -----------------------------------------
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
-|| True Positive  (TP)  = 115 | False Negative (FN)  = 0 ||
-|| False Positive (FP)  = 216 | True Negative  (TN) =  0 ||
+|| True Positive  (TP)  = 111 | False Negative (FN)  = 0 ||
+|| False Positive (FP)  = 220 | True Negative  (TN) =  0 ||
 ---------------------------------------------------------------
-Erro Classe A = 115
-Erro Classe B = 216
+Erro Classe A = 111
+Erro Classe B = 220
 Indefindos    = 331
 Soma          = 331
 Falso Positivo Correto = 0
-Soma_C        = 115
+Soma_C        = 111
 ............................................
    Taxa de Acerto |  Taxa de Erro 
  Positivo   : 1.0 |   0.0
- Indefinido : 0.35 |    0.65
+ Indefinido : 0.34 |    0.66
  Negativo   : NaN |    NaN
 ............................................
 Acurácia    =  1.0

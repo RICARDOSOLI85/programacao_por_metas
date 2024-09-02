@@ -56,23 +56,22 @@ function gp_det_1B(C,ca,cb,alpha)
 
     # print modelo 
 
-   JuMP.all_variables(modelo)
-   num_variables(modelo)
-   #println(modelo)
-   FO = JuMP.objective_value(modelo);
-   xo = JuMP.value(xo);
-   x  = JuMP.value.(x);
-   println("-------------Imprimindo a Solução do Modelo---------")
-   println("F[O] = ",  FO)
-   println("x[0] = ",  xo)
-   for i=1:n 
-   println("x[$i] = ", JuMP.value.(x[i]));
-   end
-   status = termination_status(modelo)
-   time = round(solve_time(modelo),digits=4)
-   println("Status = ", status )
-   println("Time  =  ", time )
+    num = num_variables(modelo)
+    println("numero variáveis = ", num)
+    FO = JuMP.objective_value(modelo);
+    xo_vals = JuMP.value(xo); # Alterado para evitar sobrescrita
+    x_vals  = JuMP.value.(x); # Alterado para evitar sobrescrita
+    println("-------------Imprimindo a Solução do Modelo---------")
+    println("F[O] = ",  FO)
+    println("x[0] = ",  xo_vals)
+    for i=1:n 
+     println("x[$i] = ", JuMP.value.(x[i]));
+    end
+    status = termination_status(modelo)
+    time = round(solve_time(modelo),digits=4)
+    println("Status = ", status )
+    println("Time  =  ", time )
    
-   return modelo, x, xo  
+    return modelo, x_vals, xo_vals  
 
 end 

@@ -3,14 +3,16 @@
 # Nome: Ricardo Soares Oliveira 
 
 using Printf
+using Statistics 
 
-function calcular_metricas(modelo, C ,x,xo,y_real,model_name)
+function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     
     
-    n = length(x);
-    w = x;
-    wo = xo;
-         
+    n = length(x_vals);
+    w = x_vals;
+    wo = xo_vals;
+    media = mean(w)
+    println("média das variáveis = " , media)         
     # 0. Calcular o Hiperplano 
     c = Matrix(C);
     y_modelo = c * w 
@@ -22,7 +24,7 @@ function calcular_metricas(modelo, C ,x,xo,y_real,model_name)
     # 1.0 Métricas 
 
     
-    println("                        Métricas                       ")
+    println(".........Métricas $model_name.................")
     
     
     y_predito = y_modelo .>= wo 
@@ -135,7 +137,7 @@ function calcular_metricas(modelo, C ,x,xo,y_real,model_name)
 
     # Imprimindo os resultados 
     println("=============================================================")
-    println("                      Teste do Modelo GP_1                 ")
+    println("                      Teste do Modelo                ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
     println("Status = ", status)

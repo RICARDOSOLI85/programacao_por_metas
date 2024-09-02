@@ -33,7 +33,7 @@ balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame
 C_treino_b, ca_bal, cb_bal = balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 
 #------------------------------------------------ 
-
+#=
 println("Categoria A (filtro):")
 println(first(ca_fil,10))
 println(size(ca_fil))
@@ -77,7 +77,7 @@ println(size(C_teste))
 #---------------------------
 
 
-
+=#
 
 
 # -------------------------=-----------
@@ -85,15 +85,15 @@ println(size(C_teste))
 # Implementar Modelo (2) : A, B, C e D
 #--------------------------------------
 # Filtro: Sem balanceamento   
-#ca = ca_fil;
-#cb = cb_fil; 
-#C = C_teste; 
+ca = ca_fil;
+cb = cb_fil; 
+C = C_teste; 
 #--------------------------------------
 #--------------------------------------
 # Balanceado balanceamento   
-ca = ca_bal;
-cb = cb_bal; 
-C = C_teste; 
+#ca = ca_bal;
+#cb = cb_bal; 
+#C = C_teste; 
 #----------------------------------------
 
 # Incluir os arquivos das funções 
@@ -113,21 +113,20 @@ for model_name in Set_Model_1
      println("Excecutando $model_name")
 
     if model_name =="GP_1A.jl"
-        modelo, x, xo, = gp_det_1A(C,ca, cb, alpha)
-        print(" Imprimir xo ", xo)
-        calcular_metricas(modelo, C, x, xo, y_real, model_name)
+        modelo, x_vals, xo_vals  = gp_det_1A(C,ca, cb, alpha)
+        calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
 
     elseif model_name =="GP_1B.jl"
-        modelo, x, xo, = gp_det_1B(C,ca, cb, alpha)
-        calcular_metricas(modelo, C, x, xo, y_real, model_name)
+        modelo, x_vals, xo_vals  = gp_det_1B(C,ca, cb, alpha)
+        calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
 
     elseif model_name =="GP_1C.jl"
-        modelo, x, xo, = gp_det_1C(C,ca,cb,alpha)
-        calcular_metricas(modelo, C, x, xo, y_real, model_name)
+        modelo, x_vals, xo_vals  = gp_det_1C(C,ca,cb,alpha)
+        calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
 
     elseif model_name =="GP_1D.jl"
-        modelo, x, xo, = gp_det_1D(C,ca, cb, alpha)
-        calcular_metricas(modelo, C, x, xo, y_real, model_name)        
+        modelo, x_vals, xo_vals  = gp_det_1D(C,ca, cb, alpha)
+        calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)       
     end 
 end 
 
