@@ -38,7 +38,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     # Métricas   
 
     println(".......................................................")
-    println("       Métricas  $(model_name) \beta $beta(cb)         ")
+    println("       Métricas  $(model_name) \beta $beta(sb)         ")
     println(".......................................................") 
     
     # 1. Definitivamente Positivo
@@ -144,9 +144,9 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
    
    println(".........Métricas $(model_name) (cb)................")
         
-   y_pred_ca = y_modelo .>= wo 
-   y_pred_cb = y_modelo .<= wo 
-   y_pred    = y_modelo .==0 
+   y_pred_ca = y_modelo .>= wo; 
+   y_pred_cb = y_modelo .<= wo; 
+   y_pred    = y_modelo .==0; 
    #println("y_pred_ca = ", y_pred_ca)
    #println("y_real    = ",  y_real)
    #println("y_pred_cb    = ", y_pred_cb )
@@ -157,8 +157,8 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
    FN = sum((y_real .==1) .& (y_pred_ca .==0))
    FP = sum((y_real .==0) .& (y_pred_cb .==0))
    TN = sum((y_real .==0) .& (y_pred_cb .==1))
-   IDa = sum(y_real .==1) .& (y_pred .==1)
-   IDb = sum(y_real .==0) .& (y_pred .==1)
+   IDa = sum((y_real .==1) .& (y_pred .==1))
+   IDb = sum((y_real .==0) .& (y_pred .==1))
 
    println("--------------------------------------------------------------")
    println("                      Matriz de Confusão                        ")
@@ -174,6 +174,8 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
    println("Ind b = ", IDb)
    println("Inde = ", IDa +IDb)
    println("Soma          = ", Soma)
+   TIP = IDa/(IDa + IDb)
+   TIN  = IDb/(IDa/IDb)
    
 
    # 3. Taxa Positivo acerto/erro  
@@ -252,7 +254,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name) \beta $beta(cb).txt"
+    filename = "Tabela_$(model_name) \beta $beta(sb).txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 

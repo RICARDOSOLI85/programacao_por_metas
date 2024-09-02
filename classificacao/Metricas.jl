@@ -14,19 +14,40 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
          
     # 0. Calcular o Hiperplano 
     c = Matrix(C);
-    y_modelo = c * w 
+    y_modelo = c * w; 
     #println("vetor hiperplano =" , y_modelo)  
 
     # 0.1 Tranformar o data frame y_real em vector (importante)
-    y_real = Matrix(y_real)
+    y_real = Matrix(y_real);
     
     # 1.0 Métricas 
+
+     # Status da solução 
+     FO = objective_value(modelo)
+     FO = round(FO,digits=2)
+     status = termination_status(modelo)
+     time = solve_time(modelo)
+     time = round(time,digits=4)
+     (m,n) = size(C);
+     n1 = size(ca,1);
+     n2 = size(cb,1)
+     
+ 
+     # Imprimindo os resultados 
+     println("=============================================================")
+     println("                      Teste do Modelo    $(model_name) (sb)      ")
+     println("=============================================================")
+     println("Função Objetivo = ", FO)
+     println("Hiperlano       = ",  wo)
+     println("Status = ", status)
+     println("média das variáveis = " , media)   
+     println("Time  = ", time)
+    
    
-    println(".........Métricas $(model_name) (cb)................")
-        
-    y_pred_ca = y_modelo .>= wo 
-    y_pred_cb = y_modelo .<= wo 
-    y_pred    = y_modelo .==0 
+            
+    y_pred_ca = y_modelo .>= wo; 
+    y_pred_cb = y_modelo .<= wo; 
+    y_pred    = y_modelo .==0; 
     #println("y_pred_ca = ", y_pred_ca)
     #println("y_real    = ",  y_real)
     #println("y_pred_cb    = ", y_pred_cb )
@@ -37,8 +58,8 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     FN = sum((y_real .==1) .& (y_pred_ca .==0))
     FP = sum((y_real .==0) .& (y_pred_cb .==0))
     TN = sum((y_real .==0) .& (y_pred_cb .==1))
-    IDa = sum(y_real .==1) .& (y_pred .==1)
-    IDb = sum(y_real .==0) .& (y_pred .==1)
+    IDa = sum((y_real .==1) .& (y_pred .==1))
+    IDb = sum((y_real .==0) .& (y_pred .==1))
 
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
@@ -50,9 +71,11 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
        
     # 2.1 Indefinido 
     Soma = TP +FN + FP + TN
-    println("Ind a = ", IDa)
-    println("Ind b = ", IDb)
-    println("Inde = ", IDa +IDb)
+    #println("Ind a = ", IDa)
+    #println("Ind b = ", IDb)
+    #println("Inde = ", IDa +IDb)
+    TIP = IDa/(IDa + IDb)
+    TIN  = IDb/(IDa/IDb)
     println("Soma          = ", Soma)
     
 
@@ -105,32 +128,12 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     println("recall      =  " , recall)
     println("F1Score     =  " , f1_score)
 
-    # Status da solução 
-    FO = objective_value(modelo)
-    FO = round(FO,digits=2)
-    status = termination_status(modelo)
-    time = solve_time(modelo)
-    time = round(time,digits=4)
-    (m,n) = size(C);
-    n1 = size(ca,1);
-    n2 = size(cb,1)
-    
-
-    # Imprimindo os resultados 
-    println("=============================================================")
-    println("                      Teste do Modelo                ")
-    println("=============================================================")
-    println("Função Objetivo = ", FO)
-    println("Hiperlano       = ",  wo)
-    println("Status = ", status)
-    println("média das variáveis = " , media)   
-    println("Time  = ", time)
    
     
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name) (cb).txt"
+    filename = "Tabela_$(model_name) (sb).txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 

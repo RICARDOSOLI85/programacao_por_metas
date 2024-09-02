@@ -85,15 +85,15 @@ println(size(C_teste))
 # Implementar Modelo (2) : A, B, C e D
 #--------------------------------------
 # Filtro: Sem balanceamento   
-#ca = ca_fil;
-#cb = cb_fil; 
-#C = C_teste; 
+ca = ca_fil;
+cb = cb_fil; 
+C = C_teste; 
 #--------------------------------------
 #--------------------------------------
 # Balanceado balanceamento   
-ca = ca_bal;
-cb = cb_bal; 
-C = C_teste; 
+#ca = ca_bal;
+#cb = cb_bal; 
+#C = C_teste; 
 #----------------------------------------
 
 # Incluir os arquivos das funções 
