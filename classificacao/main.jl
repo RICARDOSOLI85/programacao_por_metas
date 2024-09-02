@@ -85,15 +85,15 @@ println(size(C_teste))
 # Implementar Modelo (2) : A, B, C e D
 #--------------------------------------
 # Filtro: Sem balanceamento   
-ca = ca_fil;
-cb = cb_fil; 
-C = C_teste; 
+#ca = ca_fil;
+#cb = cb_fil; 
+#C = C_teste; 
 #--------------------------------------
 #--------------------------------------
 # Balanceado balanceamento   
-#ca = ca_bal;
-#cb = cb_bal; 
-#C = C_teste; 
+ca = ca_bal;
+cb = cb_bal; 
+C = C_teste; 
 #----------------------------------------
 
 # Incluir os arquivos das funções 
@@ -101,7 +101,9 @@ include("GP_1A.jl")
 include("GP_1B.jl")
 include("GP_1C.jl")
 include("GP_1D.jl")
-include("metricas.jl")
+#include("metricas.jl")
+include("Metricas.jl")
+
 
 # Lista de Modelos 
 Set_Model_1 = ["GP_1A.jl", "GP_1B.jl", "GP_1C.jl", "GP_1D.jl"]
@@ -135,7 +137,8 @@ include("GP_2A.jl")
 include("GP_2B.jl")
 include("GP_2C.jl")
 include("GP_2D.jl")
-include("classes.jl")
+#include("classes.jl")
+include("Classes.jl")
 
 # Lista de Modelos 
 Set_Model_2 = ["GP_2A.jl", "GP_2B.jl", "GP_2C.jl", "GP_2D.jl"]

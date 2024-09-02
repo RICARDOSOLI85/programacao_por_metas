@@ -2,48 +2,48 @@
 Tabela de Resultado das Taxas
 |---------Modelo 2 B---------|
 ========================================
-Função Objetivo  = 464.00
+Função Objetivo  = 394.00
 hiper+beta =  2.5
 hiperplano =  1.5
 hiper-beta =  0.5
 -----------------------------------------
-Valor Acerto (Def Positivo) =  14
-Valor Erro   (Def Positivo) =  5
-Valor Acerto (Def Positivo) =  12
-Valor Erro   (Def Positivo) =  5
-Taxa Acerto (Indefindos)    =  0.66
-Taxa Erro   (Indefindos)    =  0.34
-Valor Acerto (Prob Negativo)= 57
-Valor Erro  (Prob Negativo) = 57
-Valor Acerto (Def Negativo)  = 150
-Valor Erro  (Def Negativo)   = 38
+Valor Acerto (Def Positivo) =  39
+Valor Erro   (Def Positivo) =  13
+Valor Acerto (Def Positivo) =  10
+Valor Erro   (Def Positivo) =  13
+Taxa Acerto (Indefindos)    =  0.44
+Taxa Erro   (Indefindos)    =  0.56
+Valor Acerto (Prob Negativo)= 44
+Valor Erro  (Prob Negativo) = 44
+Valor Acerto (Def Negativo)  = 122
+Valor Erro  (Def Negativo)   = 22
 .............................................
      Taxa de Acerto  |  Taxa de Erro 
-Def Positivo  : 0.74 |       0.26
-Pro Positivo  : 0.71 |       0.29
-Indefindos    : 0.66  |       0.34
+Def Positivo  : 0.75 |       0.25
+Pro Positivo  : 0.43 |       0.57
+Indefindos    : 0.44  |       0.56
 Pro Negativo  : 0.5  |       0.5
-Def Negativo  : 0.8  |       0.2
+Def Negativo  : 0.85  |       0.15
 .............................................
  
 --------------------------------------------------------------
                       Matriz de Confusão                        
 --------------------------------------------------------------
-|| True Positive  (TP)  = 26 | False Negative (FN)  = 95 ||
-|| False Positive (FP)  = 10 | True Negative  (TN) =  207 ||
+|| True Positive  (TP)  = 49 | False Negative (FN)  = 66 ||
+|| False Positive (FP)  = 26 | True Negative  (TN) =  166 ||
 ---------------------------------------------------------------
-Indefinido    = 29
-Soma do Total = 367
+Indefinido    = 45
+Soma do Total = 352
 -----------------------------
-accuray    = 0.69
-precision  = 0.72
-recall     = 0.21
-F1Score    = 0.33
+accuray    = 0.7
+precision  = 0.65
+recall     = 0.43
+F1Score    = 0.52
 ............................................
          Taxa de Acerto |  Taxa de Erro 
- Positivo   :   0.72     |     0.28
- Indefindo  :   0.08     |     0.08
- Negativo   :   0.69     |     0.31
+ Positivo   :   0.65     |     0.35
+ Indefindo  :   0.13     |     0.13
+ Negativo   :   0.72     |     0.28
 ............................................
 *************************************************************
 

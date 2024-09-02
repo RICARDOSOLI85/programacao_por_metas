@@ -1,18 +1,17 @@
 # Modelo Robusto  para Problema de Classificação
-# Data: 22/ Agosto/2024
+# Data: 02/Setembro/2024
 # Nome: Ricardo Soares Oliveira 
 
 using Printf
 using Statistics 
 
 function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
-    
-    
+        
     n = length(x_vals);
     w = x_vals;
     wo = xo_vals;
     media = mean(w)
-    println("média das variáveis = " , media)         
+         
     # 0. Calcular o Hiperplano 
     c = Matrix(C);
     y_modelo = c * w 
@@ -22,24 +21,24 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     y_real = Matrix(y_real)
     
     # 1.0 Métricas 
-
-    
+   
     println(".........Métricas $(model_name) (cb)................")
-    
-    
-    y_predito = y_modelo .>= wo 
-    y_real .== y_real 
-    # y_pred : Estou selecionando todos que estão no hiperplano 
-    y_pred    = y_modelo .== wo 
-    #println("y_predito = ", y_predito)
+        
+    y_pred_ca = y_modelo .>= wo 
+    y_pred_cb = y_modelo .<= wo 
+    y_pred    = y_modelo .==0 
+    #println("y_pred_ca = ", y_pred_ca)
     #println("y_real    = ",  y_real)
-    #println("y_pred    = ", y_pred )
+    #println("y_pred_cb    = ", y_pred_cb )
+    #println("y_pred   = ", y_pred)
      
     # 2. Calculando TP, FN, FP,TN 
-    TP = sum((y_real .==1) .& (y_predito .==1))
-    FN = sum((y_real .==1) .& (y_predito .==0))
-    FP = sum((y_real .==0) .& (y_predito .==1))
-    TN = sum((y_real .==0) .& (y_predito .==0))
+    TP = sum((y_real .==1) .& (y_pred_ca .==1))
+    FN = sum((y_real .==1) .& (y_pred_ca .==0))
+    FP = sum((y_real .==0) .& (y_pred_cb .==0))
+    TN = sum((y_real .==0) .& (y_pred_cb .==1))
+    IDa = sum(y_real .==1) .& (y_pred .==1)
+    IDb = sum(y_real .==0) .& (y_pred .==1)
 
     println("--------------------------------------------------------------")
     println("                      Matriz de Confusão                        ")
@@ -49,24 +48,13 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     println("---------------------------------------------------------------")
 
        
-    # 2.1 Erros de classe e indefinido 
-    # estou tirando com ERc2 a classe B que está no hiperplano
-    ERc1 = sum((y_real .==1) .& (y_pred .==1))
-    ERc2 = sum((y_real .==0) .& (y_pred .==1))
-    Indef = ERc1+ERc2 
+    # 2.1 Indefinido 
     Soma = TP +FN + FP + TN
-    
-    println("Erro Classe A = ", ERc1)
-    println("Erro Classe B = ", ERc2)
-    println("Indefindos    = ", Indef)
+    println("Ind a = ", IDa)
+    println("Ind b = ", IDb)
+    println("Inde = ", IDa +IDb)
     println("Soma          = ", Soma)
     
-
-    # 2.2 Correção do Falso Positivo 
-    FPc = FP - ERc2 
-    Soma_C = TP +FN + FPc + TN 
-    println("Falso Positivo Correto = ", FPc)
-    println("Soma_C        = ", Soma_C)
 
     # 3. Taxa Positivo acerto/erro  
     TPA = TP  /(TP + FN)
@@ -76,17 +64,10 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     #println("Taxa Positivo acerto = ", TPA)
     #println("Taxa Positivo erro  = ",   TPE)
 
-    # 4. Taxa Indefinidos Positivo/Negativo : sobre o hiperplano 
-    TIP = ERc1 / (ERc1 + ERc2) 
-    TIN = ERc2 / (ERc1 + ERc2)
-    #println("Taxa Positivo acerto = ",  TIP)
-    #println("Taxa Positivo erro  = ",   TIN) 
-    TIP = round(TIP, digits=2)
-    TIN = round(TIN, digits=2)
-
-     # 5. Taxa Negativo Acerto Erro  
-     TNA = TN  /(TN + FPc)   # Falso Positivo C 
-     TNE = FPc / (FPc + TN)
+    
+     # 4. Taxa Negativo Acerto Erro  
+     TNA = TN  /(TN + FP)   
+     TNE = FP / (FP + TN)
      TNA = round(TNA, digits=2)
      TNE = round(TNE, digits=2)
      #println("Taxa Positivo acerto = ", TNA)
@@ -105,28 +86,28 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     
     # 4 Medidas de precisão 
     # Calcular a Acurácia (Optei por retirar FPc da acc e prec)
-    accuracy = (TP + TN) / (TP + FN + FPc +TN)
+    accuracy = (TP + TN) / (TP + FN + FP +TN)
     accuracy = round(accuracy, digits=2)
 
     # Calculando precisão de Recall 
-    precision = TP / (TP + FPc)
+    precision = TP / (TP + FP)
     recall = TP / (TP + FN)
     precision = round(precision, digits=2)
     recall = round(recall, digits=2)
 
     # Calcular F1 Score 
-
     f1_score  = 2 * (precision * recall) / (precision + recall);
     f1_score = round(f1_score, digits=2)
 
 
-    println("Acurácia    =  ", accuracy)
+    println("Acurácia    =  " , accuracy)
     println("precision   =  " , precision)
-    println("recall      =  ", recall)
-    println("F1Score     =  ", f1_score)
+    println("recall      =  " , recall)
+    println("F1Score     =  " , f1_score)
 
     # Status da solução 
     FO = objective_value(modelo)
+    FO = round(FO,digits=2)
     status = termination_status(modelo)
     time = solve_time(modelo)
     time = round(time,digits=4)
@@ -140,9 +121,11 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     println("                      Teste do Modelo                ")
     println("=============================================================")
     println("Função Objetivo = ", FO)
-    println("Status = ", status)
-    println("Time  = ", time)
     println("Hiperlano       = ",  wo)
+    println("Status = ", status)
+    println("média das variáveis = " , media)   
+    println("Time  = ", time)
+   
     
   
   # Salvar em um arquivo TXT
@@ -165,22 +148,22 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
           println(file, "|---------Modelo 1 D---------|")
         end  
         println(file, "========================================")
-        @printf(file, "Função Objetivo  = %.2f\n", FO)
+        println(file,"Função Objetivo = ", FO)
+         println(file,"Hiperlano       = ",  wo)
         println(file,"Status = ", status)
+        println(file,"média das variáveis = " , media)   
         println(file,"Time  = ", time)
-        println(file, "-----------------------------------------")
+        println(file, "------------------------------------------------------------")
         println(file,"--------------------------------------------------------------")
-        println(file,"                      Matriz de Confusão                        ")
+        println(file,"                    Matriz de Confusão $(model_name)          ")
         println(file,"--------------------------------------------------------------")
         println(file,"|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
         println(file,"|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
         println(file,"---------------------------------------------------------------")
-        println(file,"Erro Classe A = ", ERc1)
-        println(file,"Erro Classe B = ", ERc2)
-        println(file,"Indefindos    = ", Indef)
-        println(file,"Soma          = ", Soma)
-        println(file,"Falso Positivo Correto = ", FPc)
-        println(file,"Soma_C        = ", Soma_C)
+        println("Ind a = ", IDa)
+        println("Ind b = ", IDb)
+        println("Inde = ", IDa +IDb)
+        println("Soma          = ", Soma)
         println(file,"............................................")
         println(file,"   Taxa de Acerto |  Taxa de Erro ")
         println(file," Positivo   : ",   TPA, " |   " , TPE)
@@ -198,11 +181,3 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
   
     
 end
-
-
-
-
-
-
-
-

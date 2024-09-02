@@ -139,57 +139,116 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
    
-    #=
-    # B Calculo das medias de precisão TP, FP, FN, TN
-    TP = DPA + PPA 
-    FP = DPE + PPE 
-    ID = IA + IE 
-    FN = PNE + DNE 
-    TN = PNA + DNA 
-    soma = TP + FP + ID + FN + TN
-    println(" ")
-    println("--------------------------------------------------------------")
-    println("                      Matriz de Confusão                        ")
-    println("--------------------------------------------------------------")
-    println("|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
-    println("|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
-    println("---------------------------------------------------------------")
-    println("Indefinido    = ", ID)
-    println("Soma do Total = ", soma)
+    
+   # 1.0 Métricas 
+   
+   println(".........Métricas $(model_name) (cb)................")
+        
+   y_pred_ca = y_modelo .>= wo 
+   y_pred_cb = y_modelo .<= wo 
+   y_pred    = y_modelo .==0 
+   #println("y_pred_ca = ", y_pred_ca)
+   #println("y_real    = ",  y_real)
+   #println("y_pred_cb    = ", y_pred_cb )
+   #println("y_pred   = ", y_pred)
+    
+   # 2. Calculando TP, FN, FP,TN 
+   TP = sum((y_real .==1) .& (y_pred_ca .==1))
+   FN = sum((y_real .==1) .& (y_pred_ca .==0))
+   FP = sum((y_real .==0) .& (y_pred_cb .==0))
+   TN = sum((y_real .==0) .& (y_pred_cb .==1))
+   IDa = sum(y_real .==1) .& (y_pred .==1)
+   IDb = sum(y_real .==0) .& (y_pred .==1)
 
-    # Calcular a Acurácia 
-    accuracy = (TP + TN) / (TP + FN + FP +TN)
-    println("accuracy = ", round(accuracy,digits=2))
-    # Calculando precisão de Recall 
-    precision = TP / (TP + FP)
-    recall = TP / (TP + FN)
-    println("precision = ", round(precision,digits=2))
-    println("recall = ", round(recall,digits=2))
+   println("--------------------------------------------------------------")
+   println("                      Matriz de Confusão                        ")
+   println("--------------------------------------------------------------")
+   println("|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
+   println("|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
+   println("---------------------------------------------------------------")
 
-    # Calcular F1 Score 
-    f1_score  = 2 * (precision * recall) / (precision + recall)
-    println("f1_score = ", round(f1_score,digits=2))
+      
+   # 2.1 Indefinido 
+   Soma = TP +FN + FP + TN
+   println("Ind a = ", IDa)
+   println("Ind b = ", IDb)
+   println("Inde = ", IDa +IDb)
+   println("Soma          = ", Soma)
+   
 
-    # Taxa de acerto e taxa de erro 
+   # 3. Taxa Positivo acerto/erro  
+   TPA = TP  /(TP + FN)
+   TPE = FN / (TP + FN)
+   TPA = round(TPA, digits=2)
+   TPE = round(TPE, digits=2)
+   #println("Taxa Positivo acerto = ", TPA)
+   #println("Taxa Positivo erro  = ",   TPE)
 
-    TPA = (DPA + PPA) / (DPA + PPA + DPE + PPE)
-    TPA = round(TPA,digits=2) 
-    TPE = (DPE + PPE) / (DPA + PPA + DPE + PPE)
-    TPE = round(TPE,digits=2)
-    TI  = (ID / soma)
-    TI = round(TI,digits=2)
-    TNA = (DNA + PNA) / (DNA + PNA + DNE + PNE)
-    TNA = round(TNA,digits=2) 
-    TNE = (DNE + PNE) / (DNA + PNA + DNE + PNE)
+   
+    # 4. Taxa Negativo Acerto Erro  
+    TNA = TN  /(TN + FP)   
+    TNE = FP / (FP + TN)
+    TNA = round(TNA, digits=2)
     TNE = round(TNE, digits=2)
-    println(" ")
-    println("............................................")
-    println("         Taxa de Acerto |  Taxa de Erro ")
-    println(" Positivo   :   ",  TPA, "     |     " , TPE)
-    println(" Indefindo  :   ",   TI, "     |     " , TI)
-    println(" Negativo   :   ",    TNA, "     |     " , TNE)
-    println("............................................")
-   =#
+    #println("Taxa Positivo acerto = ", TNA)
+    #println("Taxa Positivo erro  = ",   TNE)
+
+
+   println("............................................")
+   println("    Taxa de Acerto |  Taxa de Erro ")
+   println(" Positivo   : ",   TPA, "  |    " , TPE)
+   println(" Indefinido : ",   TIP, "  |    " , TIN)
+   println(" Negativo   : ",   TNA, "  |    " , TNE)
+   println("............................................")
+
+
+
+   
+   # 4 Medidas de precisão 
+   # Calcular a Acurácia (Optei por retirar FPc da acc e prec)
+   accuracy = (TP + TN) / (TP + FN + FP +TN)
+   accuracy = round(accuracy, digits=2)
+
+   # Calculando precisão de Recall 
+   precision = TP / (TP + FP)
+   recall = TP / (TP + FN)
+   precision = round(precision, digits=2)
+   recall = round(recall, digits=2)
+
+   # Calcular F1 Score 
+   f1_score  = 2 * (precision * recall) / (precision + recall);
+   f1_score = round(f1_score, digits=2)
+
+
+   println("Acurácia    =  " , accuracy)
+   println("precision   =  " , precision)
+   println("recall      =  " , recall)
+   println("F1Score     =  " , f1_score)
+
+   # Status da solução 
+   FO = objective_value(modelo)
+   FO = round(FO,digits=2)
+   status = termination_status(modelo)
+   time = solve_time(modelo)
+   time = round(time,digits=4)
+   (m,n) = size(C);
+   n1 = size(ca,1);
+   n2 = size(cb,1)
+   
+
+   # Imprimindo os resultados 
+   println("=============================================================")
+   println("                      Teste do Modelo                ")
+   println("=============================================================")
+   println("Função Objetivo = ", FO)
+   println("Hiperlano       = ",  wo)
+   println("Status = ", status)
+   println("média das variáveis = " , media)   
+   println("Time  = ", time)
+  
+   
+ 
+
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
@@ -211,7 +270,11 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
           println(file, "|---------Modelo 2 D---------|")
         end  
         println(file, "========================================")
-        @printf(file, "Função Objetivo  = %.2f\n", FO)
+        println(file,"Função Objetivo = ", FO)
+        println(file,"Hiperlano       = ",  wo)
+        println(file,"Status = ", status)
+        println(file,"média das variáveis = " , media)   
+        println(file,"Time  = ", time)
         println(file, "hiper+beta =  ",hiper_up)
         println(file, "hiperplano =  ",wo)
         println(file, "hiper-beta =  ",hiper_down)
@@ -236,26 +299,26 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
         println(file, ".............................................")
         println(file," ")
         println(file,"--------------------------------------------------------------")
-        println(file,"                      Matriz de Confusão                        ")
+        println(file,"                    Matriz de Confusão $(model_name)          ")
         println(file,"--------------------------------------------------------------")
         println(file,"|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN," ||")
         println(file,"|| False Positive (FP)  = ", FP, " | True Negative  (TN) =  ", TN," ||") 
         println(file,"---------------------------------------------------------------")
-        println(file,"Indefinido    = ", ID)
-        println(file,"Soma do Total = ", soma)
-        println(file,"-----------------------------")
-        println(file, "accuray    = ", round(accuracy,digits=2))
-        println(file,"precision  = ", round(precision,digits=2)) 
-        println(file,"recall     = ", round(recall,digits=2)) 
-        println(file, "F1Score    = ",  round(f1_score,digits=2))
+        println("Ind a = ", IDa)
+        println("Ind b = ", IDb)
+        println("Inde = ", IDa +IDb)
+        println("Soma          = ", Soma)
         println(file,"............................................")
-        println(file,"         Taxa de Acerto |  Taxa de Erro ")
-        println(file," Positivo   :   ",  TPA, "     |     " , TPE)
-        println(file," Indefindo  :   ",   TI, "     |     " , TI)
-        println(file," Negativo   :   ",    TNA, "     |     " , TNE)
+        println(file,"   Taxa de Acerto |  Taxa de Erro ")
+        println(file," Positivo   : ",   TPA, " |   " , TPE)
+        println(file," Indefinido : ",   TIP, " |    " , TIN)
+        println(file," Negativo   : ",   TNA, " |    " , TNE)
         println(file,"............................................")
-        println(file,"*************************************************************\n")
-
+        println(file,"Acurácia    =  ", accuracy)
+        println(file,"precision   =  " , precision)
+        println(file,"recall      =  ", recall)
+        println(file,"F1Score     =  ", f1_score)
+        println(file,"********************************************")
     end 
     
 end
