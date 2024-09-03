@@ -1,0 +1,49 @@
+========================================
+Tabela de Resultado das Taxas
+|---------Modelo 2 C---------|
+========================================
+Função Objetivo = 441.67
+Hiperlano       = 1.0
+Status = OPTIMAL
+média das variáveis = 0.07692307692307694
+Time  = 0.018
+hiper+beta =  2.0
+hiperplano =  1.0
+hiper-beta =  0.0
+-----------------------------------------
+Valor Acerto (Def Positivo) =  23
+Valor Erro   (Def Positivo) =  13
+Valor Acerto (Def Positivo) =  11
+Valor Erro   (Def Positivo) =  3
+Taxa Acerto (Indefindos)    =  NaN
+Taxa Erro   (Indefindos)    =  NaN
+Valor Acerto (Prob Negativo)= 18
+Valor Erro  (Prob Negativo) = 18
+Valor Acerto (Def Negativo)  = 178
+Valor Erro  (Def Negativo)   = 65
+.............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.64 |       0.36
+Pro Positivo  : 0.79 |       0.21
+Indefindos    : NaN  |       NaN
+Pro Negativo  : 0.5  |       0.5
+Def Negativo  : 0.73  |       0.27
+.............................................
+ 
+--------------------------------------------------------------
+                    Matriz de Confusão GP_2C.jl          
+--------------------------------------------------------------
+|| True Positive  (TP)  = 34 | False Negative (FN)  = 85 ||
+|| False Positive (FP)  = 16 | True Negative  (TN) =  196 ||
+---------------------------------------------------------------
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 0.29 |   0.71
+ Indefinido : 0.2804878048780488 |    302.695652173913
+ Negativo   : 0.92 |    0.08
+............................................
+Acurácia    =  0.69
+precision   =  0.68
+recall      =  0.29
+F1Score     =  0.41
+********************************************

@@ -7,10 +7,11 @@ using Statistics
 
 function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
         
-    n = length(x_vals);
-    w = x_vals;
-    wo = xo_vals;
+    n =length(x_vals);
+    w = x_vals; 
+    wo =  xo_vals;
     media = mean(w)
+    
          
     # 0. Calcular o Hiperplano 
     c = Matrix(C);
@@ -35,7 +36,7 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
  
      # Imprimindo os resultados 
      println("=============================================================")
-     println("                      Teste do Modelo    $(model_name) (sb)      ")
+     println("                Teste do Modelo    $(model_name) (cb)      ")
      println("=============================================================")
      println("Função Objetivo = ", FO)
      println("Hiperlano       = ",  wo)
@@ -133,7 +134,7 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
   
   # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name) (sb).txt"
+    filename = "Resultados:$(model_name)(cb).txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 

@@ -20,7 +20,7 @@ function gp_det2D(C,ca,cb,alpha,beta)
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     #Variáveis 
-    @variable(modelo,-1<=x[j=1:n]<= 1)           #D
+    @variable(modelo,-1<=x[j=1:n]<= 1)          
     @variable(modelo, xo) 
     @variables(modelo,
     begin 

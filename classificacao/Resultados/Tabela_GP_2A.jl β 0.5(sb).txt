@@ -1,49 +1,49 @@
 ========================================
 Tabela de Resultado das Taxas
-|---------Modelo 2 B---------|
+|---------Modelo 2 A---------|
 ========================================
-Função Objetivo = 455.0
-Hiperlano       = 1.0
+Função Objetivo = 7.0
+Hiperlano       = 1.5
 Status = OPTIMAL
-média das variáveis = 0.15384615384615385
-Time  = 0.027
+média das variáveis = 0.5
+Time  = 0.0004
 hiper+beta =  2.0
-hiperplano =  1.0
-hiper-beta =  0.0
+hiperplano =  1.5
+hiper-beta =  1.0
 -----------------------------------------
-Valor Acerto (Def Positivo) =  25
-Valor Erro   (Def Positivo) =  6
+Valor Acerto (Def Positivo) =  3
+Valor Erro   (Def Positivo) =  3
 Valor Acerto (Def Positivo) =  0
 Valor Erro   (Def Positivo) =  0
-Taxa Acerto (Indefindos)    =  0.59
-Taxa Erro   (Indefindos)    =  0.41
+Taxa Acerto (Indefindos)    =  NaN
+Taxa Erro   (Indefindos)    =  NaN
 Valor Acerto (Prob Negativo)= 0
 Valor Erro  (Prob Negativo) = 0
-Valor Acerto (Def Negativo)  = 198
-Valor Erro  (Def Negativo)   = 73
+Valor Acerto (Def Negativo)  = 2
+Valor Erro  (Def Negativo)   = 2
 .............................................
      Taxa de Acerto  |  Taxa de Erro 
-Def Positivo  : 0.81 |       0.19
+Def Positivo  : 0.5 |       0.5
 Pro Positivo  : NaN |       NaN
-Indefindos    : 0.59  |       0.41
+Indefindos    : NaN  |       NaN
 Pro Negativo  : NaN  |       NaN
-Def Negativo  : 0.73  |       0.27
+Def Negativo  : 0.5  |       0.5
 .............................................
  
 --------------------------------------------------------------
-                    Matriz de Confusão GP_2B.jl          
+                    Matriz de Confusão GP_2A.jl          
 --------------------------------------------------------------
-|| True Positive  (TP)  = 42 | False Negative (FN)  = 73 ||
-|| False Positive (FP)  = 6 | True Negative  (TN) =  210 ||
+|| True Positive  (TP)  = 3 | False Negative (FN)  = 2 ||
+|| False Positive (FP)  = 3 | True Negative  (TN) =  2 ||
 ---------------------------------------------------------------
 ............................................
    Taxa de Acerto |  Taxa de Erro 
- Positivo   : 0.37 |   0.63
- Indefinido : 0.2693726937269373 |    537.0410958904109
- Negativo   : 0.97 |    0.03
+ Positivo   : 0.6 |   0.4
+ Indefinido : NaN |    NaN
+ Negativo   : 0.4 |    0.6
 ............................................
-Acurácia    =  0.76
-precision   =  0.88
-recall      =  0.37
-F1Score     =  0.52
+Acurácia    =  0.5
+precision   =  0.5
+recall      =  0.6
+F1Score     =  0.55
 ********************************************

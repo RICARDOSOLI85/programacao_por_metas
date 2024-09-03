@@ -1,0 +1,49 @@
+========================================
+Tabela de Resultado das Taxas
+|---------Modelo 2 B---------|
+========================================
+Função Objetivo = 1.0
+Hiperlano       = -1.9000000000000004
+Status = OPTIMAL
+média das variáveis = 0.09999999999999998
+Time  = 0.0003
+hiper+beta =  -1.4000000000000004
+hiperplano =  -1.9000000000000004
+hiper-beta =  -2.4000000000000004
+-----------------------------------------
+Valor Acerto (Def Positivo) =  4
+Valor Erro   (Def Positivo) =  0
+Valor Acerto (Def Positivo) =  1
+Valor Erro   (Def Positivo) =  0
+Taxa Acerto (Indefindos)    =  NaN
+Taxa Erro   (Indefindos)    =  NaN
+Valor Acerto (Prob Negativo)= 2
+Valor Erro  (Prob Negativo) = 2
+Valor Acerto (Def Negativo)  = 3
+Valor Erro  (Def Negativo)   = 0
+.............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 1.0 |       0.0
+Pro Positivo  : 1.0 |       0.0
+Indefindos    : NaN  |       NaN
+Pro Negativo  : 0.5  |       0.5
+Def Negativo  : 1.0  |       0.0
+.............................................
+ 
+--------------------------------------------------------------
+                    Matriz de Confusão GP_2B.jl          
+--------------------------------------------------------------
+|| True Positive  (TP)  = 5 | False Negative (FN)  = 0 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  5 ||
+---------------------------------------------------------------
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 1.0 |   0.0
+ Indefinido : NaN |    NaN
+ Negativo   : 1.0 |    0.0
+............................................
+Acurácia    =  1.0
+precision   =  1.0
+recall      =  1.0
+F1Score     =  1.0
+********************************************

@@ -12,25 +12,42 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     w = x_vals; 
     wo =  xo_val;
     media = mean(w)
-    println("média das variáveis = " , media)
+    
     # 0.  Calcula hiperplano 
     c = Matrix(C);
-    # #y_modelo = c * x;
+    #y_modelo = c * x;
     y_modelo = c * w 
     #println("y_modelo =", y_modelo)
 
      # 0.1 Tranformar o data frame y_real em vector (importante)
     y_real = Matrix(y_real);
-    println("tipo de variável y_ real =", typeof(y_real))
+     # Status da solução 
+    FO = objective_value(modelo)
+    FO = round(FO,digits=2)
+    status = termination_status(modelo)
+    time = solve_time(modelo)
+    time = round(time,digits=4)
+    (m,n) = size(C);
+    n1 = size(ca,1);
+    n2 = size(cb,1)
+   
 
-    println("tipo wo, : ", typeof(wo))
-    println("tipo beta, : ", typeof(beta))
-
+    # Imprimindo os resultados 
+    println("=============================================================")
+    println("                      Teste do Modelo                ")
+    println("=============================================================")
+    println("Função Objetivo = ", FO)
+    println("Hiperlano       = ",  wo)
+    println("Status = ", status)
+    println("média das variáveis = " , media)   
+    println("Time  = ", time)
     hiper_up   = wo .+ beta
     hiper_down = wo .- beta 
     println("hiper+beta = ",hiper_up)
     println("hiperplano = ",wo)
     println("hiper-beta = ",hiper_down)
+
+
    
 
 
@@ -38,7 +55,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     # Métricas   
 
     println(".......................................................")
-    println("       Métricas  $(model_name) \beta $beta(sb)         ")
+    println("       Métricas  $(model_name) β $beta(cb)         ")
     println(".......................................................") 
     
     # 1. Definitivamente Positivo
@@ -142,7 +159,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     
    # 1.0 Métricas 
    
-   println(".........Métricas $(model_name) (cb)................")
+   println(".........Métricas $(model_name)................")
         
    y_pred_ca = y_modelo .>= wo; 
    y_pred_cb = y_modelo .<= wo; 
@@ -227,26 +244,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
    println("recall      =  " , recall)
    println("F1Score     =  " , f1_score)
 
-   # Status da solução 
-   FO = objective_value(modelo)
-   FO = round(FO,digits=2)
-   status = termination_status(modelo)
-   time = solve_time(modelo)
-   time = round(time,digits=4)
-   (m,n) = size(C);
-   n1 = size(ca,1);
-   n2 = size(cb,1)
-   
-
-   # Imprimindo os resultados 
-   println("=============================================================")
-   println("                      Teste do Modelo                ")
-   println("=============================================================")
-   println("Função Objetivo = ", FO)
-   println("Hiperlano       = ",  wo)
-   println("Status = ", status)
-   println("média das variáveis = " , media)   
-   println("Time  = ", time)
+  
   
    
  
@@ -254,7 +252,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
 
     # Salvar em um arquivo TXT
     # nome do arquivo 
-    filename = "Tabela_$(model_name) \beta $beta(sb).txt"
+    filename = "Resultados:$(model_name)_β$beta(cb).txt"
     #filename = "Tabela_$(model_file)_$(balanceamento).txt"
     # abre o arquivo para a escrita 
     open(filename, "w") do file 

@@ -41,7 +41,7 @@ function gp_det2B(C,ca,cb,alpha,beta)
     cb[i=1:n2], sum(cb[i,j]*x[j] for j in 1:n) + n_b[i] - p_b[i] == xo - beta 
     end
     )
-    #@constraint(modelo, sum(x[j] for j in 1:n) ==1)
+   
 
     # solve modelo
     optimize!(modelo)

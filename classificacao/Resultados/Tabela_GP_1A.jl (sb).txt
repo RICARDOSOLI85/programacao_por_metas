@@ -1,27 +1,27 @@
 ========================================
 Tabela de Resultado das Taxas
-|---------Modelo 1 D---------|
+|---------Modelo 1 A---------|
 ========================================
-Função Objetivo = 23.43
-Hiperlano       = 0.2142857142857143
+Função Objetivo = 4.0
+Hiperlano       = 2.0
 Status = OPTIMAL
-média das variáveis = 0.07692307692307689
-Time  = 0.0099
+média das variáveis = 0.5
+Time  = 0.0003
 ------------------------------------------------------------
 --------------------------------------------------------------
-                    Matriz de Confusão GP_1D.jl          
+                    Matriz de Confusão GP_1A.jl          
 --------------------------------------------------------------
-|| True Positive  (TP)  = 59 | False Negative (FN)  = 56 ||
-|| False Positive (FP)  = 35 | True Negative  (TN) =  181 ||
+|| True Positive  (TP)  = 3 | False Negative (FN)  = 2 ||
+|| False Positive (FP)  = 1 | True Negative  (TN) =  4 ||
 ---------------------------------------------------------------
 ............................................
    Taxa de Acerto |  Taxa de Erro 
- Positivo   : 0.51 |   0.49
- Indefinido : 0.2 |    16.0
- Negativo   : 0.84 |    0.16
+ Positivo   : 0.6 |   0.4
+ Indefinido : NaN |    NaN
+ Negativo   : 0.8 |    0.2
 ............................................
-Acurácia    =  0.73
-precision   =  0.63
-recall      =  0.51
-F1Score     =  0.56
+Acurácia    =  0.7
+precision   =  0.75
+recall      =  0.6
+F1Score     =  0.67
 ********************************************
