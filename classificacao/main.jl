@@ -32,54 +32,6 @@ include("balancear.jl")
 balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 C_treino_b, ca_bal, cb_bal = balancear_categorias(C_treino_a::DataFrame, ca_fil::DataFrame, cb_fil::DataFrame)
 
-#------------------------------------------------ 
-#=
-println("Categoria A (filtro):")
-println(first(ca_fil,10))
-println(size(ca_fil))
-
-println("Categoria B (filtro):")
-println(first(cb_fil,10))
-println(size(cb_fil))
-
-println(" Matrix C (filtro):")
-println(first(C_treino_a,10))
-println(size(C_treino_a))
-
-println("Categoria A (balanceado):")
-println(first(ca_bal,10))
-println(size(ca_bal))
-
-println("Categoria B (balanceado):")
-println(first(cb_bal,10))
-println(size(cb_bal))
-
-println(" Matrix C (balanceado):")
-println(first(C_treino_b,10))
-println(size(C_treino_b))
-
-println(" Matrix C * Teste *:")
-println(first(C_teste,10))
-println(size(C_teste))
-
-
-println("Label :")
-println(first(y_real,10))
-println(size(y_real))
-
-println("Matriz :")
-println(first(C_teste,10))
-println(size(C_teste))
-
-
-# --------------------------
-# Implementar Modelo (1): 
-#---------------------------
-
-
-=#
-
-
 # -------------------------=-----------
 # Implementar Modelo (1) : A, B, C e D
 # Implementar Modelo (2) : A, B, C e D
