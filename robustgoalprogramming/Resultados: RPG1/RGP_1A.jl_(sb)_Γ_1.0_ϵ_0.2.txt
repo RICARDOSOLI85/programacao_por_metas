@@ -1,0 +1,48 @@
+........................................
+ Solução do modelo : RGP_1A.jl
+ filtro/balanceado : (sb)
+O valor de Gama é (Γ = 1.0)
+O valor de Epsilo é (ϵ = 0.2)
+........................................
+Função Objetivo (FO) = 6.0
+Target  x[o]         = 1.2
+Solução x[j]         = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
+N. variáveis         = 12350
+sol[1] = 0.0
+sol[2] = 0.0
+sol[3] = 0.0
+sol[4] = 0.0
+sol[5] = 0.0
+sol[6] = 0.0
+sol[7] = 0.0
+sol[8] = 0.0
+sol[9] = 0.0
+sol[10] = 0.0
+sol[11] = 1.0
+sol[12] = 0.0
+sol[13] = 0.0
+Status = OPTIMAL
+Time   = 0.1348 s
+--------------------------------------------------------------
+                      Matriz de Confusão                        
+--------------------------------------------------------------
+|| True Positive  (TP)  = 0 | False Negative (FN)  = 104 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  227 ||
+---------------------------------------------------------------
+Erro Classe A = 0
+Erro Classe B = 0
+Indefindos    = 0
+Soma          = 331
+Falso Positivo Correto = 0
+Soma_atual             = 331
+............................................
+    Taxa de Acerto  |  Taxa de Erro 
+ Positivo   : 0.0   |    1.0
+ Indefinido : NaN  |    NaN
+ Negativo   : 1.0  |    0.0
+............................................
+Acurácia    =  0.69
+precision   =  NaN
+recall      =  0.0
+F1Score     =  NaN
+*******************************************

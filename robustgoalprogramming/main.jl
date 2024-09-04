@@ -5,82 +5,55 @@
 #.........................................................
 #        Prâmetros -> (Tomador de Decisão)
 #.........................................................
-alpha =1.0;
-beta = 0.50; 
-Epsilons = [0.10, 0.20, 0.30];  
-Gammas = [1.0, 3.0, 5.0, 7.0, 10.0]; 
+alpha = 1.0;
+beta =  1.00; 
+Epsilons = [0.01] #, 0.05, 0.10, 0.20, 0.50];  
+Gammas =   [1.0] # , 3.0, 5.0, 7.0, 10.0]; 
 proporcao_treino = 0.70; 
 
 #----------------------------------------------------------
 #     Leitura e Processamento dos dados 
 #----------------------------------------------------------
-arquivo="exames.csv" 
-include("dados.jl")
-include("divisao.jl")
-include("filtro.jl")
-include("balanco.jl")
 
-# leitura dos dados
+# 1. dados
+include("dados.jl")
 arquivo="exames.csv"  
 df = ler_arquivo(arquivo::String)
+
+# 2. dividir
+include("divisao.jl") 
 C_teste, df_treino, df_teste, y_real = dividir_dados(df::DataFrame, proporcao_treino::Float64)
 
-# selecionar categorias A e B 
+# 3. categorias 
+include("filtro.jl")
 C_treino, ca_filtro, cb_filtro = dividir_categorias(df_treino::DataFrame)
 
-# balancear as categorias A = B 
+# balancear 
+include("balanco.jl")
 ca_balanceado, cb_balanceado= balancear_categorias(ca_filtro::DataFrame, cb_filtro::DataFrame)
 
 #----------------------------------------------------------
 #     Implementar o Modelos e imprimir as soluções  
 #----------------------------------------------------------
-include("matrizes.jl")
+
 include("gama.jl")
 include("RPG_1A.jl")
 include("RPG_1B.jl")
 include("RPG_1C.jl")
 include("RPG_1D.jl")
-include("metricas.jl")
 include("classes.jl")
-# Inicializar o dicionário de resultados
-resultados = Dict{String, Dict{Tuple{Float64, Float64}, Dict{String, Any}}}()
+include("matrizes.jl")
+include("Metricas.jl")
 
-include("RPG_2A.jl")
-#ca = ca_filtro;
-#cb = cb_filtro;
-#C  = C_treino; 
-# ---
 
-C = [1 1;2 2;3 1;3 3;6 3;4 1;5 2;7 2;8 4;9 1];
-y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
-ca = C[1:5,:]; 
-cb = C[6:10,:]
-epsilon = 0.10; 
-gama = 1.0;
-beta = 0.57; 
-ca_desvio, cb_desvio = calcular_desvios(ca::Matrix{Int64},cb::Matrix{Int64},epsilon::Float64)
-gama_a, gama_b = cria_vetor_gama(ca::Matrix{Int64},cb::Matrix{Int64},gama::Float64)
+# Lista de Modelos 
+Set_model_1 = ["RGP_1A.jl", "RGP_1B.jl", "RGP_1C.jl", "RGP_1D.jl"]
 
-FO, modelo, tar, sol = robusto_modelo_2(C::Matrix{Int64},ca::Matrix{Int64},
-    cb::Matrix{Int64},alpha::Float64,beta::Float64,
-    ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
-    gama_a::Vector{Float64},gama_b::Vector{Float64})
 
-model_name = "RPG_2A.jl"
-modelo_nome ="sb"
-
-calcular_classes(C::Matrix{Int64},y_real::Vector{Int64},gama::Float64,beta::Float64,
-modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-epsilon::Float64,modelo_nome::String)
-
-include("curvaroc.jl")
-plotar_curva(C,y_real,sol,tar)
-
-#=
 # teste para configuração : Filtro e balanceado
-for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
+for (ca,cb, tipo) in [(ca_filtro,cb_filtro,"(sb)"),
     (ca_balanceado,cb_balanceado,"(cb)")]
-    println(" configuração para $modelo_nome")
+    println(" configuração para $tipo")  # mudei para tipo ****
     
     # ϵ : implementar o modelo para cada valor de (Epsilon)
     for epsilon in Epsilons
@@ -107,63 +80,55 @@ for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
 
                 # Modelo 1 A 
                 
-                if model_name == "RPG_1A.jl"
-                    global  C = C_treino; 
-                    global  FO, modelo, tar, sol = robusto_modelo1(C::DataFrame,ca::DataFrame,
+                if model_name == "RGP_1A.jl"
+                    global  FO, modelo, tar, sol = robusto_modelo1(C_treino::DataFrame,ca::DataFrame,
                             cb::DataFrame,alpha::Float64,
                             ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
                             gama_a::Vector{Float64},gama_b::Vector{Float64})
 
                 # Imprimir os resultados do Modelo Robusto e salvar
-                            global C = C_teste 
-                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-                            epsilon::Float64,modelo_nome::String)
+                            calcular_metricas(modelo::Model, C_teste::DataFrame,
+                            sol::Vector{Float64}, tar::Float64,y_real::DataFrame,
+                            model_name, gama::Float64,epsilon::Float64,tipo::String)
 
                 # Modelo 1 B            
 
-                elseif model_name == "RPG_1B.jl"
-                    global  C = C_treino; 
-                    global  FO, modelo, tar, sol = robusto_modelo2(C::DataFrame,ca::DataFrame,
+                elseif model_name == "RGP_1B.jl"
+                    global  FO, modelo, tar, sol = robusto_modelo2(C_treino::DataFrame,ca::DataFrame,
                             cb::DataFrame,alpha::Float64,
                             ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
                             gama_a::Vector{Float64},gama_b::Vector{Float64})
 
                 # Imprimir os resultados do Modelo Robusto e salvar
-                            global  C = C_teste
-                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-                            epsilon::Float64,modelo_nome::String)
+                            calcular_metricas(modelo::Model, C_teste::DataFrame,
+                            sol::Vector{Float64}, tar::Float64,y_real::DataFrame,
+                            model_name, gama::Float64,epsilon::Float64,tipo::String)
 
                 # Modelo 1 C 
 
-                elseif model_name == "RPG_1C.jl"
-                    global  C = C_treino; 
-                    global  FO, modelo, tar, sol = robusto_modelo3(C::DataFrame,ca::DataFrame,
+                elseif model_name == "RGP_1C.jl"
+                            global  FO, modelo, tar, sol = robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
                             cb::DataFrame,alpha::Float64,
                             ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
                             gama_a::Vector{Float64},gama_b::Vector{Float64})
 
                 # Imprimir os resultados do Modelo Robusto e salvar
-                            global  C = C_teste
-                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-                            epsilon::Float64,modelo_nome::String)
+                           calcular_metricas(modelo::Model, C_teste::DataFrame,
+                           sol::Vector{Float64}, tar::Float64,y_real::DataFrame,
+                           model_name, gama::Float64,epsilon::Float64,tipo::String)
 
                # Modelo 1 D
 
-                elseif model_name == "RPG_1D.jl"
-                    global  C = C_treino; 
-                    global  FO, modelo, tar, sol = robusto_modelo4(C::DataFrame,ca::DataFrame,
+                elseif model_name == "RGP_1D.jl"
+                            global  FO, modelo, tar, sol = robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
                             cb::DataFrame,alpha::Float64,
                             ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
                             gama_a::Vector{Float64},gama_b::Vector{Float64})
 
                 # Imprimir os resultados do Modelo Robusto e salvar
-                            global  C = C_teste 
-                            calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
-                            modelo::Model,tar::Float64,sol::Vector{Float64},model_name::String,
-                            epsilon::Float64,modelo_nome::String)
+                            calcular_metricas(modelo::Model, C_teste::DataFrame,
+                            sol::Vector{Float64}, tar::Float64,y_real::DataFrame,
+                            model_name, gama::Float64,epsilon::Float64,tipo::String)
                 end
 
                
@@ -175,11 +140,10 @@ for (ca,cb, modelo_nome) in [(ca_filtro,cb_filtro,"(sb)"),
     end 
 end
 
-=#
+
+#= 
 
 
-
-#=
 gama = 1.0     
 ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
 gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
@@ -202,6 +166,3 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:]; 
 =#
-
-include("curvaroc.jl")
-plotar_curva(C,y_real,sol,tar)

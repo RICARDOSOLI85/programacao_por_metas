@@ -195,6 +195,6 @@ function calcular_metricas(C::DataFrame,y_real::DataFrame,gama::Float64,
 
 
 
-    return resultados 
+    return 
     
 end

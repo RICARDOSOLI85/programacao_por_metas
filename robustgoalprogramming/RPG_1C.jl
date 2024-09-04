@@ -10,13 +10,13 @@ using Gurobi
 
 TBW
 """
-function robusto_modelo3(C::DataFrame,ca::DataFrame,
+function robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64})
 
     # leitura 
-    (n,m) = size(C)
+    (n,m) = size(C_treino)
     n1 = size(ca,1)
     n2 = size(cb,1)
     
@@ -70,23 +70,23 @@ function robusto_modelo3(C::DataFrame,ca::DataFrame,
     # Impressão 
     #println(modelo)
     println(".................................................")
-    println("   Imprimindo a solução do modelo Robusto 1 A ")
+    println("   Imprimindo a solução do modelo Robusto 1 C ")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
     sol = JuMP.value.(x)
     NV= num_variables(modelo)
-    println("Função Objetivo (FO) = ", FO)
-    println("Target (t)           = ", tar)
-    println("Solução x[j]         = ", sol)
+    println("Função Objetivo (FO) = ", round(FO,digits=4))
+    println("Target (t)           = ", round(tar,digits=2))
+    #println("Solução x[j]         = ", round(sol,digits=2))
     println("N. variáveis         = ", NV)
-    for j=1:m 
-        println("x[$j] = ", JuMP.value.(x[j]))
-    end
+    #for j=1:m 
+    #    println("x[$j] = ", JuMP.value.(x[j]))
+    #end
     Status = termination_status(modelo)
     time = round(solve_time(modelo), digits=4)
     println("Status = ", Status)
     println("Time   = ", time, " s")
     println(".................................................")
-    return FO, modelo, tar, sol   
+    return FO, modelo, tar, sol
 end

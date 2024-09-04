@@ -1,0 +1,22 @@
+========================================
+Tabela de Resultado das Taxas
+Modelo: RGP_1C.jl
+========================================
+Função Objetivo = 8.22
+Hiperplano       = 0.6537
+Status = OPTIMAL
+Média das variáveis = 0.07692307692307693
+Time  = 0.095
+------------------------------------------------------------
+Matriz de Confusão RGP_1C.jl
+|| True Positive  (TP)  = 7 | False Negative (FN)  = 112 ||
+|| False Positive (FP)  = 2 | True Negative  (TN)  = 210 ||
+------------------------------------------------------------
+Taxa de Acerto | Taxa de Erro
+Positivo   : 0.06 | 0.94
+Negativo   : 0.99 | 0.01
+Acurácia    =  0.66
+Precisão    =  0.78
+Recall      =  0.06
+F1Score     =  0.11
+********************************************
