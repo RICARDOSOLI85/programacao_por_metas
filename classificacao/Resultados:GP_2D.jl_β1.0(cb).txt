@@ -1,0 +1,49 @@
+========================================
+Tabela de Resultado das Taxas
+|---------Modelo 2 D---------|
+========================================
+Função Objetivo = 418.33
+Hiperlano       = 0.6666666666666666
+Status = OPTIMAL
+média das variáveis = 0.0769230769230769
+Time  = 0.0197
+hiper+beta =  1.6666666666666665
+hiperplano =  0.6666666666666666
+hiper-beta =  -0.33333333333333337
+-----------------------------------------
+Valor Acerto (Def Positivo) =  27
+Valor Erro   (Def Positivo) =  4
+Valor Acerto (Def Positivo) =  33
+Valor Erro   (Def Positivo) =  34
+Taxa Acerto (Indefindos)    =  0.33
+Taxa Erro   (Indefindos)    =  0.67
+Valor Acerto (Prob Negativo)= 136
+Valor Erro  (Prob Negativo) = 136
+Valor Acerto (Def Negativo)  = 40
+Valor Erro  (Def Negativo)   = 11
+.............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.87 |       0.13
+Pro Positivo  : 0.49 |       0.51
+Indefindos    : 0.33  |       0.67
+Pro Negativo  : 0.5  |       0.5
+Def Negativo  : 0.78  |       0.22
+.............................................
+ 
+--------------------------------------------------------------
+                    Matriz de Confusão GP_2D.jl          
+--------------------------------------------------------------
+|| True Positive  (TP)  = 62 | False Negative (FN)  = 51 ||
+|| False Positive (FP)  = 38 | True Negative  (TN) =  180 ||
+---------------------------------------------------------------
+............................................
+   Taxa de Acerto |  Taxa de Erro 
+ Positivo   : 0.55 |   0.45
+ Indefinido : 0.21212121212121213 |    0.7878787878787878
+ Negativo   : 0.83 |    0.17
+............................................
+Acurácia    =  0.73
+precision   =  0.62
+recall      =  0.55
+F1Score     =  0.58
+********************************************

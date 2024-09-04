@@ -192,7 +192,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
    println("Inde = ", IDa +IDb)
    println("Soma          = ", Soma)
    TIP = IDa/(IDa + IDb)
-   TIN  = IDb/(IDa/IDb)
+   TIN  = IDb/(IDa+IDb)
    
 
    # 3. Taxa Positivo acerto/erro  

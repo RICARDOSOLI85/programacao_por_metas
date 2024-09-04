@@ -76,7 +76,7 @@ function calcular_metricas(modelo, C ,x_vals,xo_vals,y_real,model_name)
     #println("Ind b = ", IDb)
     #println("Inde = ", IDa +IDb)
     TIP = IDa/(IDa + IDb)
-    TIN  = IDb/(IDa/IDb)
+    TIN  = IDb/(IDa+IDb)
     println("Soma          = ", Soma)
     
 
