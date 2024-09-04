@@ -40,16 +40,20 @@ function calculate_roc(y_true, y_pred)
         push!(TPR, TP / (TP + FN))
         push!(FPR, FP / (FP + TN))
     end
+
+    # Calcular a AUC (Área Sob a Curva) usando integração trapezoidal
+    auc = sum(diff(FPR) .* (TPR[1:end-1] .+ TPR[2:end]) / 2)
     
-    return FPR, TPR
+    return FPR, TPR, auc 
 end
 
 # Valores de beta para testar
+
 betas = [0.1, 0.5, 1.0, 2.0]
 cores = [:blue, :green, :red, :purple]  # Cores para diferenciar as curvas
 
 # Inicializa o gráfico
-roc_plot = plot(title="Curva ROC para M 2 D(sb)", xlabel="False Positive Rate", ylabel="True Positive Rate")
+roc_plot = plot(title="Curva ROC: Modelo2-D(cb)", xlabel="False Positive Rate", ylabel="True Positive Rate",legend=:bottomright)
 
 # Plotar as curvas ROC para diferentes valores de beta
 for (i, beta) in enumerate(betas)
@@ -60,11 +64,24 @@ for (i, beta) in enumerate(betas)
     y_modelo = C * x_vals
     
     # Calcular FPR e TPR
-    FPR, TPR = calculate_roc(y_real, y_modelo)
+    #FPR, TPR = calculate_roc(y_real, y_modelo)
+    # Calcular FPR, TPR e AUC
+    FPR, TPR, auc = calculate_roc(y_real, y_modelo)
+
     
     # Adicionar a curva ROC ao gráfico
-    plot!(roc_plot, FPR, TPR, label="beta = $beta", color=cores[i], linewidth=2)
+    #plot!(roc_plot, FPR, TPR, label="beta = $beta", color=cores[i], linewidth=2)
+    # Adicionar a curva ROC ao gráfico
+    # Adicionar a curva ROC ao gráfico
+    plot!(roc_plot, FPR, TPR, label="beta = $beta (AUC = $(round(auc, digits=2)))", color=cores[i], linewidth=2)
 end
+
+
+
+# Adicionar linha diagonal de referência (0,0) a (1,1)
+plot!(roc_plot, [0, 1], [0, 1], linestyle=:dash, color=:black, label="Linha de chance")
+    
+
 
 # Mostrar o gráfico final
 display(roc_plot)
