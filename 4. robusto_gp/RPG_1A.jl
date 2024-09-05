@@ -10,7 +10,7 @@ using Gurobi
 
 TBW
 """
-function robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
+function robusto_modelo1(C_treino::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64})
@@ -19,13 +19,16 @@ function robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
     (n,m) = size(C_treino)
     n1 = size(ca,1)
     n2 = size(cb,1)
-    
+      
 
     # Modelo 
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     # variáveis
-    @variable(modelo, x[j=1:m] <= 1)
+    @variable(modelo, 0 <= x[j=1:m] <= alpha)
+    #@variable(modelo, -alpha <= x[j=1:m] <= alpha)
+    #@variable(modelo, x[j=1:m])
+    #@variable(modelo, x[j=1:m] <= 1)
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -70,15 +73,15 @@ function robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
     # Impressão 
     #println(modelo)
     println(".................................................")
-    println("   Imprimindo a solução do modelo Robusto 1 D ")
+    println("   Imprimindo a solução do modelo Robusto 1 A ")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
     sol = JuMP.value.(x)
     NV= num_variables(modelo)
-    println("Função Objetivo (FO) = ", round(FO,digits=4))
-    println("Target (t)           = ", round(tar,digits=2))
-    #println("Solução x[j]         = ", round(sol,digits=2))
+    println("Função Objetivo (FO) = ", FO)
+    println("Target (t)           = ", tar)
+    #println("Solução x[j]         = ", round(sol,digits=4))
     println("N. variáveis         = ", NV)
     #for j=1:m 
     #    println("x[$j] = ", JuMP.value.(x[j]))
@@ -90,3 +93,4 @@ function robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
     println(".................................................")
     return FO, modelo, tar, sol   
 end
+

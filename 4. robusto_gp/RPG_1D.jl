@@ -10,7 +10,7 @@ using Gurobi
 
 TBW
 """
-function robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
+function robusto_modelo4(C_treino::DataFrame,ca::DataFrame,
     cb::DataFrame,alpha::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64})
@@ -25,7 +25,7 @@ function robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
     modelo = JuMP.Model(Gurobi.Optimizer)
 
     # variáveis
-    @variable(modelo, x[j=1:m])
+    @variable(modelo, x[j=1:m] <= 1)
     @variable(modelo, target)
     @variables(modelo,
     begin
@@ -70,14 +70,14 @@ function robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
     # Impressão 
     #println(modelo)
     println(".................................................")
-    println("   Imprimindo a solução do modelo Robusto 1 C ")
+    println("   Imprimindo a solução do modelo Robusto 1 D ")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
     sol = JuMP.value.(x)
     NV= num_variables(modelo)
-    println("Função Objetivo (FO) = ", round(FO,digits=4))
-    println("Target (t)           = ", round(tar,digits=2))
+    println("Função Objetivo (FO) = ", FO)
+    println("Target (t)           = ", tar)
     #println("Solução x[j]         = ", round(sol,digits=2))
     println("N. variáveis         = ", NV)
     #for j=1:m 
@@ -88,5 +88,5 @@ function robusto_modelo3(C_treino::DataFrame,ca::DataFrame,
     println("Status = ", Status)
     println("Time   = ", time, " s")
     println(".................................................")
-    return FO, modelo, tar, sol
+    return FO, modelo, tar, sol   
 end

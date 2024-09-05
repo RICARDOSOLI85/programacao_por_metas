@@ -139,7 +139,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
     println("............................................")
    
-    #=
+    
     # B Calculo das medias de precisão TP, FP, FN, TN
     TP = DPA + PPA 
     FP = DPE + PPE 
@@ -189,7 +189,7 @@ function calcular_classes(FO, modelo , C, x_vals, xo_val, y_real,beta, model_nam
     println(" Indefindo  :   ",   TI, "     |     " , TI)
     println(" Negativo   :   ",    TNA, "     |     " , TNE)
     println("............................................")
-   =#
+
 
     # Salvar em um arquivo TXT
     # nome do arquivo 

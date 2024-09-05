@@ -1,3 +1,4 @@
+#=
 using Printf
 using Statistics
 
@@ -118,4 +119,96 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
     end
 end
 
-        
+=#
+using DataFrames
+using Printf
+using Statistics
+
+function calcular_metricas(modelo::Model, C_teste::DataFrame,
+                            sol::Vector{Float64}, tar::Float64, y_real::DataFrame,
+                            model_name, gama::Float64, epsilon::Float64, tipo::String)
+
+    #n = length(sol)
+    w = sol
+    wo = tar
+    C = C_teste
+    media = mean(w)
+
+    # Calcular o hiperplano
+    c = Matrix(C)
+    y_modelo = c * w
+
+    # Transformar o DataFrame em vetor
+    y_real = Matrix(y_real)
+
+   
+
+
+    # Métricas TP, FN, FP, TN
+    y_pred_ca = y_modelo .>= wo
+    y_pred_cb = y_modelo .<= wo
+
+    TP = sum((y_real .== 1) .& (y_pred_ca .== 1))
+    FN = sum((y_real .== 1) .& (y_pred_ca .== 0))
+    FP = sum((y_real .== 0) .& (y_pred_cb .== 0))
+    TN = sum((y_real .== 0) .& (y_pred_cb .== 1))
+
+    # Taxa Positivo acerto/erro
+    TPA = TP / (TP + FN)
+    TPE = FN / (TP + FN)
+    TPA = round(TPA, digits=2)
+    TPE = round(TPE, digits=2)
+
+    # Taxa Negativo Acerto Erro
+    TNA = TN / (TN + FP)
+    TNE = FP / (FP + TN)
+    TNA = round(TNA, digits=2)
+    TNE = round(TNE, digits=2)
+
+    # Medidas de precisão
+    accuracy = (TP + TN) / (TP + FN + FP + TN)
+    accuracy = round(accuracy, digits=2)
+    
+    precision = TP / (TP + FP)
+    recall = TP / (TP + FN)
+    precision = round(precision, digits=2)
+    recall = round(recall, digits=2)
+    
+    f1_score = 2 * (precision * recall) / (precision + recall)
+    f1_score = round(f1_score, digits=2)
+
+     # Status da solução
+     FO = objective_value(modelo)
+     FO = round(FO, digits=2)
+     status = termination_status(modelo)
+     time = solve_time(modelo)
+     time = round(time, digits=4)
+     NV = num_variables(modelo)
+     wo = round(wo,digits=2)
+     media = round(media,digits=2)
+
+
+    # Criar DataFrame para os resultados
+    return DataFrame(
+        Modelo=[model_name],
+        Tipo=[tipo],
+        Epsilon=[epsilon],
+        Gama=[gama],
+        FO=[FO],
+        Hiperplano=[wo],
+        Media_xj=[media],
+        Tempo=[time],
+        TP=[TP],
+        FN=[FN],
+        FP=[FP],
+        TN=[TN],
+        Precisao=[precision],
+        Recall=[recall],
+        Taxa_Acerto_Pos=[TPA],
+        Taxa_Erro_Pos=[TPE],
+        Taxa_Acerto_Neg=[TNA],
+        Taxa_Erro_Neg=[TNE],
+        Acuracia=[accuracy],
+        F1_Score=[f1_score]
+    )
+end

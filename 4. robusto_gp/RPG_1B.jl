@@ -75,8 +75,8 @@ function robusto_modelo2(C_treino::DataFrame,ca::DataFrame,
     tar = JuMP.value(target)
     sol = JuMP.value.(x)
     NV= num_variables(modelo)
-    println("Função Objetivo (FO) = ", round(FO,digits=4))
-    println("Target (t)           = ", round(tar,digits=2))
+    println("Função Objetivo (FO) = ", FO)
+    println("Target (t)           = ", tar)
     #println("Solução x[j]         = ", round(sol,digits=2))
     println("N. variáveis         = ", NV)
     #for j=1:m 

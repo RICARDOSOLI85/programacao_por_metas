@@ -1,0 +1,2 @@
+Modelo,Tipo,Epsilon,Gama,FO,Hiperplano,Media_xj,Tempo,TP,FN,FP,TN,Precisao,Recall,Taxa_Acerto_Pos,Taxa_Erro_Pos,Taxa_Acerto_Neg,Taxa_Erro_Neg,Acuracia,F1_Score
+RGP_1D.jl,(cb),0.5,10.0,8.04,1.08,0.08,0.3999,0,134,0,197,NaN,0.0,0.0,1.0,1.0,0.0,0.6,NaN

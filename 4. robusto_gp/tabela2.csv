@@ -1,0 +1,2 @@
+Modelo,Tipo,Epsilon,Gama,Taxa_Acerto_Pos,Taxa_Erro_Pos,Taxa_Acerto_Neg,Taxa_Erro_Neg,Acuracia,F1_Score
+RGP_1D.jl,(cb),0.5,10.0,0.0,1.0,1.0,0.0,0.6,NaN
