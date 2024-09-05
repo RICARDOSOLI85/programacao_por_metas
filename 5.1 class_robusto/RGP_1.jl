@@ -17,7 +17,7 @@ function robusto_modelo_1(C_treino::DataFrame,
 #  Modelo de programação de Metas #
 #======================================================#
 
-function robusto_modelo_1(C_treino::Matrix{Int64},
+function robusto_modelo_1(C_treino::DataFrame,
         ca::DataFrame, cb::DataFrame,alpha::Float64,
         ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
         gama_a::Vector{Float64},gama_b::Vector{Float64}, 

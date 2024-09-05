@@ -20,8 +20,8 @@ function robusto_modelo_2(C::Matrix{Int64},
     variacao::String)
 """
 
-function robusto_modelo_2(C_treino::Matrix{Int64},
-    ca::Matrix{Int64},cb::Matrix{Int64},
+function robusto_modelo_2(C_treino::DataFrame,
+    ca::DataFrame,cb::DataFrame,
     alpha::Float64,beta::Float64,
     ca_desvio::Matrix{Float64},cb_desvio::Matrix{Float64},
     gama_a::Vector{Float64},gama_b::Vector{Float64},
@@ -44,7 +44,7 @@ function robusto_modelo_2(C_treino::Matrix{Int64},
         @variable(modelo, -alpha <= x[j=1:m] <= alpha)
     elseif  variacao =="C"
         @variable(modelo, x[j=1:m])
-    elseif varicao == "D"
+    elseif variacao == "D"
         @variable(modelo, x[j=1:m] <= 1)
     end 
     @variable(modelo, target)
@@ -92,7 +92,7 @@ function robusto_modelo_2(C_treino::Matrix{Int64},
     # Impressão 
     #println(modelo)
     println(".................................................")
-    println("   Imprimindo a solução do modelo Robusto 2_($variacao) ")
+    println("Imprimindo a solução do modelo Robusto 2_($variacao)")
     println(".................................................")
     FO  = JuMP.objective_value(modelo)
     tar = JuMP.value(target)

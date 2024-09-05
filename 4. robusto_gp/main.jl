@@ -45,7 +45,7 @@ include("classes.jl")
 include("matrizes.jl")
 include("Metricas.jl")
 
-#=
+
 
 # Lista de Modelos 
 Set_model_1 = ["RGP_1A.jl", "RGP_1B.jl", "RGP_1C.jl", "RGP_1D.jl"]
@@ -142,7 +142,7 @@ for (ca,cb, tipo) in [(ca_filtro,cb_filtro,"(sb)"),
 end
 
 
-#= 
+#=
 
 
 gama = 1.0     
@@ -167,7 +167,8 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:]; 
 =#
-=# 
+
+
 using CSV
 using DataFrames
 
