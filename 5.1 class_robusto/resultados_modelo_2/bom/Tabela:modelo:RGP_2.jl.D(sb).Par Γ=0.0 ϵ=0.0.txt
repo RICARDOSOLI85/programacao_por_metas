@@ -1,42 +1,42 @@
 ........................................
-Solução do modelo:RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.0
+Solução do modelo:RGP_2.jl.D(sb).Par Γ=0.0 ϵ=0.0
 ........................................
-Função Objetivo (FO) = 468.0
-Target  x[o]         = 2.0
-Solução x[j]         = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+Função Objetivo (FO) = 356.9999999999999
+Target  x[o]         = 4.8
+Solução x[j]         = [-0.3999999999999999, 0.8000000000000002, 0.7999999999999999, -0.6000000000000001, 0.6, 1.0, -0.7999999999999998, -0.8000000000000003, -1.7999999999999998, 1.0, 1.0, -0.7999999999999998, 1.0]
 N. variáveis         = 12350
-sol[1] = 0.0
-sol[2] = 0.0
-sol[3] = 0.0
-sol[4] = 0.0
-sol[5] = 0.0
-sol[6] = 0.0
-sol[7] = 0.0
-sol[8] = 0.0
-sol[9] = 0.0
+sol[1] = -0.3999999999999999
+sol[2] = 0.8000000000000002
+sol[3] = 0.7999999999999999
+sol[4] = -0.6000000000000001
+sol[5] = 0.6
+sol[6] = 1.0
+sol[7] = -0.7999999999999998
+sol[8] = -0.8000000000000003
+sol[9] = -1.7999999999999998
 sol[10] = 1.0
-sol[11] = 0.0
-sol[12] = 0.0
-sol[13] = 0.0
+sol[11] = 1.0
+sol[12] = -0.7999999999999998
+sol[13] = 1.0
 Status = OPTIMAL
-Time   = 0.0355 s
-hiper+beta = 3.0
-hiperplano = 2.0
-hiper-beta = 1.0
+Time   = 0.0792 s
+hiper+beta = 5.8
+hiperplano = 4.8
+hiper-beta = 3.8
 ............................................
 ............................................
      Taxa de Acerto  |  Taxa de Erro 
 Def Positivo  : NaN |       NaN
 Pro Positivo  : NaN  |       NaN
 Indefindos    : NaN  |       NaN
-Pro Negativo  : NaN |       NaN
-Def Negativo  : 0.64  |       0.36
+Pro Negativo  : 0.12 |       0.88
+Def Negativo  : 0.65  |       0.35
 ............................................................
 --------------------------------------------------------------
-  Matriz de Confusão RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.0 
+  Matriz de Confusão RGP_2.jl.D(sb).Par Γ=0.0 ϵ=0.0 
 --------------------------------------------------------------
-|| True Positive  (TP)  = 0 | False Negative (FN)  = 118 ||
-|| False Positive (FP)  = 0 | True Negative  (TN) =  213 ||
+|| True Positive  (TP)  = 0 | False Negative (FN)  = 120 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  211 ||
 ---------------------------------------------------------------
 ............................................
     Taxa de Acerto  |  Taxa de Erro 

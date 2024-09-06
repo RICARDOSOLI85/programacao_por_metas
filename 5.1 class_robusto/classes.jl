@@ -1,6 +1,12 @@
-# Métricas para o resultado do modelo
+# Classes para o resultado do modelo
 # Nome: Ricardo Soares Oliveira
 # Data 05/09/2024
+
+using DataFrames
+using JuMP
+using Printf
+using Statistics
+using DataFrames
 
 function calcular_classes(modelo::Model,C_teste::DataFrame,
     sol::Vector{Float64},tar::Float64,y_real::DataFrame,
@@ -142,7 +148,7 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
     # Métricas TP, FN, FP, TN 
     n = length(sol);
     w = sol;
-    wo = tar;
+    target = tar;
     C = C_teste;
     media = mean(w);
 
@@ -212,7 +218,7 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
     # Impressão dos resultados 
 
     println(".................................................")
-    println("   Imprimindo a solução do modelo Robusto 1 A ")
+    println("   Imprimindo a solução do modelo Robusto  ")
     println("        O valor de Gama é (Γ =  ", gama, ")")
     println("        O valor de Beta é (Β =  ", beta, ")")
     println("        O valor de Epsilon é(Ε =  ", beta, ")")
@@ -234,6 +240,74 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
     println("Status = ", Status)
     println("Time   = ", time, " s")
     println(".................................................")
+
+    println("............................................")
+    println("     Taxa de Acerto  |  Taxa de Erro ")
+    println("Def Positivo  : ",    TDPA, " |       " , TDPE)
+    println("Pro Positivo  : ",    TPPA, " |       " , TPPE)
+    println("Indefindos    : ",    TIA, "  |       " , TIE)
+    println("Pro Negativo  : ",    TPNA, "  |       " , TPNE)
+    println("Def Negativo  : ",    TDNA, "  |       " , TDNE)
+    println("............................................")
+    
+     # Função Interna para construir o DataFrame das métricas
+     function construir_dataframe_classes()
+        return DataFrame(
+            #.....Parâmetros 
+            modelo = model,
+            var = variacao,
+            tipo = tipo, 
+            gama= gama, 
+            epsilon= epsilon,
+            #....Otimização 
+            FuncObj =FO,
+            HipePlan = target,
+            status = string(status),
+            media  = media,
+            tempo = time,
+            num_variaveis = nv, 
+            #.......Numeros 
+            DefPos_A = DPA,
+            DefPos_E = DPE,
+            ProPos_A = PPA,
+            ProPos_E = PPE,
+            Indefi_A  = IA,
+            Indefi_B  = IE,
+            ProNeg_A = PNA,
+            ProNeg_E = PNE,
+            DefNeg_A = DNA,
+            DefNeg_E = DNE,
+            #.......Taxas 
+            TaxDefPos_A = TDPA,
+            TaxDefPos_E = TDPE,
+            TaxProPos_A = TPPA,
+            TaxProPos_E = TPPE,
+            TaxInd_A  = TIA,
+            TaxInd_B  = TIE,
+            TaxProNeg_A = TPNA,
+            TaxProNeg_E = TPNE,
+            TaxDefNeg_A = TDNA,
+            TaxDefNeg_E = TDNE,
+            #.......Matriz Confusão 
+            TP = TP,
+            FN = FN,
+            FP = FP,
+            TN = TN, 
+            #........Taxas de Acerto
+            TPA = TPA,
+            TPE = TPE,
+            TNA = TNA,
+            TNE = TNE, 
+            #.........Métricas
+            Acurácia = accuracy,
+            Precisão = precision,
+            Recall = recall, 
+            F1_score = f1_score
+        )
+        
+    end
+
+
 
     # Salvar em um arquivo TXT
     
@@ -286,6 +360,10 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
         println(file,"F1Score     =  ", f1_score)
         println(file,"*******************************************")
 
-    end   
+    end
+    # Construir e retornar  o DataFrame 
+    classes = construir_dataframe_classes()
     
+    return classes 
+
 end

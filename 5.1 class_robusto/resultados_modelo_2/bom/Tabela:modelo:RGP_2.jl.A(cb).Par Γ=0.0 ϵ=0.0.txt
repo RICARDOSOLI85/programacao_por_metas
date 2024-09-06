@@ -1,10 +1,10 @@
 ........................................
-Solução do modelo:RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.0
+Solução do modelo:RGP_2.jl.A(cb).Par Γ=0.0 ϵ=0.0
 ........................................
-Função Objetivo (FO) = 468.0
-Target  x[o]         = 2.0
+Função Objetivo (FO) = 474.0
+Target  x[o]         = 1.0
 Solução x[j]         = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
-N. variáveis         = 12350
+N. variáveis         = 11876
 sol[1] = 0.0
 sol[2] = 0.0
 sol[3] = 0.0
@@ -19,33 +19,33 @@ sol[11] = 0.0
 sol[12] = 0.0
 sol[13] = 0.0
 Status = OPTIMAL
-Time   = 0.0355 s
-hiper+beta = 3.0
-hiperplano = 2.0
-hiper-beta = 1.0
+Time   = 0.034 s
+hiper+beta = 2.0
+hiperplano = 1.0
+hiper-beta = 0.0
 ............................................
 ............................................
      Taxa de Acerto  |  Taxa de Erro 
 Def Positivo  : NaN |       NaN
 Pro Positivo  : NaN  |       NaN
-Indefindos    : NaN  |       NaN
+Indefindos    : 0.78  |       0.22
 Pro Negativo  : NaN |       NaN
-Def Negativo  : 0.64  |       0.36
+Def Negativo  : 0.74  |       0.26
 ............................................................
 --------------------------------------------------------------
-  Matriz de Confusão RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.0 
+  Matriz de Confusão RGP_2.jl.A(cb).Par Γ=0.0 ϵ=0.0 
 --------------------------------------------------------------
-|| True Positive  (TP)  = 0 | False Negative (FN)  = 118 ||
-|| False Positive (FP)  = 0 | True Negative  (TN) =  213 ||
+|| True Positive  (TP)  = 49 | False Negative (FN)  = 71 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  211 ||
 ---------------------------------------------------------------
 ............................................
     Taxa de Acerto  |  Taxa de Erro 
- Positivo   : 0.0   |    1.0
- Indefinido : NaN  |    NaN
+ Positivo   : 0.41   |    0.59
+ Indefinido : 0.78  |    0.22
  Negativo   : 1.0  |    0.0
 ............................................
-Acurácia    =  0.64
-precision   =  NaN
-recall      =  0.0
-F1Score     =  NaN
+Acurácia    =  0.79
+precision   =  1.0
+recall      =  0.41
+F1Score     =  0.58
 *******************************************

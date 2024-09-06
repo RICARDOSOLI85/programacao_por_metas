@@ -1,51 +1,51 @@
 ........................................
 Solução do modelo:RGP_2.jl.B(sb).Par Γ=0.0 ϵ=0.0
 ........................................
-Função Objetivo (FO) = 320.3333333333335
-Target  x[o]         = 6.666666666666667
-Solução x[j]         = [0.6666666666666665, 1.0, 1.0, 0.0, 0.0, 1.0, 0.33333333333333326, -0.6666666666666667, 0.33333333333333326, 1.0, 1.0, 1.0, 1.0]
+Função Objetivo (FO) = 330.0
+Target  x[o]         = 6.0
+Solução x[j]         = [0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 1.0, 1.0, 0.0, 1.0]
 N. variáveis         = 12350
-sol[1] = 0.6666666666666665
+sol[1] = 0.0
 sol[2] = 1.0
 sol[3] = 1.0
 sol[4] = 0.0
 sol[5] = 0.0
 sol[6] = 1.0
-sol[7] = 0.33333333333333326
-sol[8] = -0.6666666666666667
-sol[9] = 0.33333333333333326
+sol[7] = 0.0
+sol[8] = 0.0
+sol[9] = -1.0
 sol[10] = 1.0
 sol[11] = 1.0
-sol[12] = 1.0
+sol[12] = 0.0
 sol[13] = 1.0
 Status = OPTIMAL
-Time   = 0.0354 s
-hiper+beta = 7.666666666666667
-hiperplano = 6.666666666666667
-hiper-beta = 5.666666666666667
+Time   = 0.0374 s
+hiper+beta = 7.0
+hiperplano = 6.0
+hiper-beta = 5.0
 ............................................
 ............................................
      Taxa de Acerto  |  Taxa de Erro 
 Def Positivo  : NaN |       NaN
-Pro Positivo  : 1.0  |       0.0
+Pro Positivo  : NaN  |       NaN
 Indefindos    : NaN  |       NaN
-Pro Negativo  : 0.33 |       0.67
-Def Negativo  : 0.65  |       0.35
+Pro Negativo  : NaN |       NaN
+Def Negativo  : 0.64  |       0.36
 ............................................................
 --------------------------------------------------------------
   Matriz de Confusão RGP_2.jl.B(sb).Par Γ=0.0 ϵ=0.0 
 --------------------------------------------------------------
-|| True Positive  (TP)  = 1 | False Negative (FN)  = 116 ||
-|| False Positive (FP)  = 0 | True Negative  (TN) =  214 ||
+|| True Positive  (TP)  = 0 | False Negative (FN)  = 118 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  213 ||
 ---------------------------------------------------------------
 ............................................
     Taxa de Acerto  |  Taxa de Erro 
- Positivo   : 0.01   |    0.99
+ Positivo   : 0.0   |    1.0
  Indefinido : NaN  |    NaN
  Negativo   : 1.0  |    0.0
 ............................................
-Acurácia    =  0.65
-precision   =  1.0
-recall      =  0.01
-F1Score     =  0.02
+Acurácia    =  0.64
+precision   =  NaN
+recall      =  0.0
+F1Score     =  NaN
 *******************************************

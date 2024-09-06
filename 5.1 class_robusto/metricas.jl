@@ -1,3 +1,9 @@
+# Métricas para o resultado do modelo
+# Nome: Ricardo Soares Oliveira
+# Data 05/09/2024
+
+using DataFrames
+using JuMP
 using Printf
 using Statistics
 using DataFrames
@@ -164,5 +170,6 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
 
     # construir e retornar o DataFrame
     metricas = construir_dataframe_metricas()
+
     return metricas 
 end
