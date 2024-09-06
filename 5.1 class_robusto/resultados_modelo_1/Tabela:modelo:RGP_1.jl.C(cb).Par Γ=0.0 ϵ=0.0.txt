@@ -1,0 +1,22 @@
+========================================
+Solução do modelo:RGP_1.jl.C(cb).Par Γ=0.0 ϵ=0.0
+========================================
+Função Objetivo = 7.67
+Hiperplano       = 0.67816091954023
+Status = OPTIMAL
+Média das variáveis = 0.0769230769230769
+Time  = 0.012
+N variáveis  = 11888
+------------------------------------------------------------
+                    Matriz de Confusão                      
+|| True Positive  (TP)  = 5 | False Negative (FN)  = 112 ||
+|| False Positive (FP)  = 1 | True Negative  (TN)  = 213 ||
+------------------------------------------------------------
+Taxa de Acerto | Taxa de Erro
+Positivo   : 0.04 | 0.96
+Negativo   : 1.0 | 0.0
+Acurácia    =  0.66
+Precisão    =  0.83
+Recall      =  0.04
+F1Score     =  0.08
+********************************************

@@ -91,9 +91,9 @@ function robusto_modelo_2(C_treino::DataFrame,
 
     # Impressão 
     #println(modelo)
-    println(".................................................")
+    println("....................................................")
     println("Imprimindo a solução do modelo Robusto 2_($variacao)")
-    println(".................................................")
+    println("....................................................")
     FO  = JuMP.objective_value(modelo)
     tar = JuMP.value(target)
     sol = JuMP.value.(x)

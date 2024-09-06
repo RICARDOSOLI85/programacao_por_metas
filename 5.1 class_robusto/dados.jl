@@ -6,6 +6,6 @@ using CSV
 using DataFrames
 
 function ler_arquivo(arquivo::String)
-    df = CSV.read(arquivo, DataFrame)
-    return df     
+    data = CSV.read(arquivo, DataFrame)
+    return data     
 end

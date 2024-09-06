@@ -1,5 +1,6 @@
 using Printf
 using Statistics
+using DataFrames
 
 function calcular_metricas(modelo::Model, C_teste::DataFrame,
     sol::Vector{Float64}, tar::Float64,y_real::DataFrame,
@@ -8,14 +9,14 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
 
 
     n = length(sol);
-    w = sol;
-    wo = tar;
+    solucao = sol;
+    target = tar;
     C = C_teste;
-    media = mean(w);
+    media = mean(solucao);
 
     # Calcular o hiperplano 
     c = Matrix(C);
-    y_modelo = c * w;
+    y_modelo = c * solucao;
 
     # Transformar o DataFrame em vetor
     y_real = Matrix(y_real);
@@ -34,15 +35,16 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
     println("Resultados: modelo:$model.$variacao($tipo).Par Γ=$gama ϵ=$epsilon")
     println("=============================================================")
     println("Função Objetivo = ", FO)
-    println("Hiperplano       = ", wo)
+    println("Hiperplano       = ", target)
     println("Status = ", status)
     println("Média das variáveis = ", media)   
     println("Time  = ", time)
     println("N variáveis  = ", nv)
 
+
     # Métricas TP, FN, FP, TN 
-    y_pred_ca = y_modelo .>= wo
-    y_pred_cb = y_modelo .<= wo
+    y_pred_ca = y_modelo .>= target;
+    y_pred_cb = y_modelo .<= target;
 
     TP = sum((y_real .== 1) .& (y_pred_ca .== 1))
     FN = sum((y_real .== 1) .& (y_pred_ca .== 0))
@@ -92,6 +94,41 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
     println("Precisão    =  ", precision)
     println("Recall      =  ", recall)
     println("F1Score     =  ", f1_score)
+
+    # Função Interna para construir o DataFrame das métricas
+    function construir_dataframe_metricas()
+        return DataFrame(
+            #.....Parâmetros 
+            modelo = model,
+            var = variacao,
+            tipo = tipo, 
+            gama= gama, 
+            epsilon= epsilon,
+            #....Otimização 
+            FuncObj =FO,
+            HipePlan = target,
+            status = string(status),
+            media  = media,
+            tempo = time,
+            num_variaveis = nv, 
+            #.......Matriz Confusão 
+            TP = TP,
+            FN = FN,
+            FP = FP,
+            TN = TN, 
+            #........Taxas de Acerto
+            TPA = TPA,
+            TPE = TPE,
+            TNA = TNA,
+            TNE = TNE, 
+            #.........Métricas
+            Acurácia = accuracy,
+            Precisão = precision,
+            Recall = recall, 
+            F1_score = f1_score
+        )
+        
+    end
     
     # Salvar em um arquivo TXT
     # Defina o caminho do diretório onde deseja salvar o arquivo
@@ -105,13 +142,13 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
         println(file, "Solução do modelo:$model.$variacao($tipo).Par Γ=$gama ϵ=$epsilon")
         println(file, "========================================")
         println(file, "Função Objetivo = ", FO)
-        println(file, "Hiperplano       = ", wo)
+        println(file, "Hiperplano       = ", target)
         println(file, "Status = ", status)
         println(file, "Média das variáveis = ", media)
         println(file, "Time  = ", time)
         println(file,"N variáveis  = ", nv)
         println(file, "------------------------------------------------------------")
-        println(file, "Matriz de Confusão $model.$variacao($tipo).Par Γ=$gama ϵ=$epsilon")
+        println(file, "                    Matriz de Confusão                      ")
         println(file, "|| True Positive  (TP)  = ", TP, " | False Negative (FN)  = ", FN, " ||")
         println(file, "|| False Positive (FP)  = ", FP, " | True Negative  (TN)  = ", TN, " ||")
         println(file, "------------------------------------------------------------")
@@ -124,4 +161,8 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
         println(file, "F1Score     =  ", f1_score)
         println(file, "********************************************")
     end
+
+    # construir e retornar o DataFrame
+    metricas = construir_dataframe_metricas()
+    return metricas 
 end

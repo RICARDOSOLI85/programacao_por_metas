@@ -140,6 +140,18 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
     
     # Parte B 
     # Métricas TP, FN, FP, TN 
+    n = length(sol);
+    w = sol;
+    wo = tar;
+    C = C_teste;
+    media = mean(w);
+
+    # Calcular o hiperplano 
+    c = Matrix(C);
+    y_modelo = c * w;
+
+    # Transformar o DataFrame em vetor
+    y_real = Matrix(y_real);
     
     y_pred_ca = y_modelo .>= target;
     y_pred_cb = y_modelo .<= target;
@@ -274,10 +286,6 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
         println(file,"F1Score     =  ", f1_score)
         println(file,"*******************************************")
 
-    end 
-
-
-
-    
+    end   
     
 end

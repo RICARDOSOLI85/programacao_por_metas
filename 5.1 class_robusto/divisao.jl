@@ -5,16 +5,16 @@
 using DataFrames
 using Random 
 
-function dividir_dados(df::DataFrame, proporcao_treino::Float64)
+function dividir_dados(data::DataFrame, proporcao_treino::Float64)
     # definir a semente para gerar o mesmo embaralhamento
     #Random.seed!(2357)
 
     # dimensões
-    (m,n) = size(df);
+    (m,n) = size(data);
     m_treino = Int(round(proporcao_treino * m));
     
     # embaralhar os dados
-    df_shuffled = df[shuffle(1:m),:];
+    df_shuffled = data[shuffle(1:m),:];
     
     # dividir entre treino e teste
     df_treino = df_shuffled[1:m_treino, :];
