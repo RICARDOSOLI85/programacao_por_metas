@@ -1,10 +1,10 @@
 ........................................
 Solução do modelo:RGP_2.jl.A(cb).Par Γ=0.0 ϵ=0.0
 ........................................
-Função Objetivo (FO) = 466.0
+Função Objetivo (FO) = 473.0
 Target  x[o]         = 1.0
 Solução x[j]         = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
-N. variáveis         = 11884
+N. variáveis         = 11908
 sol[1] = 0.0
 sol[2] = 0.0
 sol[3] = 0.0
@@ -19,7 +19,7 @@ sol[11] = 0.0
 sol[12] = 0.0
 sol[13] = 0.0
 Status = OPTIMAL
-Time   = 0.0188 s
+Time   = 0.0333 s
 hiper+beta = 2.0
 hiperplano = 1.0
 hiper-beta = 0.0
@@ -28,24 +28,24 @@ hiper-beta = 0.0
      Taxa de Acerto  |  Taxa de Erro 
 Def Positivo  : NaN |       NaN
 Pro Positivo  : NaN  |       NaN
-Indefindos    : 0.74  |       0.26
+Indefindos    : 0.64  |       0.36
 Pro Negativo  : NaN |       NaN
 Def Negativo  : 0.72  |       0.28
 ............................................................
 --------------------------------------------------------------
   Matriz de Confusão RGP_2.jl.A(cb).Par Γ=0.0 ϵ=0.0 
 --------------------------------------------------------------
-|| True Positive  (TP)  = 40 | False Negative (FN)  = 78 ||
-|| False Positive (FP)  = 0 | True Negative  (TN) =  213 ||
+|| True Positive  (TP)  = 32 | False Negative (FN)  = 80 ||
+|| False Positive (FP)  = 0 | True Negative  (TN) =  219 ||
 ---------------------------------------------------------------
 ............................................
     Taxa de Acerto  |  Taxa de Erro 
- Positivo   : 0.34   |    0.66
- Indefinido : 0.74  |    0.26
+ Positivo   : 0.29   |    0.71
+ Indefinido : 0.64  |    0.36
  Negativo   : 1.0  |    0.0
 ............................................
 Acurácia    =  0.76
 precision   =  1.0
-recall      =  0.34
-F1Score     =  0.51
+recall      =  0.29
+F1Score     =  0.45
 *******************************************

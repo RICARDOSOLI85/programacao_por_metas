@@ -1,0 +1,40 @@
+........................................
+Solução do modelo:RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.1
+........................................
+Função Objetivo (FO) = 10.0
+Target  x[o]         = 2.0
+Solução x[j]         = [0.0, 1.0]
+N. variáveis         = 53
+sol[1] = 0.0
+sol[2] = 1.0
+Status = OPTIMAL
+Time   = 0.0006 s
+hiper+beta = 3.0
+hiperplano = 2.0
+hiper-beta = 1.0
+............................................
+............................................
+     Taxa de Acerto  |  Taxa de Erro 
+Def Positivo  : 0.67 |       0.33
+Pro Positivo  : NaN  |       NaN
+Indefindos    : 0.33  |       0.67
+Pro Negativo  : NaN |       NaN
+Def Negativo  : 0.5  |       0.5
+............................................................
+--------------------------------------------------------------
+  Matriz de Confusão RGP_2.jl.A(sb).Par Γ=0.0 ϵ=0.1 
+--------------------------------------------------------------
+|| True Positive  (TP)  = 3 | False Negative (FN)  = 2 ||
+|| False Positive (FP)  = 1 | True Negative  (TN) =  4 ||
+---------------------------------------------------------------
+............................................
+    Taxa de Acerto  |  Taxa de Erro 
+ Positivo   : 0.6   |    0.4
+ Indefinido : 0.33  |    0.67
+ Negativo   : 0.8  |    0.2
+............................................
+Acurácia    =  0.7
+precision   =  0.75
+recall      =  0.6
+F1Score     =  0.67
+*******************************************

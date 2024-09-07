@@ -100,7 +100,7 @@ function linear_robusto(A,b,c,gama)
 
     # Função para salvar os resultados em um arquivo
     function salvar_resultados(resultados, arquivo_resultados)
-        open(arquivo_resultados, "a") do resultado_arquivo
+        open(arquivo_resultados, "w") do resultado_arquivo
             println(resultado_arquivo, resultados)
         end
 end
