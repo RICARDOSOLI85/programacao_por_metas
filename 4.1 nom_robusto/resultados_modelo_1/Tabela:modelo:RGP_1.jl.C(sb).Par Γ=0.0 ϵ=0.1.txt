@@ -5,7 +5,7 @@ Função Objetivo = 0.0
 Hiperplano       = 2.6666666666666665
 Status = OPTIMAL
 Média das variáveis = 0.5
-Time  = 0.0005
+Time  = 0.0007
 N variáveis  = 53
 ------------------------------------------------------------
                     Matriz de Confusão                      

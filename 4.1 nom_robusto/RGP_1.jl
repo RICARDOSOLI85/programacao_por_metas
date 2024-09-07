@@ -55,17 +55,18 @@ function robusto_modelo_1(
         p_a[1:n1] >= 0
         p_b[1:n2] >= 0
     end)
-    # alteração:a
     @variables(modelo,
     begin
         p[i=1:n,j=1:m] >= 0
         z[i=1:n]       >=0
     end)
+   
 
     # função objetivo
     @objective(modelo, Min, sum(n_a[i] for i=1:n1) + sum(p_b[i] for i=1:n2))
 
-    # restrições 
+    # restrições
+    
     @constraints(modelo,
     begin
         rest1[i=1:n1], sum(ca[i,j]*x[j] for j in 1:m) + 
@@ -81,6 +82,8 @@ function robusto_modelo_1(
         rest3[i in 1:n1, j in 1:m], z[i] + p[i,j] >= ca_desvio[i,j] * x[j]
         rest4[i in 1:n2, j in 1:m], z[i] + p[i,j] >= cb_desvio[i,j] * x[j]
     end)
+    
+  
 
 
     if variacao != "B"
