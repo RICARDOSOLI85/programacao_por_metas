@@ -5,7 +5,7 @@
 using Printf
 using Statistics
 using DataFrames
-using XLSX: eachtablerow, readxlsx, writetable 
+using CSV
 using Tables 
 
 
@@ -22,7 +22,7 @@ Epsilons = [0.10];
 
 # número de colunas em cada linha sujeito a incerteza   
 #Gamas =   [0.0 ,3.0, 5.0, 7.0, 10.0];
-Gamas =   [0.0 ,1.0, 2.0, 3.0];  
+Gamas =   [0.0];  
 #----------------------------------------------------------
 #     Leitura e Processamento dos dados 
 #----------------------------------------------------------
@@ -30,7 +30,7 @@ Gamas =   [0.0 ,1.0, 2.0, 3.0];
 # 1. dados
 include("dados.jl")
 arquivo="exames.csv"  
-ata = ler_arquivo(arquivo::String)
+data = ler_arquivo(arquivo::String)
 
 # 2. dividir
 include("divisao.jl") 
@@ -78,16 +78,17 @@ for model in Modelos
                 for epsilon in Epsilons
                     println("Para Epsilon ϵ =$epsilon")
                     println(" ")
-                    #println("Rodar modelo:$modelo.$variacao($tipo).Par Γ=$gama ϵ=$epsilon")
+                    
                     # Calcular as matrizes A de desvio 
-                    ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,cb::DataFrame,epsilon::Float64)
+                    ca_desvio, cb_desvio = calcular_desvios(ca::DataFrame,
+                                                            cb::DataFrame,
+                                                            epsilon::Float64)
 
                     # cria vetor gama 
-                    gama_a, gama_b = cria_vetor_gama(ca::DataFrame,cb::DataFrame,gama::Float64)
-                    #println("DataFram resultados m1 ", resultados_m1)
-                    #println("DataFram resultados m2 ", resultados_m2)
-
-                   
+                    gama_a, gama_b = cria_vetor_gama(ca::DataFrame,
+                                                     cb::DataFrame,
+                                                     gama::Float64)
+                                      
                     # Modelo 1 
                     if model == "RGP_1.jl"
                         println("Implementando o modelo $model.$variacao($tipo)")
@@ -174,6 +175,9 @@ for model in Modelos
     end
 end  
 
+CSV.write("resultados_m1.csv", resultados_m1)
+CSV.write("resultados_m2.csv", resultados_m2)
+
 #=
 # Função para criar um novo arquivo Excel e adicionar uma aba com o DataFrame
 function criar_novo_arquivo_excel(df::DataFrame, arquivo::String, aba::String)
@@ -194,7 +198,7 @@ end
 criar_novo_arquivo_excel(resultados_m1, "Resultados_Novo_1.xlsx", "Resultados_M1")
 criar_novo_arquivo_excel(resultados_m2, "Resultados_Novo_2.xlsx", "Resultados_M2")
 
-=#
+
 
 
 
@@ -236,3 +240,5 @@ end
 # Exemplo de uso
 adicionar_aba_excel(resultados_m1, "Resultados_Existente.xlsx", "Resultados_M1")
 adicionar_aba_excel(resultados_m2, "Resultados_Existente.xlsx", "Resultados_M2")
+
+=# 

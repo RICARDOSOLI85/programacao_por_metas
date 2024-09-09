@@ -224,11 +224,14 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
     println("        O valor de Epsilon é(Ε =  ", beta, ")")
     println(".................................................")
     FO     = JuMP.objective_value(modelo)
+    FO = round(FO,digits=2)
     tar = JuMP.value(target)
+    target = round(tar, digits=2)
+    media = round(media,digits=2)
     sol = JuMP.value.(solucao)
     NV= num_variables(modelo)
     println("Função Objetivo (FO) = ", FO)
-    println("Target  x[o]           = ", tar)
+    println("Target  x[o]           = ", target)
     println("Solução x[j]         = ", sol)
     println("N. variáveis         = ", NV)
     m = size(C,2);
@@ -267,16 +270,16 @@ function calcular_classes(modelo::Model,C_teste::DataFrame,
             tempo = time,
             num_variaveis = nv, 
             #.......Numeros 
-            DefPos_A = DPA,
-            DefPos_E = DPE,
-            ProPos_A = PPA,
-            ProPos_E = PPE,
-            Indefi_A  = IA,
-            Indefi_B  = IE,
-            ProNeg_A = PNA,
-            ProNeg_E = PNE,
-            DefNeg_A = DNA,
-            DefNeg_E = DNE,
+            #DefPos_A = DPA,
+            #DefPos_E = DPE,
+            #ProPos_A = PPA,
+            #ProPos_E = PPE,
+            #Indefi_A  = IA,
+            #Indefi_B  = IE,
+            #ProNeg_A = PNA,
+            #ProNeg_E = PNE,
+            #DefNeg_A = DNA,
+            #DefNeg_E = DNE,
             #.......Taxas 
             TaxDefPos_A = TDPA,
             TaxDefPos_E = TDPE,

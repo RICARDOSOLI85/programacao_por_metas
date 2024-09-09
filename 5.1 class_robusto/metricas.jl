@@ -101,6 +101,10 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
     println("Recall      =  ", recall)
     println("F1Score     =  ", f1_score)
 
+    target = round(tar, digits=2)
+    media = round(media,digits=2)
+    FO = round(FO,digits=2)
+
     # Função Interna para construir o DataFrame das métricas
     function construir_dataframe_metricas()
         return DataFrame(
@@ -138,7 +142,7 @@ function calcular_metricas(modelo::Model, C_teste::DataFrame,
     
     # Salvar em um arquivo TXT
     # Defina o caminho do diretório onde deseja salvar o arquivo
-    diretorio = "resultados_modelo_1"
+    diretorio = "resultados_m1"
     # Cria o diretório se ele não existir
     mkpath(diretorio)
     filename = joinpath(diretorio,"Tabela:modelo:$model.$variacao($tipo).Par Γ=$gama ϵ=$epsilon.txt")

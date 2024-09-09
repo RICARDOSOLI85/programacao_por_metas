@@ -8,8 +8,6 @@ using Gurobi
 #=======================================================#
 #  Modelo de programação de Metas #
 #======================================================#
-using JuMP
-using Gurobi
 
 """
 function robusto_modelo_2(C::Matrix{Int64},
@@ -45,7 +43,7 @@ function robusto_modelo_2(C_treino::DataFrame,
     elseif  variacao =="C"
         @variable(modelo, x[j=1:m])
     elseif variacao == "D"
-        @variable(modelo, x[j=1:m] <= 1)
+        @variable(modelo, x[j=1:m] <= alpha)
     end 
     @variable(modelo, target)
     @variables(modelo,
