@@ -21,6 +21,7 @@ y_real = [1; 1; 1; 1; 1;0 ;0 ;0 ;0 ;0];
 ca = C[1:5,:]; 
 cb = C[6:10,:]; 
 
+
 # parâmetros 
 alpha =1.0;
 beta = 1.0; 
@@ -119,20 +120,21 @@ for model in Modelos
                                         gama::Float64,
                                         epsilon::Float64,beta::Float64
                                 ) 
-                                            
-                                    # Verificar e atualizar tabela de resultados para o Modelo 1
+                                # Atualizar tabela de resultados para o Modelo 2
                                 global resultados_m2
                                 if typeof(classes) == DataFrame
-                                        resultados_m1 = vcat(resultados_m2, classes)
+                                        resultados_m2 = vcat(resultados_m2, classes)
                                 else
-                                        println("Erro: `metricas` não é um DataFrame válido.")
-                                end
-                        end
+                                println("Erro: `classes` não é um DataFrame válido.")
+                                end            
+                                 # Verificar e atualizar tabela de resultados para o Modelo 1
+                        end                              
+                                        
+                                       
                 end
                         
-                     
-        
-        
+         
+
         
         
         end 
@@ -141,3 +143,5 @@ end
 
 
 
+CSV.write("resultados_m1.csv", resultados_m1)
+CSV.write("resultados_m2.csv", resultados_m2)
